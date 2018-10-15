@@ -1,0 +1,30 @@
+.UploadFileArea {
+  align-items: center;
+  text-align: center;
+}
+
+.Dropzone {
+  width: 650px;
+  height: 300px;
+  margin: 20px auto;
+  border: 1px solid gray;
+  background-color: #f6f6f6;
+  padding: 3px;
+  -webkit-box-shadow: 0 7px 4px #777;
+	-moz-box-shadow: 0 7px 4px #777;
+	box-shadow: 0 7px 4px #777;
+}
+
+.ExcelIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  padding-top: 3px;
+  display: inline-block;
+}
+
+.Filename {
+  text-align: left;
+  list-style: none;
+  font-size: 18px;
+}
