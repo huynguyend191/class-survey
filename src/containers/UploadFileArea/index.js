@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
+import xlsxParser from 'xlsx-parse-json';
 
 import styles from './UploadFileArea.module.css';
 import ExcelIcon from '../../assets/icons/excel.png';
+
+
 
 class UploadFileArea extends Component {
   state = {
@@ -15,14 +18,18 @@ class UploadFileArea extends Component {
     }
     let newFiles = this.state.files.concat(acceptedFiles);
     
-    
-    // myReader.readAsDataURL(acceptedFiles);
     this.setState({files: newFiles});
   }
 
   onUpload= () => {
     console.log(this.state.files);
     
+    xlsxParser
+    .onFileSelection(this.state.files[0])
+    .then(data => {
+      let parsedData = data;
+      console.log(parsedData);
+    });
   }
 
   render() {
@@ -37,7 +44,6 @@ class UploadFileArea extends Component {
         })
       )
     }
-    const preview = this.state.preview;
     return (
       <div className={styles.UploadFileArea}>
         <Dropzone 
