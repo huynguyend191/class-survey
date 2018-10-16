@@ -6,7 +6,7 @@ import ExcelIcon from '../../assets/icons/excel.png';
 
 class UploadFileArea extends Component {
   state = {
-    files: []
+    files: [],
   }
 
   onSelectedFiles = (acceptedFiles, rejectedFiles) => {
@@ -14,11 +14,15 @@ class UploadFileArea extends Component {
       alert('Not excel file');
     }
     let newFiles = this.state.files.concat(acceptedFiles);
+    
+    
+    // myReader.readAsDataURL(acceptedFiles);
     this.setState({files: newFiles});
   }
 
   onUpload= () => {
     console.log(this.state.files);
+    
   }
 
   render() {
@@ -33,7 +37,7 @@ class UploadFileArea extends Component {
         })
       )
     }
-
+    const preview = this.state.preview;
     return (
       <div className={styles.UploadFileArea}>
         <Dropzone 
