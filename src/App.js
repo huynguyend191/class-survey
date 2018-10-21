@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import UploadFileArea from './containers/UploadFileArea';
 import { Route, Link, withRouter } from 'react-router-dom';
+import UploadFileArea from './containers/UploadFileArea';
 
 class App extends Component {
   render() {

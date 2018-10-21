@@ -12,8 +12,7 @@
     "react-scripts": "2.0.5",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2",
-    "xlsx": "^0.14.0",
-    "xlsx-parse-json": "^2.0.2"
+    "xlsx": "^0.14.0"
   },
   "scripts": {
     "start": "react-scripts start",

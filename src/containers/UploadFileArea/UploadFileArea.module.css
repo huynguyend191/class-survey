@@ -7,12 +7,10 @@
   width: 650px;
   height: 300px;
   margin: 20px auto;
-  border: 1px solid gray;
-  background-color: #f6f6f6;
+  border: 1px dashed gray;
+  background-color: white;
   padding: 3px;
-  -webkit-box-shadow: 0 7px 4px #777;
-	-moz-box-shadow: 0 7px 4px #777;
-	box-shadow: 0 7px 4px #777;
+  overflow: auto;
 }
 
 .ExcelIcon {
