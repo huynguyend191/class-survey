@@ -23,8 +23,10 @@ class UploadFileArea extends Component {
 
   onUpload = () => {
     let formData = new FormData();
-    //tam thoi chi gui 1 file de test
-    formData.append('myFile', this.state.files[0]);
+    //upload multiples files
+    this.state.files.forEach(file=> {
+      formData.append('myArrayOfFiles', file);
+    })
     console.log(formData);
     axios.post('http://127.0.0.1:3001/', formData)
     .then((res)=>{
