@@ -11,8 +11,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
     "redux": "^4.0.1",
-    "redux-saga": "^0.16.2",
-    "xlsx": "^0.14.0"
+    "redux-saga": "^0.16.2"
   },
   "scripts": {
     "start": "react-scripts start",

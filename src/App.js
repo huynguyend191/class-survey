@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import { Route, Link, withRouter } from 'react-router-dom';
+import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
 import UploadFileArea from './containers/UploadFileArea';
+import Login from './containers/Login';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <UploadFileArea />
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/" exact component={UploadFileArea} />
+          <Redirect to="/" />
+      </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

@@ -35,7 +35,6 @@ class UploadFileArea extends Component {
 
   render() {
     
-    const openFileExplorer = React.createRef();
     let selectedFiles = <p>Please drop the file here</p>;
     let uploadAvailability = true;
     if (this.state.files.length > 0) {
@@ -52,13 +51,13 @@ class UploadFileArea extends Component {
           className={styles.Dropzone}
           onDrop={this.onSelectedFiles}
           accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-          // disableClick
-          ref={openFileExplorer}
+        
         >
           {selectedFiles}
         </Dropzone>
-        <button onClick={() => openFileExplorer.current.open()}>Select file</button>
+      
         <button onClick={this.onUpload} disabled={uploadAvailability}>Upload</button>
+
       </div>
     );
       
