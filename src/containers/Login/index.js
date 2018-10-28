@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import Axios from 'axios';
+import axios from '../../utils/axiosConfig';
 
 class Login extends Component {
 
@@ -20,15 +20,15 @@ class Login extends Component {
     event.preventDefault();
     const loginData = {
       username: this.state.username,
-      password: this.state.password
-    }
-    Axios.post('http://127.0.0.1:3001/user/login', loginData)
+      password: this.state.password,
+    };
+    axios.post('/user/login', loginData)
     .then(res => {
       console.log(res);
-      this.setState({isAuthenticated: true});
     }).catch(err => {
       console.log(err);
     })
+
   }
 
   render() {

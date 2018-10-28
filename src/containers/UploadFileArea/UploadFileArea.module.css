@@ -4,11 +4,11 @@
 }
 
 .Dropzone {
-  width: 650px;
-  height: 300px;
+  width: 500px;
+  height: 250px;
   margin: 20px auto;
   border: 1px dashed gray;
-  background-color: white;
+  background-color: rgb(240, 238, 238);
   padding: 3px;
   overflow: auto;
 }
@@ -26,3 +26,4 @@
   list-style: none;
   font-size: 18px;
 }
+

@@ -17,7 +17,7 @@ class UploadFileArea extends Component {
       alert('Not excel file');
     }
     let newFiles = this.state.files.concat(acceptedFiles);
-    
+    console.log(newFiles);
     this.setState({files: newFiles});
   }
 
@@ -28,14 +28,26 @@ class UploadFileArea extends Component {
       formData.append('myArrayOfFiles', file);
     })
     console.log(formData);
-    axios.post('http://127.0.0.1:3001/', formData)
-    .then((res)=>{
-      console.log(res)})
+    axios('http://localhost:3001/products/upload',{
+      method: 'POST',
+      data: formData,
+      withCredentials: true,
+    })
+    .then(res => {
+      console.log(res.data);
+    }).catch(err => {
+      console.log(err.response.data);
+    })
   }
 
   render() {
     
-    let selectedFiles = <p>Please drop the file here</p>;
+    let selectedFiles = (
+      <div>
+        <p>Drag and drop file or click to select</p>
+        
+      </div>
+    );
     let uploadAvailability = true;
     if (this.state.files.length > 0) {
       uploadAvailability =  false;
