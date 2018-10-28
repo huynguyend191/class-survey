@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import * as actions from '../../store/actions';
 
 class Login extends Component {
 
   state = {
     username: null,
-    password: null
+    password: null,
+    redirectPath: '/'
   }
 
   componentDidMount() {
-    if (this.props.isAuthenticated) {
-      this.props.history.push('/');
-    }
+    console.log(this.props.isAuthenticated);
+    
   }
 
   onInputChangeHandler = (event) => {
@@ -32,8 +33,9 @@ class Login extends Component {
   }
 
   render() {
+    let loginRedirect = null;
     if (this.props.isAuthenticated) {
-      this.props.history.push('/');
+      loginRedirect = <Redirect to="/" />
     }
     let error = <p>{this.props.error}</p>
     const form = (
@@ -47,6 +49,7 @@ class Login extends Component {
     )
     return (
       <div>
+        {loginRedirect}
         {form}
         {error}
       </div>
