@@ -9,19 +9,23 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import authReducer from './store/reducers/authReducer';
+
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
+const rootReducer =  combineReducers({
+  authReducer
+})
 
-
-// const store = createStore(rootReducer, composeEnhancers(applyMiddleware(ReduxThunk)));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(ReduxThunk)));
 
 const app = (
-  // <Provider store={store}>
+  <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  // </Provider>
+  </Provider>
 )
 
 ReactDOM.render(app, document.getElementById('root'));

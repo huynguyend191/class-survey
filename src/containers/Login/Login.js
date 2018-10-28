@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import axios from '../../utils/axiosConfig';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
 
 class Login extends Component {
 
   state = {
-    isAuthenticated: false,
     username: null,
     password: null
+  }
+
+  componentDidMount() {
+    if (this.props.isAuthenticated) {
+      this.props.history.push('/');
+    }
   }
 
   onInputChangeHandler = (event) => {
@@ -22,20 +27,15 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password,
     };
-    axios.post('/user/login', loginData)
-    .then(res => {
-      console.log(res);
-    }).catch(err => {
-      console.log(err);
-    })
-
+    this.props.onLogin(loginData);
+   
   }
 
   render() {
-    let redirect = null;
-    if (this.state.isAuthenticated) {
-      redirect = <Redirect to="/" />
+    if (this.props.isAuthenticated) {
+      this.props.history.push('/');
     }
+    let error = <p>{this.props.error}</p>
     const form = (
       <form onSubmit={this.onLoginHandler}>
         <label>Username:</label><br></br>
@@ -47,11 +47,24 @@ class Login extends Component {
     )
     return (
       <div>
-        {redirect}
         {form}
+        {error}
       </div>
     );
   }
 }
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.authReducer.isAuthenticated,
+    error: state.authReducer.error
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: (loginData) => dispatch(actions.initLogin(loginData))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
-import UploadFileArea from './containers/UploadFileArea';
-import Login from './containers/Login';
+import UploadFileArea from './containers/UploadFileArea/UploadFileArea';
+import Login from './containers/Login/Login';
 
 class App extends Component {
   render() {
