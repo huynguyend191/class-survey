@@ -73,7 +73,7 @@ class UploadFileArea extends Component {
           Select Files
         </button>
         <button onClick={this.onUpload} disabled={uploadAvailability}>Upload</button>
-
+       
       </div>
     );
       

@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { withCookies }  from 'react-cookie';
+import Cookies from 'universal-cookie';
 import _ from 'lodash';
 import UploadFileArea from './containers/UploadFileArea/UploadFileArea';
 import SignIn from './containers/SignIn/SignIn';
 import * as actions from './store/actions';
 
+const cookies = new Cookies();
 class App extends Component {
   
   componentDidMount() {
-    if (_.isEmpty(this.props.cookies.cookies)) {
-      console.log('No user')
+    if (_.isEmpty(cookies.getAll())) {
+      this.props.autoSignOut();
+      // this.props.history.push('/signin');
     } else {
       this.props.autoSignIn();
     }
@@ -49,9 +51,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps =  dispatch => {
   return {
-    autoSignIn : () => dispatch(actions.signInSuccesful())
+    autoSignIn : () => dispatch(actions.signInSuccesful()),
+    autoSignOut: () => dispatch(actions.signOut())
   }
 }
 
-export default withCookies(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 

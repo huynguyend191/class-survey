@@ -12,6 +12,8 @@ const reducer = ( state =  initialState, action) => {
       return updateObject (state, {isAuthenticated: true});
     case actionTypes.SIGN_IN_FAILED:
       return updateObject (state, {error: action.error});
+    case actionTypes.SIGN_OUT:
+      return updateObject (state, {isAuthenticated: false});
     default:
       return state;
   }

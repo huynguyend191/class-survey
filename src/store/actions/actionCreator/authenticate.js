@@ -14,6 +14,12 @@ export const signInFailed = (error) => {
   }
 }
 
+export const signOut = () => {
+  return {
+    type: actionTypes.SIGN_OUT
+  }
+}
+
 export const initSignIn = (loginData) => {
   return dispatch => {
     axios.post('/user/login', loginData)
