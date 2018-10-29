@@ -8,9 +8,9 @@ const initialState = {
 
 const reducer = ( state =  initialState, action) => {
   switch (action.type) {
-    case actionTypes.LOGIN_SUCCESSFUL:
+    case actionTypes.SIGN_IN_SUCCESSFUL:
       return updateObject (state, {isAuthenticated: true});
-    case actionTypes.LOGIN_FAILED:
+    case actionTypes.SIGN_IN_FAILED:
       return updateObject (state, {error: action.error});
     default:
       return state;

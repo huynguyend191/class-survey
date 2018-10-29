@@ -1,3 +1,4 @@
 export {
-  initLogin
+  signInSuccesful,
+  initSignIn
 } from './actionCreator/authenticate';

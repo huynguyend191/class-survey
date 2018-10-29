@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as actions from '../../store/actions';
 
-class Login extends Component {
+class SignIn extends Component {
 
   state = {
     username: null,
@@ -11,10 +11,6 @@ class Login extends Component {
     redirectPath: '/'
   }
 
-  componentDidMount() {
-    console.log(this.props.isAuthenticated);
-    
-  }
 
   onInputChangeHandler = (event) => {
     this.setState({
@@ -66,8 +62,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: (loginData) => dispatch(actions.initLogin(loginData))
+    onLogin: (loginData) => dispatch(actions.initSignIn(loginData))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

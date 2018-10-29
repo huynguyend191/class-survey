@@ -1,26 +1,26 @@
 import axios from '../../../utils/axiosConfig';
 import * as actionTypes from '../actionTypes';
 
-export const loginSuccesful = () => {
+export const signInSuccesful = () => {
   return {
-    type: actionTypes.LOGIN_SUCCESSFUL
+    type: actionTypes.SIGN_IN_SUCCESSFUL
   }
 }
 
-export const loginFailed = (error) => {
+export const signInFailed = (error) => {
   return {
-    type: actionTypes.LOGIN_FAILED,
+    type: actionTypes.SIGN_IN_FAILED,
     error
   }
 }
 
-export const initLogin = (loginData) => {
+export const initSignIn = (loginData) => {
   return dispatch => {
     axios.post('/user/login', loginData)
     .then(res => {
-      dispatch(loginSuccesful());
+      dispatch(signInSuccesful());
     }).catch(err => {
-      dispatch(loginFailed(err.message));
+      dispatch(signInFailed(err.message));
     })
   }
 }

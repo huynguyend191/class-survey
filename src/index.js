@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import ReduxThunk from 'redux-thunk';
+import { CookiesProvider } from 'react-cookie';
 
 import './index.css';
 import App from './App';
@@ -21,11 +22,14 @@ const rootReducer =  combineReducers({
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(ReduxThunk)));
 
 const app = (
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
+  <CookiesProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </CookiesProvider>
+  
 )
 
 ReactDOM.render(app, document.getElementById('root'));

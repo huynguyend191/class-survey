@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
+import uuidv4 from 'uuid/v4';
 
 import styles from './UploadFileArea.module.css';
 import ExcelIcon from '../../assets/icons/excel.png';
@@ -17,7 +18,6 @@ class UploadFileArea extends Component {
       alert('Not excel file');
     }
     let newFiles = this.state.files.concat(acceptedFiles);
-    console.log(newFiles);
     this.setState({files: newFiles});
   }
 
@@ -41,10 +41,10 @@ class UploadFileArea extends Component {
   }
 
   render() {
-    
+    const dropzoneRef = React.createRef();
     let selectedFiles = (
       <div>
-        <p>Drag and drop file or click to select</p>
+        <p>Drag and drop file here or click select button</p>
         
       </div>
     );
@@ -52,8 +52,9 @@ class UploadFileArea extends Component {
     if (this.state.files.length > 0) {
       uploadAvailability =  false;
       selectedFiles = (
-        this.state.files.map( (file, index) => {
-          return <li className={styles.Filename} key={index} onClick={() => alert(index)}><img className={styles.ExcelIcon} src={ExcelIcon} alt="" />{file.name}</li>
+        this.state.files.map( (file) => {
+          let key = uuidv4();
+          return <li className={styles.Filename} key={key}><img className={styles.ExcelIcon} src={ExcelIcon} alt="" />{file.name}</li>
         })
       )
     }
@@ -63,11 +64,14 @@ class UploadFileArea extends Component {
           className={styles.Dropzone}
           onDrop={this.onSelectedFiles}
           accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-        
+          ref={dropzoneRef}
+          disableClick
         >
           {selectedFiles}
         </Dropzone>
-      
+        <button onClick={() => { dropzoneRef.current.open() }}>
+          Select Files
+        </button>
         <button onClick={this.onUpload} disabled={uploadAvailability}>Upload</button>
 
       </div>
