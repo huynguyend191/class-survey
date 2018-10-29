@@ -1,5 +1,7 @@
 import axios from '../../../utils/axiosConfig';
 import * as actionTypes from '../actionTypes';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 export const signInSuccesful = () => {
   return {
@@ -28,5 +30,17 @@ export const initSignIn = (loginData) => {
     }).catch(err => {
       dispatch(signInFailed(err.message));
     })
+  }
+}
+
+export const initSignOut = () => {
+  return dispatch => {
+    //remove all cookies
+    const allCookies = cookies.getAll();
+    for (let cookieName in allCookies) {
+      cookies.remove(cookieName);
+    }
+    //update state
+    dispatch(signOut());
   }
 }
