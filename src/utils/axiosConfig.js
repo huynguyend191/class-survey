@@ -11,7 +11,16 @@ const axiosRequest = axios.create({
 
 axiosRequest.interceptors.response.use(
   response => (response), 
-  error => (Promise.reject(error.response.data))
+  error => {
+    if (error.response){
+      //when server is running
+      return (Promise.reject(error.response.data));
+    } else {
+      //when server is not running
+      const err = {message: 'Server error'};
+      return (Promise.reject(err));
+    }
+  }
 );
 
 export default axiosRequest;
