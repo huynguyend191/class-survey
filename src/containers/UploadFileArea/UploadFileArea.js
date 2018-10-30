@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import uuidv4 from 'uuid/v4';
 
-import styles from './UploadFileArea.module.css';
+import classes from './UploadFileArea.module.css';
 import ExcelIcon from '../../assets/icons/excel.png';
 
 
@@ -54,14 +54,14 @@ class UploadFileArea extends Component {
       selectedFiles = (
         this.state.files.map( (file) => {
           let key = uuidv4();
-          return <li className={styles.Filename} key={key}><img className={styles.ExcelIcon} src={ExcelIcon} alt="" />{file.name}</li>
+          return <li className={classes.Filename} key={key}><img className={styles.ExcelIcon} src={ExcelIcon} alt="" />{file.name}</li>
         })
       )
     }
     return (
-      <div className={styles.UploadFileArea}>
+      <div className={classes.UploadFileArea}>
         <Dropzone 
-          className={styles.Dropzone}
+          className={classes.Dropzone}
           onDrop={this.onSelectedFiles}
           accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
           ref={dropzoneRef}

@@ -1,41 +1,37 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-import UploadFileArea from './containers/UploadFileArea/UploadFileArea';
+
+import Dashboard from './containers/Dashboard/Dashboard';
 import SignIn from './containers/SignIn/SignIn';
+import SignOut from './containers/SignOut/SignOut';
 import * as actions from './store/actions';
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
 
 class App extends Component {
   
   componentDidMount() {
-    //check if cookies exist to maintain state
-    if (_.isEmpty(cookies.getAll())) {
-      this.props.autoSignOut();
-      // this.props.history.push('/signin');
-    } else {
-      this.props.autoSignIn();
-    }
+    //try auto sign if cookies existing
+    this.props.tryAutoSignIn();
   }
 
   render() {
+
     //default routes
     let routes = (
       <Switch>
-          <Route path="/signin" component={SignIn} />
-          <Route path="/" exact component={UploadFileArea} />
-          <Redirect to="/" />
+        <Route path="/signin" component={SignIn} />
+        <Redirect to="/signin" />
       </Switch>
     )
-    //routes when user signed in
+
+    // routes when user signed in
     if (this.props.isAuthenticated) {
       routes = (
         <Switch>
-          <Route path="/" exact component={UploadFileArea} />
+          <Route path="/signout" component={SignOut} />
+          <Route path="/" exact component={Dashboard} />
           <Redirect to="/" />
-      </Switch>
+        </Switch>
       )
     }
     return (
@@ -54,8 +50,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps =  dispatch => {
   return {
-    autoSignIn : () => dispatch(actions.signInSuccesful()),
-    autoSignOut: () => dispatch(actions.signOut()),
+    tryAutoSignIn: () => dispatch(actions.checkSignInState())
   }
 }
 
