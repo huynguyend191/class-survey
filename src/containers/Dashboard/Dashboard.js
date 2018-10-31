@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import UploadFileArea from '../UploadFileArea/UploadFileArea';
 
 class Dashboard extends Component {
   render() {
@@ -7,7 +8,7 @@ class Dashboard extends Component {
     return (
       <div>
         <NavLink to='signout'>Sign Out</NavLink>
-        <div>DASHBOARD</div>
+        <UploadFileArea />
       </div>
     );
   }

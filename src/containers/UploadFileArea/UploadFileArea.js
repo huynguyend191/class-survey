@@ -54,7 +54,7 @@ class UploadFileArea extends Component {
       selectedFiles = (
         this.state.files.map( (file) => {
           let key = uuidv4();
-          return <li className={classes.Filename} key={key}><img className={styles.ExcelIcon} src={ExcelIcon} alt="" />{file.name}</li>
+          return <li className={classes.Filename} key={key}><img className={classes.ExcelIcon} src={ExcelIcon} alt="" />{file.name}</li>
         })
       )
     }

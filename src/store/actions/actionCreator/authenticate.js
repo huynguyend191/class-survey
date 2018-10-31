@@ -2,6 +2,7 @@ import axios from '../../../utils/axiosConfig';
 import * as actionTypes from '../actionTypes';
 import _ from 'lodash';
 import Cookies from 'universal-cookie';
+import jwtDecode from 'jwt-decode';
 const cookies = new Cookies();
 
 export const startSignIn = () => {
@@ -10,10 +11,11 @@ export const startSignIn = () => {
   }
 }
 
-export const signInSuccesful = (userInfo) => {
+export const signInSuccesful = (username, role) => {
   return {
     type: actionTypes.SIGN_IN_SUCCESSFUL,
-    userInfo
+    username,
+    role
   }
 }
 
@@ -35,7 +37,17 @@ export const initSignIn = (loginData) => {
     dispatch(startSignIn());
     axios.post('/user/login', loginData)
     .then(res => {
-      dispatch(signInSuccesful());
+      const allCookies = cookies.getAll();
+      let token;
+      for (let cookieName in allCookies) {
+        token = cookies.get(cookieName);
+      }
+      const decoded = jwtDecode(token);
+      const userInfo = {
+        username: decoded.username,
+        role: decoded.role
+      }
+      dispatch(signInSuccesful(userInfo.username, userInfo.role));
     }).catch(err => {
       dispatch(signInFailed(err.message));
     })
@@ -43,9 +55,9 @@ export const initSignIn = (loginData) => {
 }
 
 export const initSignOut = () => {
-  return async dispatch => {
+  return dispatch => {
     //remove all cookies
-    const allCookies = await cookies.getAll();
+    const allCookies = cookies.getAll();
     for (let cookieName in allCookies) {
       cookies.remove(cookieName);
     }

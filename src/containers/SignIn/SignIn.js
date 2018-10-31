@@ -65,7 +65,7 @@ class SignIn extends Component {
       )
     }
     let header = (
-      <p className={classes.Header}>SIGN IN TO CLASS SURVEY</p>
+      <p className={classes.Header}>CLASS SURVEY</p>
     )
     const form = (
       <form onSubmit={this.onLoginHandler} className={classes.SignInForm}>
