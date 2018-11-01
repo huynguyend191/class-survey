@@ -14,16 +14,24 @@
 }
 
 .ExcelIcon {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   margin-right: 5px;
-  padding-top: 3px;
   display: inline-block;
 }
 
 .Filename {
   text-align: left;
   list-style: none;
-  font-size: 18px;
+  font-size: 14px;
+}
+
+.Button {
+  width: 100px;
+  margin-right: 5px !important;
+}
+
+.CloudUploadIcon, .FolderOpenIcon {
+  margin-left: 3px !important;
 }
 

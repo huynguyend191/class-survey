@@ -5,6 +5,11 @@ import uuidv4 from 'uuid/v4';
 import classes from './UploadFileArea.module.css';
 import ExcelIcon from '../../assets/icons/excel.png';
 
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
+import Button from '@material-ui/core/Button';
 
 import axios from 'axios';
 
@@ -17,7 +22,23 @@ class UploadFileArea extends Component {
     if (rejectedFiles.length) {
       alert('Not excel file');
     }
-    let newFiles = this.state.files.concat(acceptedFiles);
+    const renamedFiles = [];
+    acceptedFiles.forEach(file => {
+      const myNewFile = new File([file], file.name.split(".xlsx")[0] + '~' + uuidv4() +'.xlsx', {type: file.type});
+      renamedFiles.push(myNewFile);
+    })
+    let newFiles = this.state.files.concat(renamedFiles);
+    this.setState({files: newFiles});
+  }
+
+  onRemoveFile = (fileName) => {
+    const files = this.state.files;
+    const newFiles = [];
+    files.forEach(file => {
+      if(file.name !== fileName) {
+        newFiles.push(file);
+      }
+    })
     this.setState({files: newFiles});
   }
 
@@ -44,7 +65,7 @@ class UploadFileArea extends Component {
     const dropzoneRef = React.createRef();
     let selectedFiles = (
       <div>
-        <p>Drag and drop file here or click select button</p>
+        <p>Drag file here or click select button</p>
         
       </div>
     );
@@ -53,8 +74,15 @@ class UploadFileArea extends Component {
       uploadAvailability =  false;
       selectedFiles = (
         this.state.files.map( (file) => {
-          let key = uuidv4();
-          return <li className={classes.Filename} key={key}><img className={classes.ExcelIcon} src={ExcelIcon} alt="" />{file.name}</li>
+          let fileName = file.name.split("~")[0];
+          return <li 
+            className={classes.Filename} key={file.name}>
+            <img className={classes.ExcelIcon} src={ExcelIcon} alt="" />
+            {fileName}
+            <IconButton>
+              <DeleteIcon fontSize="small" color="error" onClick={() => this.onRemoveFile(file.name)}/>
+            </IconButton>
+          </li>;
         })
       )
     }
@@ -69,11 +97,25 @@ class UploadFileArea extends Component {
         >
           {selectedFiles}
         </Dropzone>
-        <button onClick={() => { dropzoneRef.current.open() }}>
-          Select Files
-        </button>
-        <button onClick={this.onUpload} disabled={uploadAvailability}>Upload</button>
-       
+        <Button 
+          className={classes.Button} 
+          variant="contained" 
+          color="primary" 
+          size="small" 
+          onClick={() => { dropzoneRef.current.open() }}
+          >Select
+          <FolderOpenIcon className={classes.FolderOpenIcon}/>
+        </Button>
+        <Button 
+          className={classes.Button} 
+          variant="contained" 
+          color="primary"
+          size="small" 
+          onClick={this.onUpload} 
+          disabled={uploadAvailability}
+          >Upload 
+          <CloudUploadIcon className={classes.CloudUploadIcon} />
+        </Button>
       </div>
     );
       
