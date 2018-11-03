@@ -53,7 +53,7 @@ class UploadFileArea extends Component {
     })
     console.log(formData);
     this.setState({isUploading: true});
-    axios('http://localhost:3001/products/upload',{
+    axios('http://localhost:3003/products/upload',{
       method: 'POST',
       data: formData,
       withCredentials: true,

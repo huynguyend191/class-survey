@@ -1,0 +1,15 @@
+.SideBar {
+  width: 300px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid salmon;
+}
+
+.activeLink {
+  color: red;
+}
+
+.Nav {
+  text-decoration: none;
+}

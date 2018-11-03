@@ -1,0 +1,14 @@
+.ToolBar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid salmon;
+}
+
+.activeLink {
+  color: red;
+}
+
+.Nav {
+  text-decoration: none;
+}
