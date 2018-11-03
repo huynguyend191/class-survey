@@ -17,7 +17,7 @@ const reducer = ( state =  initialState, action) => {
       return updateObject (state, 
         {
           isAuthenticated: true,
-          error: null, 
+          error: null,  
           loading: false,
           username: action.username,
           role: action.role

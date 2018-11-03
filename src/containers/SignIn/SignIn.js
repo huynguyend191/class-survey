@@ -53,7 +53,7 @@ class SignIn extends Component {
   render() {
     let loginRedirect = null;
     if (this.props.isAuthenticated) {
-      loginRedirect = <Redirect to="/" />
+      loginRedirect = <Redirect to="/dashboard" />;
     }
     let error = null;
     if (this.props.error) {
@@ -102,7 +102,7 @@ class SignIn extends Component {
           fullWidth
           disabled={this.props.isLoading}
         >
-          {this.props.isLoading ? <CircularProgress size={20}/> : 'SIGN IN'}
+          {this.props.isLoading ? <CircularProgress className={classes.signInLoading} size={20}/> : 'SIGN IN'}
         </Button>
       </form>
     )

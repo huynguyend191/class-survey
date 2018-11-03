@@ -10,12 +10,15 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 import axios from 'axios';
 
 class UploadFileArea extends Component {
   state = {
     files: [],
+    isUploading: false
   }
 
   onSelectedFiles = (acceptedFiles, rejectedFiles) => {
@@ -49,14 +52,17 @@ class UploadFileArea extends Component {
       formData.append('myArrayOfFiles', file);
     })
     console.log(formData);
+    this.setState({isUploading: true});
     axios('http://localhost:3001/products/upload',{
       method: 'POST',
       data: formData,
       withCredentials: true,
     })
     .then(res => {
+      this.setState({isUploading: false});
       console.log(res.data);
     }).catch(err => {
+      this.setState({isUploading: false});
       console.log(err.response.data);
     })
   }
@@ -113,8 +119,13 @@ class UploadFileArea extends Component {
           size="small" 
           onClick={this.onUpload} 
           disabled={uploadAvailability}
-          >Upload 
-          <CloudUploadIcon className={classes.CloudUploadIcon} />
+          >
+          Upload
+          {this.state.isUploading ? 
+            <CircularProgress className={classes.UploadingIcon} size={15}/>
+            :
+            <CloudUploadIcon className={classes.CloudUploadIcon} />
+          }
         </Button>
       </div>
     );

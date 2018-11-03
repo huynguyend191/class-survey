@@ -34,4 +34,7 @@
 .CloudUploadIcon, .FolderOpenIcon {
   margin-left: 3px !important;
 }
-
+.UploadingIcon {
+  margin-left: 5px !important;
+  color: white !important;
+}

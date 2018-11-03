@@ -2,7 +2,7 @@ import axios from '../../../utils/axiosConfig';
 import * as actionTypes from '../actionTypes';
 import _ from 'lodash';
 import Cookies from 'universal-cookie';
-import jwtDecode from 'jwt-decode';
+import decodeCookie from '../../../utils/decodeCookie';
 const cookies = new Cookies();
 
 export const startSignIn = () => {
@@ -37,16 +37,7 @@ export const initSignIn = (loginData) => {
     dispatch(startSignIn());
     axios.post('/user/login', loginData)
     .then(res => {
-      const allCookies = cookies.getAll();
-      let token;
-      for (let cookieName in allCookies) {
-        token = cookies.get(cookieName);
-      }
-      const decoded = jwtDecode(token);
-      const userInfo = {
-        username: decoded.username,
-        role: decoded.role
-      }
+      const userInfo = decodeCookie();
       dispatch(signInSuccesful(userInfo.username, userInfo.role));
     }).catch(err => {
       dispatch(signInFailed(err.message));
@@ -73,7 +64,8 @@ export const checkSignInState = () => {
     if (_.isEmpty(allCookies)){
       dispatch(signOut());
     } else {
-      dispatch(signInSuccesful());
+      const userInfo = decodeCookie();
+      dispatch(signInSuccesful(userInfo.username, userInfo.role));
     }
   }
 }
