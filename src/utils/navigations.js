@@ -1,22 +1,22 @@
 export const adminSideBar = [
   {
+    label: 'Manage Surveys',
+    link: '/surveys'
+  },
+  {
     label: 'Manage Students',
     link: '/students'
   },
   {
     label: 'Manage Lecturers',
     link: '/lecturers'
-  },
-  {
-    label: 'Manage Surveys',
-    link: '/surveys'
   }
 ];
 
 export const manageStudentToolbar = [
   {
     label: 'Student List',
-    link: '/students/list'
+    link: '/students'
   },
   {
     label: 'Upload',
@@ -27,7 +27,7 @@ export const manageStudentToolbar = [
 export const manageLecturerToolbar = [
   {
     label: 'Lecturer List',
-    link: '/lecturers/list'
+    link: '/lecturers'
   },
   {
     label: 'Upload',

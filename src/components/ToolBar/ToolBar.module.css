@@ -2,13 +2,35 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  border: 1px solid salmon;
-}
-
-.activeLink {
-  color: red;
+  border-bottom:  1px solid #d6d9dc;
+  box-shadow: 0 0 0 rgba(12,13,14,0.05);
+  box-sizing: border-box;
+  transition: box-shadow ease-in-out .1s,transform ease-in-out .1s;
 }
 
 .Nav {
+  padding: 3px;
+  width: 100px;
   text-decoration: none;
+  text-align: center;
+  border-top-right-radius: 3px;
+  border: solid 1px #d6d9dc;
+  border-bottom: 0; 
+  font-size: 13px;
+  color: #535a60;
+  cursor: pointer;
+  border-left: 0;
+  height: 20px;
 }
+
+.Nav:hover {
+  background: rgba(12,13,14,0.05);
+}
+
+.activeLink {
+  font-weight: 500;
+  color: #0C0D0E;
+  border-top: #3f51b5 solid 3px;
+  background: rgba(12,13,14,0.05);
+}
+

@@ -1,6 +1,7 @@
 .UploadFileArea {
   align-items: center;
   text-align: center;
+  background-color: #FFF;
 }
 
 .Dropzone {

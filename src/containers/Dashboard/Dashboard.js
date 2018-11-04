@@ -38,6 +38,7 @@ class Dashboard extends Component {
           <SideBar navigations={navigations} />
           {routes}
         </div>
+        <div className={classes.footer}></div>
       </div>
     );
   }
