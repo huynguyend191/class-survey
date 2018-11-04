@@ -6,13 +6,15 @@ import classes from './ToolBar.module.css';
 function ToolBar(props) {
   return (
     <div className={classes.ToolBar}>
-      <NavLink className={classes.Nav} activeClassName={classes.activeLink} to='/upload' >
-        Upload
-      </NavLink>
-      <NavLink className={classes.Nav} activeClassName={classes.activeLink} to='/list'>
-        List
-      </NavLink>
-    
+      {
+        props.navigations.map(nav => {
+          return (
+            <NavLink key={nav.label} className={classes.Nav} activeClassName={classes.activeLink} to={nav.link} >
+              {nav.label}
+            </NavLink>
+          );
+        })
+      }
     </div>
   );
 }

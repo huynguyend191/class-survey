@@ -1,34 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-
-import UploadFileArea from '../UploadFileArea/UploadFileArea';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
-import SignOut from '../../containers/SignOut/SignOut';
-import ListAccount from '../ListAccount/ListAccount';
 import SideBar from '../../components/SideBar/SideBar';
-import ToolBar from '../../components/ToolBar/ToolBar';
-
-
+import { adminSideBar } from '../../utils/navigations';
 import classes from './Dashboard.module.css';
+import ManageStudents from '../ManageStudents/ManageStudents';
+import ManageLecturers from '../ManageLecturers/ManageLecturers';
+import ManageSurveys from '../ManageSurveys/ManageSurveys';
 
 class Dashboard extends Component {
-  
-  componentDidMount() {
-    this.props.history.replace('/list');
-  }
 
   render() {
     let routes = null;
+    let navigations = null;
     switch (this.props.role) {
       case ('admin'):
         routes = (
           <Switch>
-            <Route path='/upload' component={UploadFileArea} />
-            <Route path='/list' component={ListAccount} />
-            <Route path='/signout' component={SignOut} />
+            <Route path='/students' component={ManageStudents} />
+            <Route path='/lecturers' component={ManageLecturers} />
+            <Route path='/surveys' component={ManageSurveys} />
           </Switch>
         );
+        navigations = adminSideBar;
         break;
       case ('student'):
         break;
@@ -38,13 +33,10 @@ class Dashboard extends Component {
     }
     return (
       <div>
-        <NavigationBar username={this.props.username}/>
+        <NavigationBar username={this.props.username} />
         <div className={classes.container}>
-          <SideBar />    
-          <div className={classes.MainContent}>
-            <ToolBar />
-            {routes}
-          </div>
+          <SideBar navigations={navigations} />
+          {routes}
         </div>
       </div>
     );

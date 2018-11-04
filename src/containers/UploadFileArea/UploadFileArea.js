@@ -59,7 +59,7 @@ class UploadFileArea extends Component {
       withCredentials: true,
     })
     .then(res => {
-      this.setState({isUploading: false});
+      this.setState({isUploading: false, files: []});
       console.log(res.data);
     }).catch(err => {
       this.setState({isUploading: false});

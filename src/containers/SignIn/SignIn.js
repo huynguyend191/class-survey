@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as actions from '../../store/actions';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { TextField, Paper, Button, CircularProgress } from '@material-ui/core';
+
 import classes from './SignIn.module.css';
 
 class SignIn extends Component {
@@ -53,7 +51,7 @@ class SignIn extends Component {
   render() {
     let loginRedirect = null;
     if (this.props.isAuthenticated) {
-      loginRedirect = <Redirect to="/dashboard" />;
+      loginRedirect = <Redirect to="/" />;
     }
     let error = null;
     if (this.props.error) {
@@ -64,6 +62,7 @@ class SignIn extends Component {
         </p>
       )
     }
+
     let header = (
       <p className={classes.Header}>CLASS SURVEY</p>
     )
