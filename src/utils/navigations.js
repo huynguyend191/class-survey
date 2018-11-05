@@ -1,5 +1,9 @@
 export const adminSideBar = [
   {
+    label: 'Home',
+    link: '/'
+  },
+  {
     label: 'Manage Surveys',
     link: '/surveys'
   },

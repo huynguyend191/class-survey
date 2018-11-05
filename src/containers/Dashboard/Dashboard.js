@@ -8,6 +8,7 @@ import classes from './Dashboard.module.css';
 import ManageStudents from '../ManageStudents/ManageStudents';
 import ManageLecturers from '../ManageLecturers/ManageLecturers';
 import ManageSurveys from '../ManageSurveys/ManageSurveys';
+import Home from '../Home/Home';
 
 class Dashboard extends Component {
 
@@ -21,6 +22,7 @@ class Dashboard extends Component {
             <Route path='/students' component={ManageStudents} />
             <Route path='/lecturers' component={ManageLecturers} />
             <Route path='/surveys' component={ManageSurveys} />
+            <Route path='/' component={Home} />
           </Switch>
         );
         navigations = adminSideBar;

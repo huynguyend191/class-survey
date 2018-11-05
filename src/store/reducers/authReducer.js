@@ -12,7 +12,7 @@ const initialState = {
 const reducer = ( state =  initialState, action) => {
   switch (action.type) {
     case actionTypes.START_SIGN_IN:
-    return updateObject (state, {loading: true});
+    return updateObject (state, {error: null,loading: true});
     case actionTypes.SIGN_IN_SUCCESSFUL:
       return updateObject (state, 
         {

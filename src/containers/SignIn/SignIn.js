@@ -2,17 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as actions from '../../store/actions';
-import { TextField, Paper, Button, CircularProgress } from '@material-ui/core';
+import { TextField, Paper, Button, CircularProgress, Dialog, Slide, DialogTitle, DialogContent } from '@material-ui/core';
 
 import classes from './SignIn.module.css';
 
-class SignIn extends Component {
+//Error Modal animation
+function Transition(props) {
+  return <Slide direction="down" {...props} />;
+}
 
+class SignIn extends Component {
   state = {
     username: '',
     password: '',
     usernameError: false,
-    passwordError: false
+    passwordError: false,
+    openErrorMsg: false
   }
 
   onInputChangeHandler = (event) => {
@@ -22,12 +27,17 @@ class SignIn extends Component {
   }
 
   onLoginHandler = (event) => {
+    this.setState({openErrorMsg: true});
     event.preventDefault();
     const loginData = {
       username: this.state.username,
       password: this.state.password,
     };
-    this.props.onLogin(loginData);
+    const isPasswordValid = this.checkPasswordValidity();
+    const isUsernameValid = this.checkUsernameValidity();
+    if(isPasswordValid && isUsernameValid){
+      this.props.onLogin(loginData);
+    }
   }
 
   checkUsernameValidity = () => {
@@ -37,6 +47,7 @@ class SignIn extends Component {
       isValid = false;
     }
     this.setState({usernameError: !isValid});
+    return isValid;
   }
 
   checkPasswordValidity = () => {
@@ -46,7 +57,13 @@ class SignIn extends Component {
       isValid = false;
     }
     this.setState({passwordError: !isValid});
+    return isValid;
   }
+
+  handleCloseModal = () => {
+    this.setState({openErrorMsg: false});
+  }
+
 
   render() {
     let loginRedirect = null;
@@ -54,21 +71,30 @@ class SignIn extends Component {
       loginRedirect = <Redirect to="/" />;
     }
     let error = null;
-    if (this.props.error) {
+    if(this.props.error){
       error = (
-        <p className={classes.ErrorMsg}>
-          {this.props.error}<br></br>
-          Please try again
-        </p>
+        <Dialog
+          className={classes.ErrorModal}
+          open={this.state.openErrorMsg}
+          onClick={this.handleCloseModal}
+          TransitionComponent={Transition}
+        >
+          <DialogTitle>
+            <p className={classes.ErrorMsg}>{this.props.error}</p>
+          </DialogTitle>
+          <DialogContent>
+            Please try again!
+          </DialogContent>
+        </Dialog>
       )
     }
-
     let header = (
       <p className={classes.Header}>CLASS SURVEY</p>
     )
     const form = (
       <form onSubmit={this.onLoginHandler} className={classes.SignInForm}>
         <TextField
+            className={classes.Input}
             fullWidth
             id="username"
             label="Username"
@@ -81,6 +107,7 @@ class SignIn extends Component {
             error={this.state.usernameError}
           />
         <TextField
+            className={classes.Input}
             fullWidth
             type="password"
             id="password"
