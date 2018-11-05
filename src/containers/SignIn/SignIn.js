@@ -74,15 +74,14 @@ class SignIn extends Component {
     if(this.props.error){
       error = (
         <Dialog
-          className={classes.ErrorModal}
           open={this.state.openErrorMsg}
           onClick={this.handleCloseModal}
           TransitionComponent={Transition}
         >
-          <DialogTitle>
+          <DialogTitle className={classes.ErrorModal}>
             <p className={classes.ErrorMsg}>{this.props.error}</p>
           </DialogTitle>
-          <DialogContent>
+          <DialogContent className={classes.ErrorMsg}>
             Please try again!
           </DialogContent>
         </Dialog>

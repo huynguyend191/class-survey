@@ -18,11 +18,12 @@
 }
 
 .ErrorMsg {
+  text-align: center;
   color: red !important;
 }
 
 .ErrorModal {
-  text-align: center;
+  border-top: 4px red solid !important;
 }
 
 
