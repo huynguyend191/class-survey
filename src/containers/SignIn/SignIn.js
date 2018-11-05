@@ -27,7 +27,6 @@ class SignIn extends Component {
   }
 
   onLoginHandler = (event) => {
-    this.setState({openErrorMsg: true});
     event.preventDefault();
     const loginData = {
       username: this.state.username,
@@ -36,6 +35,7 @@ class SignIn extends Component {
     const isPasswordValid = this.checkPasswordValidity();
     const isUsernameValid = this.checkUsernameValidity();
     if(isPasswordValid && isUsernameValid){
+      this.setState({openErrorMsg: true});
       this.props.onLogin(loginData);
     }
   }
