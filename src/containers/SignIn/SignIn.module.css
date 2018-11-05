@@ -23,6 +23,7 @@
 }
 
 .ErrorModal {
+  width: 200px !important;
   border-top: 4px red solid !important;
 }
 
