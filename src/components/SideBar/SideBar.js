@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Icon } from '@material-ui/core';
 
 import classes from './SideBar.module.css';
 
@@ -11,7 +12,7 @@ function SideBar(props) {
         navigations.map(item => {
           return(
             <NavLink exact key={item.label} className={classes.Nav} activeClassName={classes.activeLink} to={item.link} >
-              {item.label}
+              <Icon fontSize="small" className={classes.NavIcon}>{item.icon}</Icon>{item.label}
             </NavLink>
           );
         })

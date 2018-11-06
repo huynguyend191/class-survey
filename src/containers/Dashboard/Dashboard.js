@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import NavigationBar from '../../components/NavigationBar/NavigationBar';
+import NavigationBar from '../../containers/NavigationBar/NavigationBar';
 import SideBar from '../../components/SideBar/SideBar';
-import { adminSideBar } from '../../utils/navigations';
+import { adminSideBar, studentSideBar, lecturerSideBar } from '../../utils/navigations';
 import classes from './Dashboard.module.css';
 import ManageStudents from '../ManageStudents/ManageStudents';
 import ManageLecturers from '../ManageLecturers/ManageLecturers';
 import ManageSurveys from '../ManageSurveys/ManageSurveys';
 import Home from '../Home/Home';
+import StudentClassList from '../StudentClassList/StudentClassList';
+import LecturerClassList from '../LecturerClassList/LecturerClassList';
 
 class Dashboard extends Component {
-
   render() {
     let routes = null;
     let navigations = null;
@@ -28,8 +29,22 @@ class Dashboard extends Component {
         navigations = adminSideBar;
         break;
       case ('student'):
+        routes = (
+          <Switch>
+            <Route path='/classes' component={StudentClassList} />
+            <Route path='/' component={Home} />
+          </Switch>
+        );     
+        navigations = studentSideBar;
         break;
       case ('lecturer'):
+      routes = (
+        <Switch>
+          <Route path='/classes' component={LecturerClassList} />          
+          <Route path='/' component={Home} />
+        </Switch>
+      );  
+        navigations = lecturerSideBar;          
         break;
       default: routes = null;
     }

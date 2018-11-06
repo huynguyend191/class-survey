@@ -1,5 +1,5 @@
 .SideBar {
-  width: 200px;
+  width: 220px;
   height: 90vh;
   display: flex;
   flex-direction: column;
@@ -16,6 +16,8 @@
   text-decoration: none;
   color: #535a60;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
 }
 
 .Nav:hover {
@@ -29,4 +31,8 @@
   background: rgba(12,13,14,0.05);
 }
 
+.NavIcon {
+  margin-right: 4px;
+  margin-left: 10px;
+}
 
