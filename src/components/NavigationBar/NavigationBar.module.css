@@ -4,12 +4,14 @@
   color: #242729;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   padding: 10px;
   border-top: #3f51b5 solid 3px;
   box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 6px rgba(59,64,69,0.1);
 }
 
 .SurveyIcon {
+  margin-left: 10px;
   height: 40px;
   width: 40px;
 }
@@ -21,15 +23,21 @@
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 10px;
-  width: 80%;
 }
 
 .Username {
   margin: auto;
+  margin-left: 3px;
   font-size: 12px;
 }
 
 .SignOut {
   margin: auto;
+  margin-left: 14px;
   text-decoration: none;
+}
+
+.NavContent, .Account {
+  display: flex;
+  flex-direction: row;
 }
