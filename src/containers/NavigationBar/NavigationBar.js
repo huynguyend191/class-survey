@@ -32,7 +32,7 @@ class NavigationBar extends Component {
         TransitionComponent={Transition}
       >
         <DialogTitle>
-          <p style={{fontSize: '16px'}}>Do you want to signout?</p>
+          <p style={{fontSize: '16px'}}>Do you want to sign out?</p>
         </DialogTitle>
         <DialogActions>
           <Button onClick={this.handleCloseModal} color="secondary">
@@ -59,7 +59,7 @@ class NavigationBar extends Component {
         </div>
         <div className={classes.Account}>
           <AccountCircle style={{ margin: 'auto' }} color="primary" />
-          <p className={classes.Username}> {this.props.username}</p>
+          <p className={classes.Username}>{this.props.username}</p>
           <Tooltip 
             title="Sign Out" 
             disableFocusListener

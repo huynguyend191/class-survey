@@ -23,12 +23,13 @@
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 10px;
+  pointer-events: none;
 }
 
 .Username {
   margin: auto;
   margin-left: 3px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .SignOut {
