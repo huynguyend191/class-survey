@@ -4,6 +4,7 @@ import classes from './NavigationBar.module.css';
 import SurveyIcon from '../../assets/icons/survey.png';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import ArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
@@ -40,13 +41,16 @@ class NavigationBar extends Component {
             CLASS SURVEY
           </p>
         </div>
-        <Button
+        <div
           className={classes.Account}
-          onClick={this.handleClick}
+          
         >
           <AccountCircle style={{ margin: 'auto' }} color="primary" />
           <p className={classes.Username}>{this.props.username}</p>
-        </Button>
+          <Button onClick={this.handleClick} className={classes.DropDown}>
+            <ArrowDown style={{ margin: 'auto' }} color="primary" />
+          </Button>
+        </div>
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}

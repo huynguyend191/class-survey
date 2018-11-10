@@ -30,6 +30,7 @@
   margin: auto;
   margin-left: 3px;
   font-size: 14px;
+  text-transform: capitalize;
 }
 
 .SignOut {
@@ -46,4 +47,10 @@
 
 .Account {
   text-transform: none !important;
+}
+
+.DropDown {
+  min-width: 5px !important;
+  width: 5px;
+  background-color: transparent !important;
 }
