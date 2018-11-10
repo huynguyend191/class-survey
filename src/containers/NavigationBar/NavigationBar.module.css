@@ -33,12 +33,17 @@
 }
 
 .SignOut {
-  margin: auto;
-  margin-left: 14px;
-  text-decoration: none;
+  background-color: transparent !important;
+  width: 70px;
+  text-transform: none !important;
+  font-size: 14px !important;
 }
 
 .NavContent, .Account {
   display: flex;
   flex-direction: row;
+}
+
+.Account {
+  text-transform: none !important;
 }

@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as actions from '../../store/actions';
-import { TextField, Paper, Button, CircularProgress, Dialog, Slide, DialogTitle, DialogContent } from '@material-ui/core';
+import { TextField, Paper, Button, CircularProgress, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
 
 import classes from './SignIn.module.css';
-
-//Error Modal animation
-function Transition(props) {
-  return <Slide direction="down" {...props} />;
-}
 
 class SignIn extends Component {
   state = {
@@ -76,7 +71,6 @@ class SignIn extends Component {
         <Dialog
           open={this.state.openErrorMsg}
           onClick={this.handleCloseModal}
-          TransitionComponent={Transition}
         >
           <DialogTitle className={classes.ErrorModal}>
             <p className={classes.ErrorMsg}>{this.props.error}</p>

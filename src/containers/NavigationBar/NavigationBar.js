@@ -2,19 +2,25 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './NavigationBar.module.css';
 import SurveyIcon from '../../assets/icons/survey.png';
-import { Tooltip, Button, Dialog, Slide, DialogTitle, DialogActions } from '@material-ui/core';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
-function Transition(props) {
-  return <Slide direction="down" {...props} />;
-}
-
 class NavigationBar extends Component {
   state = {
     openDiaglog: false,
+    anchorEl: null,
   }
+
+
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
 
   handleCloseModal = () => {
     this.setState({openDiaglog: false});
@@ -25,30 +31,7 @@ class NavigationBar extends Component {
   }
 
   render() {
-    const confirmLogout = (
-      <Dialog
-        onClick={this.handleCloseModal}
-        open={this.state.openDiaglog}
-        TransitionComponent={Transition}
-      >
-        <DialogTitle>
-          <p style={{fontSize: '16px'}}>Do you want to sign out?</p>
-        </DialogTitle>
-        <DialogActions>
-          <Button onClick={this.handleCloseModal} color="secondary">
-            No
-          </Button>
-          <Button 
-            color="primary" 
-            autoFocus 
-            component={Link} 
-            to="/signout"
-          >
-            Yes
-          </Button>
-        </DialogActions>
-      </Dialog>
-    )
+    const { anchorEl } = this.state;
     return (
       <div className={classes.NavigationBar}>
         <div className={classes.NavContent}>
@@ -57,19 +40,24 @@ class NavigationBar extends Component {
             CLASS SURVEY
           </p>
         </div>
-        <div className={classes.Account}>
+        <Button
+          className={classes.Account}
+          onClick={this.handleClick}
+        >
           <AccountCircle style={{ margin: 'auto' }} color="primary" />
           <p className={classes.Username}>{this.props.username}</p>
-          <Tooltip 
-            title="Sign Out" 
-            disableFocusListener
-          > 
-            <Button style={{ backgroundColor: 'transparent' }} onClick={this.handleOpenModal}>
-              <ExitToApp />
+        </Button>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClose}
+        >
+          <MenuItem style={{ height: '10px' }}>
+            <Button className={classes.SignOut} component={Link} to="/signout">
+              <ExitToApp />Sign Out
             </Button>
-          </Tooltip>
-        </div>
-        {confirmLogout}
+          </MenuItem>
+        </Menu>
       </div>
     );
   }
