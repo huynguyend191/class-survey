@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class AccountList extends Component {
+class LecturerAccounts extends Component {
   render() {
     return (
       <div>
-        Table of account
+        
       </div>
     );
   }
 }
 
-export default AccountList;
+export default LecturerAccounts;

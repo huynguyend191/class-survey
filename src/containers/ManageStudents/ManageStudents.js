@@ -4,7 +4,7 @@ import ToolBar from '../../components/ToolBar/ToolBar';
 import UploadFileArea from '../../containers/UploadFileArea/UploadFileArea';
 import { manageStudentToolbar } from '../../utils/navigations';
 import classes from './ManageStudents.module.css';
-import AccountList from '../AccountList/AccountList';
+import StudentAccounts from '../../containers/StudentAccounts/StudentAccounts';
 
 class ManageStudents extends Component {
   render() {
@@ -13,7 +13,7 @@ class ManageStudents extends Component {
         <ToolBar navigations={manageStudentToolbar} />
         <Switch>
           <Route path='/students/upload' component={UploadFileArea}/>
-          <Route path='/students' exact component={AccountList} />
+          <Route path='/students' exact component={StudentAccounts} />
         </Switch>
       </div>
     );
