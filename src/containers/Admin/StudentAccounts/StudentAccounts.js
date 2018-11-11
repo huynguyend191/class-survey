@@ -19,7 +19,9 @@ class AccountList extends Component {
   }
 
   componentDidMount() {
-    this.props.onFetchAcc();
+    if(this.props.accounts.length <= 0) {
+      this.props.onFetchAcc();
+    }
   }
   render() {
 
