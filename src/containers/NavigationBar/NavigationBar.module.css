@@ -38,6 +38,7 @@
   width: 70px;
   text-transform: none !important;
   font-size: 14px !important;
+  font-weight: normal !important;
 }
 
 .NavContent, .Account {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import ToolBar from '../../components/ToolBar/ToolBar';
-import UploadFileArea from '../../containers/UploadFileArea/UploadFileArea';
-import { manageStudentToolbar } from '../../utils/navigations';
+import ToolBar from '../../../components/ToolBar/ToolBar';
+import UploadFileArea from '../UploadFileArea/UploadFileArea';
+import { manageStudentToolbar } from '../../../utils/navigations';
 import classes from './ManageStudents.module.css';
-import StudentAccounts from '../../containers/StudentAccounts/StudentAccounts';
+import StudentAccounts from '../StudentAccounts/StudentAccounts';
 
 class ManageStudents extends Component {
   render() {

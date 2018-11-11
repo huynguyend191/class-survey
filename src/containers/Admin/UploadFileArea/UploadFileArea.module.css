@@ -9,7 +9,7 @@
   height: 250px;
   margin: 20px auto;
   border: 1px dashed gray;
-  background-color: rgb(240, 238, 238);
+  background-color: #fafafb;
   padding: 3px;
   overflow: auto;
 }

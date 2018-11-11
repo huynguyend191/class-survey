@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import ToolBar from '../../components/ToolBar/ToolBar';
-import { manageLecturerToolbar } from '../../utils/navigations';
+import ToolBar from '../../../components/ToolBar/ToolBar';
+import { manageLecturerToolbar } from '../../../utils/navigations';
 import { Switch, Route } from 'react-router-dom';
-import UploadFileArea from '../../containers/UploadFileArea/UploadFileArea';
+import UploadFileArea from '../UploadFileArea/UploadFileArea';
 import LecturerAccounts from '../LecturerAccounts/LecturerAccounts';
 
 import classes from './ManageLecturers.module.css';

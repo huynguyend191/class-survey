@@ -5,12 +5,12 @@ import NavigationBar from '../../containers/NavigationBar/NavigationBar';
 import SideBar from '../../components/SideBar/SideBar';
 import { adminSideBar, studentSideBar, lecturerSideBar } from '../../utils/navigations';
 import classes from './Dashboard.module.css';
-import ManageStudents from '../ManageStudents/ManageStudents';
-import ManageLecturers from '../ManageLecturers/ManageLecturers';
-import ManageSurveys from '../ManageSurveys/ManageSurveys';
+import ManageStudents from '../Admin/ManageStudents/ManageStudents';
+import ManageLecturers from '../Admin/ManageLecturers/ManageLecturers';
+import ManageSurveys from '../Admin/ManageSurveys/ManageSurveys';
 import Home from '../Home/Home';
-import StudentClassList from '../StudentClassList/StudentClassList';
-import LecturerClassList from '../LecturerClassList/LecturerClassList';
+import StudentClassList from '../Students/StudentClassList/StudentClassList';
+import LecturerClassList from '../Lecturers/LecturerClassList/LecturerClassList';
 
 class Dashboard extends Component {
   render() {
