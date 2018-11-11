@@ -10,14 +10,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import authReducer from './store/reducers/authReducer';
-import fetchAccReducer from './store/reducers/fetchAccReducer';
+import accReducer from './store/reducers/accReducer';
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer =  combineReducers({
   authReducer,
-  fetchAccReducer
+  accReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(ReduxThunk)));

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {Table, TableBody, TableCell, TableHead, TableRow, TablePagination, CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import classes from './StudentAccounts.module.css';
-import { initFetchAccounts } from '../../../store/actions';
+import { initFetchStudentAccounts } from '../../../store/actions';
 
-class AccountList extends Component {
+class StudentAccounts extends Component {
   state = {
     page: 0, 
     rowsPerPage: 10 
@@ -84,18 +84,18 @@ class AccountList extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.fetchAccReducer.loading,
-    error:  state.fetchAccReducer.error,
-    accounts: state.fetchAccReducer.studentAccounts,
-    totalAcc: state.fetchAccReducer.totalStudents
+    isLoading: state.accReducer.loading,
+    error:  state.accReducer.error,
+    accounts: state.accReducer.studentAccounts,
+    totalAcc: state.accReducer.totalStudents
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchAcc: () => dispatch(initFetchAccounts())
+    onFetchAcc: () => dispatch(initFetchStudentAccounts())
   }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountList);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentAccounts);

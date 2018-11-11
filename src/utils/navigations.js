@@ -44,6 +44,21 @@ export const manageLecturerToolbar = [
   }
 ];
 
+export const manageSurveyToolbar = [
+  {
+    label: 'Survey List',
+    link: '/surveys'
+  },
+  {
+    label: 'Generate Survey',
+    link: '/surveys/generate'
+  },
+  {
+    label: 'Create New',
+    link: '/surveys/create'
+  }
+]
+
 
 //Navigation for Student
 export const studentSideBar = [

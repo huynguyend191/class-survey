@@ -5,5 +5,6 @@ export {
 } from './actionCreator/authenticate';
 
 export {
-  initFetchAccounts
-} from './actionCreator/fetchAccounts';
+  initFetchStudentAccounts,
+  initFetchLecturerAccounts
+} from './actionCreator/accounts';

@@ -1,0 +1,17 @@
+.LecturerAccounts {
+  margin-top: 20px;
+}
+
+.LecturerTableHeadRow {
+  background-color: #fafafb;
+  border-top: 1px solid rgba(224, 224, 224, 1);
+  height: 40px !important;
+}
+
+.LecturerTableHeadRow > .Cell {
+  color: #0C0D0E;
+}
+
+.LecturerTableBodyRow {
+  height: 40px !important;
+}
