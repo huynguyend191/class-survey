@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import {Table, TableBody, TableCell, TableHead, TableRow, TablePagination, CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import classes from './LecturerAccounts.module.css';
-import { initFetchLecturerAccounts } from '../../../store/actions';
+import { fetchLecturerAccounts } from '../../../store/actions';
 
 class LecturerAccounts extends Component {
   state = {
-    page: 0, 
     rowsPerPage: 10 
   }
 
@@ -15,25 +14,25 @@ class LecturerAccounts extends Component {
   }
 
   handleChangePage = (event, page) => {
-    this.setState({page: page})
+    this.props.onFetchAcc(page);
   }
 
   componentDidMount() {
     if(this.props.accounts.length <= 0) {
-      this.props.onFetchAcc();
+      this.props.onFetchAcc(this.props.page);
     }
   }
   render() {
 
     let tableBody = (
       <TableRow className={classes.LecturerTableBodyRow}>
-        <TableCell colSpan={6} style={{textAlign: 'center'}}><CircularProgress size={30} /></TableCell>
+        <TableCell colSpan={5} style={{textAlign: 'center'}}><CircularProgress size={30} /></TableCell>
       </TableRow>
     );
     if (!this.props.isLoading) {
       tableBody = this.props.accounts.map((account,index) => {
         return(
-          <TableRow className={classes.LecturerTableBodyRow}>
+          <TableRow className={classes.LecturerTableBodyRow} key={account.username}>
             <TableCell>{index + 1}</TableCell>
             <TableCell>{account.username}</TableCell>
             <TableCell>{account.fullname}</TableCell>
@@ -66,7 +65,7 @@ class LecturerAccounts extends Component {
           count={this.props.totalAcc}  
           rowsPerPageOptions={[]}
           rowsPerPage={this.state.rowsPerPage}
-          page={this.state.page} 
+          page={this.props.page} 
           backIconButtonProps={{
             'aria-label': 'Previous Page',
           }}
@@ -84,13 +83,14 @@ const mapStateToProps = state => {
     isLoading: state.accReducer.loading,
     error:  state.accReducer.error,
     accounts: state.accReducer.lecturerAccounts,
-    totalAcc: state.accReducer.totalLecturers
+    totalAcc: state.accReducer.totalLecturers,
+    page: state.accReducer.currentPageLecturer
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchAcc: () => dispatch(initFetchLecturerAccounts())
+    onFetchAcc: (page) => dispatch(fetchLecturerAccounts(page)),
   }
 }
 

@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import {Table, TableBody, TableCell, TableHead, TableRow, TablePagination, CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import classes from './StudentAccounts.module.css';
-import { initFetchStudentAccounts } from '../../../store/actions';
+import { fetchStudentAccounts } from '../../../store/actions';
 
 class StudentAccounts extends Component {
   state = {
-    page: 0, 
     rowsPerPage: 10 
   }
 
@@ -15,12 +14,12 @@ class StudentAccounts extends Component {
   }
 
   handleChangePage = (event, page) => {
-    this.setState({page: page})
+    this.props.onFetchAcc(page);
   }
 
   componentDidMount() {
     if(this.props.accounts.length <= 0) {
-      this.props.onFetchAcc();
+      this.props.onFetchAcc(0);
     }
   }
   render() {
@@ -33,7 +32,7 @@ class StudentAccounts extends Component {
     if (!this.props.isLoading) {
       tableBody = this.props.accounts.map((account,index) => {
         return(
-          <TableRow className={classes.StudentTableBodyRow}>
+          <TableRow className={classes.StudentTableBodyRow} key={account.username}>
             <TableCell>{index + 1}</TableCell>
             <TableCell>{account.username}</TableCell>
             <TableCell>{account.fullname}</TableCell>
@@ -68,7 +67,7 @@ class StudentAccounts extends Component {
           count={this.props.totalAcc}  
           rowsPerPageOptions={[]}
           rowsPerPage={this.state.rowsPerPage}
-          page={this.state.page} 
+          page={this.props.page} 
           backIconButtonProps={{
             'aria-label': 'Previous Page',
           }}
@@ -87,13 +86,14 @@ const mapStateToProps = state => {
     isLoading: state.accReducer.loading,
     error:  state.accReducer.error,
     accounts: state.accReducer.studentAccounts,
-    totalAcc: state.accReducer.totalStudents
+    totalAcc: state.accReducer.totalStudents,
+    page: state.accReducer.currentPageStudent
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchAcc: () => dispatch(initFetchStudentAccounts())
+    onFetchAcc: (page) => dispatch(fetchStudentAccounts(page))
   }
 }
 
