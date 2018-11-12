@@ -1,6 +1,6 @@
 .SideBar {
   width: 220px;
-  height: 90vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   padding-top: 30px;
@@ -36,3 +36,7 @@
   margin-left: 10px;
 }
 
+.Sticky {
+  top: 0;
+  position: sticky;
+}

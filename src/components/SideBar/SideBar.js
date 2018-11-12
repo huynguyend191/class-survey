@@ -7,16 +7,19 @@ import classes from './SideBar.module.css';
 function SideBar(props) {
   const navigations = props.navigations;
   return (
-    <div className={classes.SideBar}> 
-      {
-        navigations.map(item => {
-          return(
-            <NavLink exact key={item.label} className={classes.Nav} activeClassName={classes.activeLink} to={item.link} >
-              <Icon fontSize="small" className={classes.NavIcon}>{item.icon}</Icon>{item.label}
-            </NavLink>
-          );
-        })
-      }
+    <div className={classes.SideBar}>
+      <div className={classes.Sticky}>
+        {
+          navigations.map(item => {
+            return(
+              <NavLink exact key={item.label} className={classes.Nav} activeClassName={classes.activeLink} to={item.link} >
+                <Icon fontSize="small" className={classes.NavIcon}>{item.icon}</Icon>{item.label}
+              </NavLink>
+            );
+          })
+        }
+      </div> 
+      
     </div>
   );
 }

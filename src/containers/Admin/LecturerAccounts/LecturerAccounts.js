@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import {Table, TableBody, TableCell, TableHead, TableRow, TablePagination, CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
-import classes from './LecturerAccounts.module.css';
 import { fetchLecturerAccounts } from '../../../store/actions';
+import DataTable from '../../../components/DataTable/DataTable';
+import { tableHeadLecturer } from '../../../utils/tableInfo';
 
 class LecturerAccounts extends Component {
-  state = {
-    rowsPerPage: 10 
-  }
 
   handleDeleteAccount = (username) => {
     alert(username);
@@ -17,65 +14,28 @@ class LecturerAccounts extends Component {
     this.props.onFetchAcc(page);
   }
 
+  handleRefresh = () => {
+    this.props.onFetchAcc(0);
+  }
+
   componentDidMount() {
     if(this.props.accounts.length <= 0) {
       this.props.onFetchAcc(this.props.page);
     }
   }
   render() {
-
-    let tableBody = (
-      <TableRow className={classes.LecturerTableBodyRow}>
-        <TableCell colSpan={5} style={{textAlign: 'center'}}><CircularProgress size={30} /></TableCell>
-      </TableRow>
-    );
-    if (!this.props.isLoading) {
-      tableBody = this.props.accounts.map((account,index) => {
-        return(
-          <TableRow className={classes.LecturerTableBodyRow} key={account.username}>
-            <TableCell>{index + 1}</TableCell>
-            <TableCell>{account.username}</TableCell>
-            <TableCell>{account.fullname}</TableCell>
-            <TableCell>{account.VNUemail}</TableCell>
-            <TableCell>
-              <button onClick={() => this.handleDeleteAccount(account.username)}>Delete</button>
-            </TableCell>
-          </TableRow>
-        )
-      });
-    }
-    return (
-      <div className={classes.LecturerAccounts}>
-        <Table>
-          <TableHead>
-            <TableRow className={classes.LecturerTableHeadRow}>
-              <TableCell className={classes.Cell}>STT</TableCell>
-              <TableCell className={classes.Cell}>Tên đăng nhập</TableCell>
-              <TableCell className={classes.Cell}>Họ và tên</TableCell>
-              <TableCell className={classes.Cell}>VNU email</TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-              {tableBody}
-          </TableBody>
-        </Table>
-        <TablePagination 
-          component="div"
-          count={this.props.totalAcc}  
-          rowsPerPageOptions={[]}
-          rowsPerPage={this.state.rowsPerPage}
-          page={this.props.page} 
-          backIconButtonProps={{
-            'aria-label': 'Previous Page',
-          }}
-          nextIconButtonProps={{
-            'aria-label': 'Next Page',
-          }}
-          onChangePage={this.handleChangePage}
-        />
-      </div>
-    );
+    return(
+      <DataTable 
+        accounts={this.props.accounts}
+        page={this.props.page}
+        isLoading={this.props.isLoading}
+        handleChangePage={this.handleChangePage}
+        handleDeleteAccount={this.handleDeleteAccount}
+        handleRefresh={this.handleRefresh}
+        totalAcc={this.props.totalAcc}
+        tableHeadInfo={tableHeadLecturer}
+      />
+    )
   }
 }
 const mapStateToProps = state => {

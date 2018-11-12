@@ -38,7 +38,6 @@ export const updateStudentPage = (page) => {
 }
 
 export const updateLecturerPage = (page) => {
-  console.log('lec: ', page)
   return {
     type: actionTypes.UPDATE_LECTURER_PAGE,
     page
@@ -52,7 +51,7 @@ export const fetchStudentAccounts = (page) => {
     accounts = [
       {
         username: 16021391,
-        fullname: 'Nguyễn Đắc Huy',
+        fullname: 'Hello 123',
         VNUemail: '16021391@gmail.com',
         year: 'QH-2016-I/CQ-C-CLC'
       },
@@ -132,12 +131,11 @@ export const fetchStudentAccounts = (page) => {
   return dispatch => {
     dispatch(updateStudentPage(page));
     dispatch(startFetching());
-    setTimeout(() => {dispatch(fetchStudentSuccessful(accounts, total))}, 2*1000);
+    setTimeout(() => {dispatch(fetchStudentSuccessful(accounts, total))}, 1*1000);
   }
 };
 
 export const fetchLecturerAccounts = (page) => {
-  console.log('fetch: ',page);
   const accounts = [
     {
       username: 'thanhld',
@@ -154,7 +152,7 @@ export const fetchLecturerAccounts = (page) => {
   return dispatch => {
     dispatch(updateLecturerPage(page));   
     dispatch(startFetching());
-    setTimeout(() => {dispatch(fetchLecturerSuccessful(accounts, total))}, 2*1000);
+    setTimeout(() => {dispatch(fetchLecturerSuccessful(accounts, total))}, 1*1000);
   }
 }
 

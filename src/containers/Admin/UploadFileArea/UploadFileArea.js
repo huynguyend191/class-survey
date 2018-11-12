@@ -84,8 +84,8 @@ class UploadFileArea extends Component {
             className={classes.Filename} key={file.name}>
             <img className={classes.ExcelIcon} src={ExcelIcon} alt="" />
             {fileName}
-            <IconButton style={{ backgroundColor: 'transparent' }}>
-              <DeleteIcon fontSize="small" color="error" onClick={() => this.onRemoveFile(file.name)}/>
+            <IconButton style={{ backgroundColor: 'transparent' }} onClick={() => this.onRemoveFile(file.name)}>
+              <DeleteIcon fontSize="small" color="error" />
             </IconButton>
           </li>;
         })
