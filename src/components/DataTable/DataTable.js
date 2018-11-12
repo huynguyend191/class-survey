@@ -8,7 +8,7 @@ import classes from './DataTable.module.css';
 function DataTable(props) {
   let tableBody = (
     <TableRow className={classes.TableBodyRow}>
-      <TableCell colSpan={5} style={{textAlign: 'center'}}><CircularProgress size={30} /></TableCell>
+      <TableCell colSpan={props.tableHeadInfo.length + 1} style={{textAlign: 'center'}}><CircularProgress size={30} /></TableCell>
     </TableRow>
   );
   if (!props.isLoading) {
