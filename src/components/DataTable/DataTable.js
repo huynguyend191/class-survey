@@ -37,7 +37,7 @@ function DataTable(props) {
     } else {
       tableBody = (
         <TableRow className={classes.TableBodyRow}>
-          <TableCell colSpan={props.tableHeadInfo.length + 1} style={{textAlign: 'center'}}>Không có kết quả</TableCell>
+          <TableCell colSpan={props.tableHeadInfo.length + 1} style={{textAlign: 'center'}}>No result</TableCell>
         </TableRow>
       )
     }

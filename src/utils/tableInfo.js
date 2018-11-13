@@ -1,3 +1,3 @@
-export const tableHeadLecturer = ['STT', 'Tên đăng nhập', 'Họ và tên', 'VNU email'];
+export const tableHeadLecturer = ['No.', 'Username', 'Fullname', 'VNU email'];
 
-export const tableHeadStudent = ['STT', 'Tên đăng nhập', 'Họ và tên', 'VNU email', 'Khóa'];
+export const tableHeadStudent = ['No.', 'Username', 'Fullname', 'VNU email', 'Year'];
