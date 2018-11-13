@@ -13,7 +13,7 @@ class ManageLecturers extends Component {
       <div className={classes.ManageLecturers}>
         <ToolBar navigations={manageLecturerToolbar}/>
         <Switch>
-          <Route path='/lecturers/upload' component={UploadFileArea}/>
+          <Route path='/lecturers/upload' render={UploadFileArea} />
           <Route path='/lecturers' exact component={LecturerAccounts} />
         </Switch>
       </div>

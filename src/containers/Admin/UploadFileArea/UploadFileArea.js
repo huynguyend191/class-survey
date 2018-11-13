@@ -14,11 +14,13 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 import axios from '../../../utils/axiosConfig';
+import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 
 class UploadFileArea extends Component {
   state = {
     files: [],
-    isUploading: false
+    isUploading: false,
+    error: null,
   }
 
   onSelectedFiles = (acceptedFiles, rejectedFiles) => {
@@ -51,8 +53,9 @@ class UploadFileArea extends Component {
     this.state.files.forEach(file=> {
       formData.append('myArrayOfFiles', file);
     })
-    console.log(formData);
     this.setState({isUploading: true});
+    const url =  this.props.match.url;
+    console.log(url);
     axios('/products/upload',{
       method: 'POST',
       data: formData,
@@ -61,9 +64,12 @@ class UploadFileArea extends Component {
       this.setState({isUploading: false, files: []});
       console.log(res.data);
     }).catch(err => {
-      this.setState({isUploading: false});
-      console.log(err.response.data);
+      this.setState({isUploading: false, error: err.message});
     })
+  }
+
+  handleCloseError = () => {
+    this.setState({error: null});
   }
 
   render() {
@@ -93,6 +99,11 @@ class UploadFileArea extends Component {
     }
     return (
       <div className={classes.UploadFileArea}>
+        <ErrorModal 
+          isOpen = {this.state.error ? true : false}
+          handleCloseModal = {this.handleCloseError}
+          error = {this.state.error}
+        />
         <Dropzone 
           className={classes.Dropzone}
           onDrop={this.onSelectedFiles}

@@ -19,6 +19,6 @@
   height: 40px !important;
 }
 
-.EditButton, .DeleteButton, .RefreshButton {
+.EditButton, .DeleteButton, .RefreshButton, .AddButton {
   padding: 6px !important;
 }

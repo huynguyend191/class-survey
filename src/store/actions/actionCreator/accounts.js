@@ -150,7 +150,7 @@ export const fetchStudentAccounts = (page) => {
     dispatch(updateStudentPage(page));
     dispatch(startFetching());
     setTimeout(() => {dispatch(fetchStudentSuccessful(accounts, total))}, 1*1000);
-    setTimeout(() => {dispatch(fetchFailed('Nani'))}, 1*1000);
+    setTimeout(() => {dispatch(fetchFailed('student error'))}, 1*1000);
   }
 };
 
@@ -163,7 +163,7 @@ export const fetchLecturerAccounts = (page) => {
     dispatch(updateLecturerPage(page));   
     dispatch(startFetching());
     setTimeout(() => {dispatch(fetchLecturerSuccessful(accounts, total))}, 1*1000);
-    setTimeout(() => {dispatch(fetchFailed('Nani'))}, 1*1000);
+    setTimeout(() => {dispatch(fetchFailed('lecturer error'))}, 1*1000);
   }
 }
 
@@ -183,8 +183,9 @@ export const editLecturer = (id) => {
 
 export const deleteStudent = (id) => {
   return dispatch => {
-    dispatch(startFetching());
-    dispatch(fetchStudentAccounts(0));
+    // dispatch(startFetching());
+    // dispatch(fetchStudentAccounts(0));
+    console.log('Delete student: ', id)
   }
 }
 

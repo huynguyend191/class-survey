@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError } from '../../../store/actions';
-import DataTable from '../../../components/DataTable/DataTable';
+import DataTable from '../../DataTable/DataTable';
 import { tableHeadStudent } from '../../../utils/tableInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 
@@ -9,7 +9,6 @@ class StudentAccounts extends Component {
 
   handleDeleteAccount = (id) => {
     this.props.onDeleteAcc(id);
-    alert(id);
   }
 
   handleEditAccount = (id) => {

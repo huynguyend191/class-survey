@@ -30,6 +30,7 @@
 .Button {
   width: 100px;
   margin-right: 5px !important;
+  min-height: 38px !important;
 }
 
 .CloudUploadIcon, .FolderOpenIcon {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchLecturerAccounts, editLecturer, deleteLecturer, removeAccError } from '../../../store/actions';
-import DataTable from '../../../components/DataTable/DataTable';
+import DataTable from '../../DataTable/DataTable';
 import { tableHeadLecturer } from '../../../utils/tableInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 
