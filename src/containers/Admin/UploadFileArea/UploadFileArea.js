@@ -128,8 +128,6 @@ class UploadFileArea extends Component {
         </Button>
       </div>
     );
-      
-      
   }
 }
 

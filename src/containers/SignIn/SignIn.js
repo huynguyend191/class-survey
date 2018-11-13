@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as actions from '../../store/actions';
-import { TextField, Paper, Button, CircularProgress, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
+import { TextField, Paper, Button, CircularProgress } from '@material-ui/core';
 
 import classes from './SignIn.module.css';
+import ErrorModal from '../../components/ErrorModal/ErrorModal';
 
 class SignIn extends Component {
   state = {
@@ -12,7 +13,6 @@ class SignIn extends Component {
     password: '',
     usernameError: false,
     passwordError: false,
-    openErrorMsg: false
   }
 
   onInputChangeHandler = (event) => {
@@ -30,7 +30,6 @@ class SignIn extends Component {
     const isPasswordValid = this.checkPasswordValidity();
     const isUsernameValid = this.checkUsernameValidity();
     if(isPasswordValid && isUsernameValid){
-      this.setState({openErrorMsg: true});
       this.props.onLogin(loginData);
     }
   }
@@ -55,31 +54,15 @@ class SignIn extends Component {
     return isValid;
   }
 
-  handleCloseModal = () => {
-    this.setState({openErrorMsg: false});
+  handleCloseError = () => {
+    this.setState({isOpen: false})
+    this.props.onCloseError();
   }
-
 
   render() {
     let loginRedirect = null;
     if (this.props.isAuthenticated) {
       loginRedirect = <Redirect to="/" />;
-    }
-    let error = null;
-    if(this.props.error){
-      error = (
-        <Dialog
-          open={this.state.openErrorMsg}
-          onClick={this.handleCloseModal}
-        >
-          <DialogTitle className={classes.ErrorModal}>
-            <p className={classes.ErrorMsg}>{this.props.error}</p>
-          </DialogTitle>
-          <DialogContent className={classes.ErrorMsg}>
-            Please try again!
-          </DialogContent>
-        </Dialog>
-      )
     }
     let header = (
       <p className={classes.Header}>CLASS SURVEY</p>
@@ -131,7 +114,11 @@ class SignIn extends Component {
         <Paper className={classes.Paper}>
           {header}
           {form}
-          {error}
+          <ErrorModal 
+            isOpen={this.props.error ? true : false}
+            error={this.props.error}
+            handleCloseModal={this.handleCloseError}
+          />
         </Paper>
       </div>
     );
@@ -148,7 +135,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: (loginData) => dispatch(actions.initSignIn(loginData))
+    onLogin: (loginData) => dispatch(actions.initSignIn(loginData)),
+    onCloseError: () => dispatch(actions.removeAuthError())
   };
 };
 

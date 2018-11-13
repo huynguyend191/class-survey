@@ -11,6 +11,12 @@ export const startSignIn = () => {
   }
 }
 
+export const removeAuthError = () => {
+  return {
+    type: actionTypes.REMOVE_AUTH_ERROR
+  }
+}
+
 export const signInSuccesful = (username, role) => {
   return {
     type: actionTypes.SIGN_IN_SUCCESSFUL,

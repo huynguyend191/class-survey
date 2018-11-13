@@ -17,14 +17,6 @@
   transform: translate(-50%, -50%);
 }
 
-.ErrorMsg {
-  text-align: center;
-  color: red !important;
-}
-
-.ErrorModal {
-  width: 200px !important;
-}
 
 
 .SignInButton {

@@ -28,7 +28,7 @@ export const manageStudentToolbar = [
     link: '/students'
   },
   {
-    label: 'Upload',
+    label: 'Upload Files',
     link: '/students/upload'
   }
 ];
@@ -39,7 +39,7 @@ export const manageLecturerToolbar = [
     link: '/lecturers',
   },
   {
-    label: 'Upload',
+    label: 'Upload Files',
     link: '/lecturers/upload'
   }
 ];
@@ -50,12 +50,16 @@ export const manageSurveyToolbar = [
     link: '/surveys'
   },
   {
-    label: 'Generate Survey',
+    label: 'Generate Form',
     link: '/surveys/generate'
   },
   {
-    label: 'Create New',
+    label: 'Create Survey',
     link: '/surveys/create'
+  },
+  {
+    label: 'Upload Class',
+    link: '/surveys/upload'
   }
 ]
 

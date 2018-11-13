@@ -34,6 +34,8 @@ const reducer = ( state =  initialState, action) => {
           role: null
         }
       );
+    case actionTypes.REMOVE_AUTH_ERROR:
+        return updateObject(state, {error: null});
     default:
       return state;
   }

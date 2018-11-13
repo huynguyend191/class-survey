@@ -1,0 +1,8 @@
+.ErrorMsg {
+  text-align: center;
+  color: red !important;
+}
+
+.ErrorModal {
+  width: 200px !important;
+}

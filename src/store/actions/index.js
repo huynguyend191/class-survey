@@ -1,10 +1,16 @@
 export {
   initSignIn,
   initSignOut,
-  checkSignInState
+  checkSignInState,
+  removeAuthError
 } from './actionCreator/authenticate';
 
 export {
   fetchStudentAccounts,
-  fetchLecturerAccounts
+  fetchLecturerAccounts,
+  editLecturer,
+  editStudent,
+  deleteLecturer,
+  deleteStudent,
+  removeAccError
 } from './actionCreator/accounts';

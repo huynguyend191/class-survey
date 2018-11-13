@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudentAccounts } from '../../../store/actions';
+import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError } from '../../../store/actions';
 import DataTable from '../../../components/DataTable/DataTable';
 import { tableHeadStudent } from '../../../utils/tableInfo';
+import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 
 class StudentAccounts extends Component {
 
-  handleDeleteAccount = (username) => {
-    alert(username);
+  handleDeleteAccount = (id) => {
+    this.props.onDeleteAcc(id);
+    alert(id);
   }
 
-  handleEditAccount = (username) => {
-    alert(username);
+  handleEditAccount = (id) => {
+    this.props.onEditAcc(id);    
   }
 
   handleRefresh = () => {
@@ -22,6 +24,10 @@ class StudentAccounts extends Component {
     this.props.onFetchAcc(page);
   }
 
+  handleCloseError = () => {
+    this.props.onCloseError();
+  }
+
   componentDidMount() {
     if(this.props.accounts.length <= 0) {
       this.props.onFetchAcc(0);
@@ -29,16 +35,24 @@ class StudentAccounts extends Component {
   }
   render() {
     return (
-      <DataTable 
-        accounts={this.props.accounts}
-        page={this.props.page}
-        isLoading={this.props.isLoading}
-        handleChangePage={this.handleChangePage}
-        handleDeleteAccount={this.handleDeleteAccount}
-        handleRefresh={this.handleRefresh}
-        totalAcc={this.props.totalAcc}
-        tableHeadInfo={tableHeadStudent}
-      />
+      <div>
+        <ErrorModal 
+          isOpen={this.props.error ? true : false}
+          error={this.props.error}
+          handleCloseModal={this.handleCloseError}
+        />
+        <DataTable 
+          accounts={this.props.accounts}
+          page={this.props.page}
+          isLoading={this.props.isLoading}
+          handleChangePage={this.handleChangePage}
+          handleEditAccount={this.handleEditAccount}
+          handleDeleteAccount={this.handleDeleteAccount}
+          handleRefresh={this.handleRefresh}
+          totalAcc={this.props.totalAcc}
+          tableHeadInfo={tableHeadStudent}
+        />
+      </div>
     );
   }
 }
@@ -55,7 +69,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchAcc: (page) => dispatch(fetchStudentAccounts(page))
+    onFetchAcc: (page) => dispatch(fetchStudentAccounts(page)),
+    onEditAcc: (id) => dispatch(editStudent(id)),
+    onDeleteAcc: (id) => dispatch(deleteStudent(id)),
+    onCloseError: () => dispatch(removeAccError())
   }
 }
 

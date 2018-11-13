@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchLecturerAccounts } from '../../../store/actions';
+import { fetchLecturerAccounts, editLecturer, deleteLecturer, removeAccError } from '../../../store/actions';
 import DataTable from '../../../components/DataTable/DataTable';
 import { tableHeadLecturer } from '../../../utils/tableInfo';
+import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 
 class LecturerAccounts extends Component {
 
-  handleDeleteAccount = (username) => {
-    alert(username);
+  handleDeleteAccount = (id) => {
+    this.props.onDeleteAcc(id);
+    alert(id);
+  }
+
+  handleEditAccount = (id) => {
+    this.props.onEditAcc(id);    
   }
 
   handleChangePage = (event, page) => {
@@ -18,6 +24,10 @@ class LecturerAccounts extends Component {
     this.props.onFetchAcc(0);
   }
 
+  handleCloseError = () => {
+    this.props.onCloseError();
+  }
+
   componentDidMount() {
     if(this.props.accounts.length <= 0) {
       this.props.onFetchAcc(this.props.page);
@@ -25,16 +35,24 @@ class LecturerAccounts extends Component {
   }
   render() {
     return(
-      <DataTable 
-        accounts={this.props.accounts}
-        page={this.props.page}
-        isLoading={this.props.isLoading}
-        handleChangePage={this.handleChangePage}
-        handleDeleteAccount={this.handleDeleteAccount}
-        handleRefresh={this.handleRefresh}
-        totalAcc={this.props.totalAcc}
-        tableHeadInfo={tableHeadLecturer}
-      />
+      <div>
+        <ErrorModal 
+          isOpen={this.props.error ? true : false}
+          error={this.props.error}
+          handleCloseModal={this.handleCloseError}
+        />
+        <DataTable 
+          accounts={this.props.accounts}
+          page={this.props.page}
+          isLoading={this.props.isLoading}
+          handleChangePage={this.handleChangePage}
+          handleEditAccount={this.handleEditAccount}
+          handleDeleteAccount={this.handleDeleteAccount}
+          handleRefresh={this.handleRefresh}
+          totalAcc={this.props.totalAcc}
+          tableHeadInfo={tableHeadLecturer}
+        />
+      </div>
     )
   }
 }
@@ -51,6 +69,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchAcc: (page) => dispatch(fetchLecturerAccounts(page)),
+    onEditAcc: (id) => dispatch(editLecturer(id)),
+    onDeleteAcc: (id) => dispatch(deleteLecturer(id)),
+    onCloseError: () => dispatch(removeAccError())
   }
 }
 

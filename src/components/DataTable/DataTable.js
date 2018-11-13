@@ -12,27 +12,36 @@ function DataTable(props) {
     </TableRow>
   );
   if (!props.isLoading) {
-    tableBody = props.accounts.map((account,index) => {
-      const accountObject = account;
-      return(
-        <TableRow className={classes.TableBodyRow} key={account.username}>
-          <TableCell>{index + 1}</TableCell>
-          { 
-            Object.keys(accountObject).map(key => {
-              return <TableCell key={accountObject[key]}>{accountObject[key]}</TableCell>;
-            })
-          }
-          <TableCell>
-            <IconButton className={classes.EditButton} onClick={() => props.handleDeleteAccount(account.username)}>
-              <EditIcon fontSize="small" color="primary" />
-            </IconButton>
-            <IconButton className={classes.DeleteButton} onClick={() => props.handleDeleteAccount(account.username)}>
-              <DeleteIcon fontSize="small" color="error" />
-            </IconButton>
-          </TableCell>
+    if (props.accounts.length > 0) {
+      tableBody = props.accounts.map((account,index) => {
+        const accountObject = account;
+        return(
+          <TableRow className={classes.TableBodyRow} key={account.id}>
+            <TableCell>{index + 1}</TableCell>
+            { 
+              Object.keys(accountObject).map(key => {
+                return key !== 'id' ?  <TableCell key={accountObject[key]}>{accountObject[key]}</TableCell> : null;
+              })
+            }
+            <TableCell>
+              <IconButton className={classes.EditButton} onClick={() => props.handleEditAccount(account.id)}>
+                <EditIcon fontSize="small" color="primary" />
+              </IconButton>
+              <IconButton className={classes.DeleteButton} onClick={() => props.handleDeleteAccount(account.id)}>
+                <DeleteIcon fontSize="small" color="error" />
+              </IconButton>
+            </TableCell>
+          </TableRow>
+        )
+      });
+    } else {
+      tableBody = (
+        <TableRow className={classes.TableBodyRow}>
+          <TableCell colSpan={props.tableHeadInfo.length + 1} style={{textAlign: 'center'}}>Không có kết quả</TableCell>
         </TableRow>
       )
-    });
+    }
+    
   }
   return (
     <div className={classes.Accounts}>

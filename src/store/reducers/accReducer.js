@@ -40,6 +40,9 @@ const reducer = ( state =  initialState, action) => {
     case actionTypes.UPDATE_LECTURER_PAGE:
       return updateObject(state, {currentPageLecturer: action.page});
     
+    case actionTypes.REMOVE_ACC_ERROR:
+      return updateObject(state, {error: null});
+
     default:
       return state;
   }
