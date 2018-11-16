@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError } from '../../../store/actions';
 import DataTable from '../../DataTable/DataTable';
-import { tableHeadStudent } from '../../../utils/tableInfo';
+import { tableHeadStudent } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 
 class StudentAccounts extends Component {
@@ -11,8 +11,8 @@ class StudentAccounts extends Component {
     this.props.onDeleteAcc(id);
   }
 
-  handleEditAccount = (id) => {
-    this.props.onEditAcc(id);    
+  handleEditAccount = (id, form) => {
+    this.props.onEditAcc(id, form);    
   }
 
   handleRefresh = () => {
@@ -40,7 +40,9 @@ class StudentAccounts extends Component {
           error={this.props.error}
           handleCloseModal={this.handleCloseError}
         />
-        <DataTable 
+        <DataTable
+          history={this.props.history}
+          path={this.props.match.path}
           accounts={this.props.accounts}
           page={this.props.page}
           isLoading={this.props.isLoading}
@@ -69,7 +71,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchAcc: (page) => dispatch(fetchStudentAccounts(page)),
-    onEditAcc: (id) => dispatch(editStudent(id)),
+    onEditAcc: (id, form) => dispatch(editStudent(id, form)),
     onDeleteAcc: (id) => dispatch(deleteStudent(id)),
     onCloseError: () => dispatch(removeAccError())
   }

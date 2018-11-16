@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchLecturerAccounts, editLecturer, deleteLecturer, removeAccError } from '../../../store/actions';
 import DataTable from '../../DataTable/DataTable';
-import { tableHeadLecturer } from '../../../utils/tableInfo';
+import { tableHeadLecturer } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 
 class LecturerAccounts extends Component {
 
   handleDeleteAccount = (id) => {
     this.props.onDeleteAcc(id);
-    alert(id);
   }
 
-  handleEditAccount = (id) => {
-    this.props.onEditAcc(id);    
+  handleEditAccount = (id, form) => {
+    this.props.onEditAcc(id, form);    
   }
 
   handleChangePage = (event, page) => {
@@ -41,7 +40,9 @@ class LecturerAccounts extends Component {
           error={this.props.error}
           handleCloseModal={this.handleCloseError}
         />
-        <DataTable 
+        <DataTable
+          history={this.props.history}
+          path={this.props.match.path}
           accounts={this.props.accounts}
           page={this.props.page}
           isLoading={this.props.isLoading}
@@ -51,6 +52,7 @@ class LecturerAccounts extends Component {
           handleRefresh={this.handleRefresh}
           totalAcc={this.props.totalAcc}
           tableHeadInfo={tableHeadLecturer}
+          accountType="lecturer"
         />
       </div>
     )
@@ -69,7 +71,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchAcc: (page) => dispatch(fetchLecturerAccounts(page)),
-    onEditAcc: (id) => dispatch(editLecturer(id)),
+    onEditAcc: (id, form) => dispatch(editLecturer(id, form)),
     onDeleteAcc: (id) => dispatch(deleteLecturer(id)),
     onCloseError: () => dispatch(removeAccError())
   }

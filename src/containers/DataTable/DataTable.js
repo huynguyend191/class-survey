@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import {Table, TableBody, TableCell, TableHead, TableRow, TablePagination, CircularProgress, IconButton, Tooltip } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -6,11 +7,16 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import AddIcon from '@material-ui/icons/Add';
 import classes from './DataTable.module.css';
 import ConfirmDelete from '../../components/ConfirmDelete/ConfirmDelete';
+import EditModal from '../EditModal/EditModal';
+// import CreateSurvey from '../Admin/CreateSurvey/CreateSurvey';
 
 class DataTable extends Component {
+
   state = {
     openConfirmDelete: false,
-    deleteId: null
+    openEditModal: false,
+    deleteId: null,
+    editAccount: null
   }
 
   closeDeleteConfirm = () => {
@@ -27,6 +33,20 @@ class DataTable extends Component {
     });
   }
 
+  closeEditModal = () => {
+    this.setState({
+      openEditModal: false,
+      editAccount: null
+    });
+  }
+
+  openEditModal = (account) => {
+    this.setState({
+      editAccount: account
+    });
+    this.props.history.replace(this.props.path + '/edit');
+  }
+
   render() {
     //tableBody loading or show data
     let tableBody = (
@@ -35,6 +55,7 @@ class DataTable extends Component {
         <TableCell colSpan={this.props.tableHeadInfo.length + 2} style={{textAlign: 'center'}}><CircularProgress size={30} /></TableCell>
       </TableRow>
     );
+    //finish loading
     if (!this.props.isLoading) {
       if (this.props.accounts.length > 0) {
         tableBody = this.props.accounts.map((account,index) => {
@@ -48,7 +69,9 @@ class DataTable extends Component {
                 })
               }
               <TableCell>
-                  <IconButton className={classes.EditButton} onClick={() => this.props.handleEditAccount(account.id)}>
+                  <IconButton className={classes.EditButton}
+                    onClick={() => this.openEditModal(account)}
+                  >
                     <EditIcon fontSize="small" color="primary" />
                   </IconButton>
   
@@ -68,8 +91,20 @@ class DataTable extends Component {
         )
       }
     }
+
     return (
       <div className={classes.Accounts}>
+        <Route  
+          path={this.props.path + '/edit'}
+          render={() =>
+            <EditModal
+              label={this.props.tableHeadInfo} 
+              submit={this.props.handleEditAccount}
+              account={this.state.editAccount} 
+              history={this.props.history} 
+              path={this.props.path}/>
+          }
+        />
         <ConfirmDelete 
           isOpen={this.state.openConfirmDelete}
           handleClose={this.closeDeleteConfirm}

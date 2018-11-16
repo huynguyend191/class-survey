@@ -1,0 +1,49 @@
+.EditModal {
+  width: 300px;
+  padding: 15px;
+  border-top: solid #3f51b5 6px;
+}
+
+.Input {
+  height: 30px;
+  margin: auto;
+  border-radius: 5px;
+  margin: 8px;
+  padding: 2px;
+  margin-right: 0;
+}
+
+.InputHolder {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.InputLabel {
+  font-size: 14px;
+  width: 200px;
+  margin: auto;
+}
+
+.ButtonHolder {
+  width: 100px; 
+  margin: auto;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+.CloseButton {
+  cursor: pointer;
+}
+
+.EditHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  padding: 3px;
+  color: #3f51b5;
+  font-weight: 500;
+  font-size: 18px;
+}

@@ -13,7 +13,7 @@ class ManageStudents extends Component {
         <ToolBar navigations={manageStudentToolbar} />
         <Switch>
           <Route path='/students/upload' component={UploadFileArea}/>
-          <Route path='/students' exact component={StudentAccounts} />
+          <Route path='/students' component={StudentAccounts} />
         </Switch>
       </div>
     );
