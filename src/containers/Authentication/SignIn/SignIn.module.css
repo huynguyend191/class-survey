@@ -3,7 +3,7 @@
   height: 100vh;
   background-size: cover;
   background-blend-mode: darken;
-  background-image: url('../../assets/backgrounds/background.jpg');
+  background-image: url('../../../assets/backgrounds/background.jpg');
   position: relative;
 }
 

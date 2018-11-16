@@ -7,8 +7,8 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import AddIcon from '@material-ui/icons/Add';
 import classes from './DataTable.module.css';
 import ConfirmDelete from '../../components/ConfirmDelete/ConfirmDelete';
-import EditModal from '../AccForm/EditModal';
-import AddModal from '../AccForm/AddModal';
+import EditModal from '../Admin/AccForm/EditModal';
+import AddModal from '../Admin/AccForm/AddModal';
 
 // import CreateSurvey from '../Admin/CreateSurvey/CreateSurvey';
 
@@ -122,7 +122,7 @@ class DataTable extends Component {
         <Table>
           <TableHead>
             <TableRow className={classes.TableHeadRow}>
-              <TableCell className={classes.Cell}>No.</TableCell>
+              <TableCell className={classes.Cell}>STT</TableCell>
               {
                 this.props.tableHeadInfo.map(item => {
                   return(

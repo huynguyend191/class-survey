@@ -3,8 +3,8 @@ import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Dashboard from './containers/Dashboard/Dashboard';
-import SignIn from './containers/SignIn/SignIn';
-import SignOut from './containers/SignOut/SignOut';
+import SignIn from './containers/Authentication/SignIn/SignIn';
+import SignOut from './containers/Authentication/SignOut/SignOut';
 import * as actions from './store/actions';
 
 class App extends Component {

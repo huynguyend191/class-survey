@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import * as actions from '../../store/actions';
+import * as actions from '../../../store/actions';
 import { TextField, Paper, Button, CircularProgress } from '@material-ui/core';
 
 import classes from './SignIn.module.css';
-import ErrorModal from '../../components/ErrorModal/ErrorModal';
+import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 
 class SignIn extends Component {
   state = {

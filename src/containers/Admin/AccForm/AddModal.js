@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Dialog, Paper, Button, Icon } from '@material-ui/core';
 import classes from './EditModal.module.css';
+import checkValidity  from '../../../utils/checkValidity';
 
 class EditModal extends Component{
 
@@ -10,13 +11,14 @@ class EditModal extends Component{
         account: { 
         ...this.state.account,
         year:{
-          label: 'Khóa',
+          label: 'Khóa đào tạo',
           elementType: 'text',
           value: '',
           validation: { 
             required: true
           },
           valid: false,
+          message: null
         }}
       })
     }
@@ -32,6 +34,17 @@ class EditModal extends Component{
           required: true
         },
         valid: false,
+        message: null
+      },
+      password: {
+        label: 'Mật khẩu',
+        elementType: 'text',
+        value: '',
+        validation: { 
+          required: true,
+        },
+        valid: false,
+        message: null
       },
       fullname: {
         label: 'Họ và tên',
@@ -41,6 +54,7 @@ class EditModal extends Component{
           required: true
         },
         valid: false,
+        message: null
       },
       VUNemail: {
         label: 'VNU email',
@@ -51,6 +65,7 @@ class EditModal extends Component{
           isEmail: true
         },
         valid: false,
+        message: null
       },
     
     },
@@ -67,7 +82,8 @@ class EditModal extends Component{
     updatedElement.value = event.target.value;
     updatedForm[id] = updatedElement;
     updatedElement.touched = true;
-    updatedElement.valid = this.checkValidity(updatedElement.value, updatedElement.validation);
+    updatedElement.valid = checkValidity(updatedElement.value, updatedElement.validation).isValid;
+    updatedElement.message = checkValidity(updatedElement.value, updatedElement.validation).message;
     let formIsValid = true;
     for(let inputIdentifier in updatedForm) {
       formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
@@ -89,18 +105,6 @@ class EditModal extends Component{
     this.handleClose();
   }
 
-  checkValidity (value, rules) {
-    let isValid = true;
-    if (rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
-    if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value) && isValid;
-    }
-    return isValid;
-  }
-
   render() {
     const inputArrays = [];
     for (let key in this.state.account) {
@@ -115,13 +119,17 @@ class EditModal extends Component{
       <form onSubmit={this.submitForm}>
         { 
           inputArrays.map(formElement => (
-            <div key={formElement.id} className={classes.InputHolder}>
-              <p className={classes.InputLabel}>{formElement.config.label}</p>
-              <input 
-                className={classes.Input}
-                value={formElement.config.value}
-                onChange={(event) => this.onInputChangeHandler(event, formElement.id)} 
-              />
+            <div key={formElement.id} >
+              <div className={classes.InputHolder}>
+                <p className={classes.InputLabel}>{formElement.config.label}</p>
+                <input 
+                  className={classes.Input}
+                  value={formElement.config.value}
+                  type={formElement.config.elementType}
+                  onChange={(event) => this.onInputChangeHandler(event, formElement.id)} 
+                />
+              </div>
+              <div className={classes.ErrorMsg}>{formElement.config.message}</div>
             </div>
           ))
         }

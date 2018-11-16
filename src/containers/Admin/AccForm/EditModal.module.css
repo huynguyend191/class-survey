@@ -1,6 +1,6 @@
 .EditModal {
   width: 300px;
-  padding: 5px 15px 10px 15px;
+  padding: 5px 15px 8px 15px;
   border-top: solid #3f51b5 6px;
 }
 
@@ -11,6 +11,21 @@
   margin: 8px;
   padding: 2px;
   margin-right: 0;
+  border: 1px solid rgb(185, 183, 183);
+}
+
+.InputError {
+  height: 30px;
+  margin: auto;
+  border-radius: 5px;
+  margin: 8px;
+  padding: 2px;
+  margin-right: 0;
+  border: 1px solid red;
+}
+
+.InputError:focus {
+  outline: none;
 }
 
 .InputHolder {
@@ -19,10 +34,13 @@
   margin: auto;
 }
 
+
 .InputLabel {
   font-size: 14px;
   width: 200px;
   margin: auto;
+  color: #0C0D0E;
+  font-weight: 500;
 }
 
 .ButtonHolder {
@@ -40,10 +58,16 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 5px;
   border-bottom: 1px solid rgba(224, 224, 224, 1);
   padding: 3px;
   color: #3f51b5;
   font-weight: 500;
   font-size: 18px;
+}
+
+.ErrorMsg {
+  color: red;
+  font-size: 12px;
+  height: 13px;
+  text-align: right;
 }
