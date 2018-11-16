@@ -2,10 +2,6 @@ export const tableHeadLecturer = ['Tên đăng nhập', 'Họ và tên', 'VNU Em
 
 export const tableHeadStudent = ['Tên đăng nhập', 'Họ và tên', 'VNU Email', 'Khóa đào tạo'];
 
-export const studentAccountFields = ['id', 'username', 'fullname', 'VNUemail', 'year', 'password'];
+export const studentAcc = ['username', 'password', 'fullname', 'VNUemail', 'year'];
 
-export const lecturerAccountFields = ['id', 'username', 'fullname', 'VNUemail', 'password'];
-
-export const formLecturer = ['Tên đăng nhập', 'Họ và tên', 'VNU Email', 'Password'];
-
-export const formStudent = ['Tên đăng nhập', 'Họ và tên', 'VNU Email', 'Khóa đào tạo', 'Password'];
+export const lecAcc = ['username', 'password', 'fullname', 'VNUemail'];

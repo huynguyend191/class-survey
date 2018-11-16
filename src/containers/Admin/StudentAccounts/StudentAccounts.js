@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError } from '../../../store/actions';
+import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError, addStudent } from '../../../store/actions';
 import DataTable from '../../DataTable/DataTable';
 import { tableHeadStudent } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
@@ -27,6 +27,10 @@ class StudentAccounts extends Component {
     this.props.onCloseError();
   }
 
+  handleAddAcc = (form) => {
+    this.props.onAddAcc(form);
+  }
+
   componentDidMount() {
     if(this.props.accounts.length <= 0) {
       this.props.onFetchAcc(0);
@@ -41,15 +45,19 @@ class StudentAccounts extends Component {
           handleCloseModal={this.handleCloseError}
         />
         <DataTable
+          accType = "student"
           history={this.props.history}
           path={this.props.match.path}
           accounts={this.props.accounts}
           page={this.props.page}
           isLoading={this.props.isLoading}
+
           handleChangePage={this.handleChangePage}
           handleEditAccount={this.handleEditAccount}
           handleDeleteAccount={this.handleDeleteAccount}
           handleRefresh={this.handleRefresh}
+          handleAddAccount={this.handleAddAcc}
+
           totalAcc={this.props.totalAcc}
           tableHeadInfo={tableHeadStudent}
         />
@@ -73,7 +81,8 @@ const mapDispatchToProps = dispatch => {
     onFetchAcc: (page) => dispatch(fetchStudentAccounts(page)),
     onEditAcc: (id, form) => dispatch(editStudent(id, form)),
     onDeleteAcc: (id) => dispatch(deleteStudent(id)),
-    onCloseError: () => dispatch(removeAccError())
+    onCloseError: () => dispatch(removeAccError()),
+    onAddAcc: (form) => dispatch(addStudent(form))
   }
 }
 

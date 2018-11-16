@@ -7,14 +7,15 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import AddIcon from '@material-ui/icons/Add';
 import classes from './DataTable.module.css';
 import ConfirmDelete from '../../components/ConfirmDelete/ConfirmDelete';
-import EditModal from '../EditModal/EditModal';
+import EditModal from '../AccForm/EditModal';
+import AddModal from '../AccForm/AddModal';
+
 // import CreateSurvey from '../Admin/CreateSurvey/CreateSurvey';
 
 class DataTable extends Component {
 
   state = {
     openConfirmDelete: false,
-    openEditModal: false,
     deleteId: null,
     editAccount: null
   }
@@ -33,18 +34,15 @@ class DataTable extends Component {
     });
   }
 
-  closeEditModal = () => {
-    this.setState({
-      openEditModal: false,
-      editAccount: null
-    });
-  }
-
   openEditModal = (account) => {
     this.setState({
       editAccount: account
     });
     this.props.history.replace(this.props.path + '/edit');
+  }
+
+  openAddModal = () => {
+    this.props.history.replace(this.props.path + '/add');
   }
 
   render() {
@@ -98,9 +96,19 @@ class DataTable extends Component {
           path={this.props.path + '/edit'}
           render={() =>
             <EditModal
-              label={this.props.tableHeadInfo} 
+              accType={this.props.accType}
               submit={this.props.handleEditAccount}
               account={this.state.editAccount} 
+              history={this.props.history} 
+              path={this.props.path}/>
+          }
+        />
+        <Route  
+          path={this.props.path + '/add'}
+          render={() =>
+            <AddModal
+              accType={this.props.accType}
+              submit={this.props.handleAddAccount}
               history={this.props.history} 
               path={this.props.path}/>
           }
@@ -129,7 +137,7 @@ class DataTable extends Component {
                   </IconButton>
                 </Tooltip>              
                 <Tooltip title="Add" disableFocusListener>
-                  <IconButton className={classes.AddButton} onClick={this.props.addAccount}>
+                  <IconButton className={classes.AddButton} onClick={this.openAddModal}>
                     <AddIcon fontSize="small" />
                   </IconButton>
                 </Tooltip>

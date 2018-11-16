@@ -12,5 +12,7 @@ export {
   editStudent,
   deleteLecturer,
   deleteStudent,
-  removeAccError
+  removeAccError,
+  addStudent,
+  addLecturer
 } from './actionCreator/accounts';

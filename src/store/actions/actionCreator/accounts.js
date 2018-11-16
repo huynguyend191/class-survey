@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes';
 import uuidv4 from 'uuid';
+import axios from '../../../utils/axiosConfig';
 
 export const startFetching = () => {
   return {
@@ -52,206 +53,124 @@ export const updateLecturerPage = (page) => {
 }
 
 export const fetchStudentAccounts = (page) => {
-  let accounts;
-  if (page === 0) {
-    accounts = [
-      {
-        id: uuidv4(),
-        username: 16021391,
-        fullname: 'Hello 123',
-        VNUemail: '16021391@gmail.com',
-        year: 'QH-2016-I/CQ-C-CLC'
-      },
-      {
-        id: uuidv4(),        
-        username: 16021392,
-        fullname: 'Nani hello aloha',
-        VNUemail: '16021392@gmail.com',
-        year: 'QH-2016-I/CQ-C-CLC'
-      },
-      {
-        id: uuidv4(),
-        username: 16021393,
-        fullname: 'Nani hello aloha',
-        VNUemail: '16021392@gmail.com',
-        year: 'QH-2016-I/CQ-C-CLC'
-      },
-      {
-        id: uuidv4(),
-        username: 16021394,
-        fullname: 'Nani hello aloha',
-        VNUemail: '16021392@gmail.com',
-        year: 'QH-2016-I/CQ-C-CLC'
-      },
-      {
-        id: uuidv4(),        
-        username: 16021395,
-        fullname: 'Nani hello aloha',
-        VNUemail: '16021392@gmail.com',
-        year: 'QH-2016-I/CQ-C-CLC'
-      },
-      {
-        id: uuidv4(),
-        username: 16021396,
-        fullname: 'Nani hello aloha',
-        VNUemail: '16021392@gmail.com',
-        year: 'QH-2016-I/CQ-C-CLC'
-      },
-      {
-        id: uuidv4(),
-        username: 16021397,
-        fullname: 'Nani hello aloha',
-        VNUemail: '16021392@gmail.com',
-        year: 'QH-2016-I/CQ-C-CLC'
-      },
-      {
-        id: uuidv4(),
-        username: 16021398,
-        fullname: 'Nani hello aloha',
-        VNUemail: '16021392@gmail.com',
-        year: 'QH-2016-I/CQ-C-CLC'
-      },
-      {
-        id: uuidv4(),
-        username: 16021399,
-        fullname: 'Nani hello aloha',
-        VNUemail: '16021392@gmail.com',
-        year: 'QH-2016-I/CQ-C-CLC'
-      },
-      {
-        id: uuidv4(),
-        username: 16021390,
-        fullname: 'Nani hello aloha',
-        VNUemail: '16021392@gmail.com',
-        year: 'QH-2016-I/CQ-C-CLC'
-      }
-    ];
-  } else {
-    accounts = [
-      {
-        id: uuidv4(),
-        username: 1602139119,
-        fullname: 'Nani hello aloha',
-        VNUemail: '16021392@gmail.com',
-        year: 'QH-2016-I/CQ-C-CLC'
-      },
-      {
-        id: uuidv4(),        
-        username: 1602132132190,
-        fullname: 'Nani hello aloha',
-        VNUemail: '16021392@gmail.com',
-        year: 'QH-2016-I/CQ-C-CLC'
-      }
-    ]
-  }
   
-  const total = 12;
   return dispatch => {
     dispatch(updateStudentPage(page));
     dispatch(startFetching());
-    setTimeout(() => {dispatch(fetchStudentSuccessful(accounts, total))}, 1*1000);
+    // axios.get('/students/')
+    // .then(result => {
+    //   let accounts;
+    //   let total;
+    //   dispatch(fetchStudentSuccessful(accounts, total))
+    // })
+    // .catch(error => {
+    //   dispatch(fetchFailed(error.message))
+    // })
+    let accounts = [{
+      id: uuidv4(),
+      username: 'abc123',
+      fullname: 'Yolo',
+      VNUemail: 'abc123@gmail.com',
+      year: 'QH-CLC-123'
+    }];
+    let total = accounts.length;
+    dispatch(fetchStudentSuccessful(accounts, total))
   }
 };
 
 export const fetchLecturerAccounts = (page) => {
-  const accounts = [
-    {
-      id: uuidv4(),
-      username: 16021391,
-      fullname: 'Hello 123',
-      VNUemail: '16021391@gmail.com',
-    },
-    {
-      id: uuidv4(),        
-      username: 16021392,
-      fullname: 'Nani hello aloha',
-      VNUemail: '16021392@gmail.com',
-    },
-    {
-      id: uuidv4(),
-      username: 16021393,
-      fullname: 'Nani hello aloha',
-      VNUemail: '16021392@gmail.com',
-    },
-    {
-      id: uuidv4(),
-      username: 16021394,
-      fullname: 'Nani hello aloha',
-      VNUemail: '16021392@gmail.com',
-    },
-    {
-      id: uuidv4(),        
-      username: 16021395,
-      fullname: 'Nani hello aloha',
-      VNUemail: '16021392@gmail.com',
-    },
-    {
-      id: uuidv4(),
-      username: 16021396,
-      fullname: 'Nani hello aloha',
-      VNUemail: '16021392@gmail.com',
-    },
-    {
-      id: uuidv4(),
-      username: 16021397,
-      fullname: 'Nani hello aloha',
-      VNUemail: '16021392@gmail.com',
-    },
-    {
-      id: uuidv4(),
-      username: 16021398,
-      fullname: 'Nani hello aloha',
-      VNUemail: '16021392@gmail.com',
-    },
-    {
-      id: uuidv4(),
-      username: 16021399,
-      fullname: 'Nani hello aloha',
-      VNUemail: '16021392@gmail.com',
-    },
-    {
-      id: uuidv4(),
-      username: 16021390,
-      fullname: 'Nani hello aloha',
-      VNUemail: '16021392@gmail.com',
-    }
-  ];
-  const total = accounts.length;
   return dispatch => {
     dispatch(updateLecturerPage(page));   
     dispatch(startFetching());
-    setTimeout(() => {dispatch(fetchLecturerSuccessful(accounts, total))}, 1*1000);
+    // axios.get('/lecturers/')
+    // .then(result => {
+    //   let accounts;
+    //   let total;
+    //   dispatch(fetchStudentSuccessful(accounts, total))
+    // })
+    // .catch(error => {
+    //   dispatch(fetchFailed(error.message))
+    // })
+    let accounts = [{
+      id: uuidv4(),
+      username: 'abc123',
+      fullname: 'Yolo',
+      VNUemail: 'abc123@gmail.com'
+    }];
+    let total = accounts.length;
+    dispatch(fetchLecturerSuccessful(accounts, total))
   }
 }
 
 export const editStudent = (id, form) => {
   return dispatch => {
-    // dispatch(startFetching());
-    // dispatch(fetchStudentAccounts(0));
-    console.log(id, form)
+    axios.post('/students/' + id, form)
+    .then(result => {
+      dispatch(fetchStudentAccounts(0))
+    })
+    .catch(error => {
+      dispatch(fetchFailed('Edit Student Failed'))
+    })
   }
 }
 
 export const editLecturer = (id, form) => {
   return dispatch => {
-    // dispatch(startFetching());
-    // dispatch(fetchLecturerAccounts(0));
-    console.log(id, form)
+    axios.post('/lecturers/' + id, form)
+    .then(result => {
+      dispatch(fetchStudentAccounts(0))
+    })
+    .catch(error => {
+      dispatch(fetchFailed('Edit Lecturer Failed'))
+    })
   }
 }
 
 export const deleteStudent = (id) => {
   return dispatch => {
-    // dispatch(startFetching());
-    // dispatch(fetchStudentAccounts(0));
-    console.log('Delete student: ', id)
+    axios.delete('/students/' + id)
+    .then(result => {
+      dispatch(fetchStudentAccounts(0))
+    })
+    .catch(error => {
+      dispatch(fetchFailed('Delete Student Failed'))
+    })
   }
 }
 
 export const deleteLecturer = (id) => {
   return dispatch => {
-    // dispatch(startFetching());
-    // dispatch(fetchLecturerAccounts(0));
-    console.log('Delete lec: ', id)
+    axios.delete('/lecturers/' + id)
+    .then(result => {
+      dispatch(fetchStudentAccounts(0))
+    })
+    .catch(error => {
+      dispatch(fetchFailed('Delete Lecturer Failed'))
+    })
+  }
+}
+
+export const addStudent = (form) => {
+  return dispatch => {
+    console.log('studentForm', form)
+    axios.post('/students', form)
+    .then(result => {
+      dispatch(fetchStudentAccounts(0))
+    })
+    .catch(error => {
+      dispatch(fetchFailed('Add Student Failed'))
+    })
+  }
+}
+
+export const addLecturer = (form) => {
+  return dispatch => {
+    axios.post('/lecturers', form)
+    .then(result => {
+      dispatch(fetchStudentAccounts(0))
+    })
+    .catch(error => {
+      dispatch(fetchFailed('Add Lecturer Failed'))
+    })
   }
 }
