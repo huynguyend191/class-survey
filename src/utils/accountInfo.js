@@ -2,6 +2,37 @@ export const tableHeadLecturer = ['Tên đăng nhập', 'Họ và tên', 'VNU Em
 
 export const tableHeadStudent = ['Tên đăng nhập', 'Họ và tên', 'VNU Email', 'Khóa đào tạo'];
 
-export const studentAcc = ['username', 'password', 'fullname', 'VNUemail', 'year'];
+export const studentAcc = [
+  {
+    label: 'Tên đăng nhập',
+    value: 'username'
+  },
+  {
+    label: 'Họ và tên',
+    value: 'fullname'
+  },
+  {
+    label: 'VNU Email',
+    value: 'VNUemail'
+  },
+  {
+    label: 'Khóa đào tạo',
+    value: 'year'
+  }
+ 
+];
 
-export const lecAcc = ['username', 'password', 'fullname', 'VNUemail'];
+export const lecAcc = [
+  {
+    label: 'Tên đăng nhập',
+    value: 'username'
+  },
+  {
+    label: 'Họ và tên',
+    value: 'fullname'
+  },
+  {
+    label: 'VNU Email',
+    value: 'VNUemail'
+  }
+];

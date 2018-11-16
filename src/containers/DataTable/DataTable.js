@@ -9,6 +9,7 @@ import classes from './DataTable.module.css';
 import ConfirmDelete from '../../components/ConfirmDelete/ConfirmDelete';
 import EditModal from '../Admin/AccForm/EditModal';
 import AddModal from '../Admin/AccForm/AddModal';
+import SearchAccount from '../Admin/SearchAccount/SearchAccount';
 
 // import CreateSurvey from '../Admin/CreateSurvey/CreateSurvey';
 
@@ -118,6 +119,10 @@ class DataTable extends Component {
           handleClose={this.closeDeleteConfirm}
           confirmDelete={this.props.handleDeleteAccount}
           deleteId={this.state.deleteId}
+        />
+        <SearchAccount 
+          accFormat={this.props.accFormat}
+          submit={this.props.handleSearchAcc}
         />
         <Table>
           <TableHead>

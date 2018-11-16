@@ -104,6 +104,7 @@ export const fetchLecturerAccounts = (page) => {
 
 export const editStudent = (id, form) => {
   return dispatch => {
+    dispatch(startFetching());
     axios.post('/students/' + id, form)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
@@ -116,6 +117,7 @@ export const editStudent = (id, form) => {
 
 export const editLecturer = (id, form) => {
   return dispatch => {
+    dispatch(startFetching());
     axios.post('/lecturers/' + id, form)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
@@ -128,6 +130,7 @@ export const editLecturer = (id, form) => {
 
 export const deleteStudent = (id) => {
   return dispatch => {
+    dispatch(startFetching());
     axios.delete('/students/' + id)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
@@ -140,6 +143,7 @@ export const deleteStudent = (id) => {
 
 export const deleteLecturer = (id) => {
   return dispatch => {
+    dispatch(startFetching());
     axios.delete('/lecturers/' + id)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
@@ -152,7 +156,7 @@ export const deleteLecturer = (id) => {
 
 export const addStudent = (form) => {
   return dispatch => {
-    console.log('studentForm', form)
+    dispatch(startFetching());    
     axios.post('/students', form)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
@@ -165,12 +169,39 @@ export const addStudent = (form) => {
 
 export const addLecturer = (form) => {
   return dispatch => {
+    dispatch(startFetching());
     axios.post('/lecturers', form)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
     })
     .catch(error => {
       dispatch(fetchFailed('Add Lecturer Failed'))
+    })
+  }
+}
+
+export const searchStudent = (keyword, type) => {
+  return dispatch => {
+    dispatch(startFetching());
+    axios.post('/students')
+    .then(result => {
+      // dispatch(fetchStudentSuccessful())
+    })
+    .catch(error => {
+      dispatch(fetchFailed('Search Student Failed'))
+    })
+  }
+}
+
+export const searchLecturer = (keyword, type) => {
+  return dispatch => {
+    dispatch(startFetching());
+    axios.post('/lecturers')
+    .then(result => {
+      // dispatch(fetchLecturerSuccessful())
+    })
+    .catch(error => {
+      dispatch(fetchFailed('Search Lec Failed'))
     })
   }
 }

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchLecturerAccounts, editLecturer, deleteLecturer, removeAccError, addLecturer } from '../../../store/actions';
+import { fetchLecturerAccounts, editLecturer, deleteLecturer, removeAccError, addLecturer, searchLecturer } from '../../../store/actions';
 import DataTable from '../../DataTable/DataTable';
 import { tableHeadLecturer } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
+import { lecAcc } from '../../../utils/accountInfo';
+
 
 class LecturerAccounts extends Component {
 
@@ -31,6 +33,10 @@ class LecturerAccounts extends Component {
     this.props.onAddAcc(form);
   }
 
+  handleSearchAcc = (keyword, type) => {
+    this.props.onSearchAcc(keyword, type);
+  }
+
   componentDidMount() {
     if(this.props.accounts.length <= 0) {
       this.props.onFetchAcc(this.props.page);
@@ -44,6 +50,7 @@ class LecturerAccounts extends Component {
           error={this.props.error}
           handleCloseModal={this.handleCloseError}
         />
+
         <DataTable
           accType = "lecturer"
           history={this.props.history}
@@ -57,10 +64,12 @@ class LecturerAccounts extends Component {
           handleDeleteAccount={this.handleDeleteAccount}
           handleRefresh={this.handleRefresh}
           handleAddAccount={this.handleAddAcc}
+          handleSearchAcc={this.handleSearchAcc}
 
           totalAcc={this.props.totalAcc}
           tableHeadInfo={tableHeadLecturer}
           accountType="lecturer"
+          accFormat={lecAcc}
         />
       </div>
     )
@@ -82,7 +91,8 @@ const mapDispatchToProps = dispatch => {
     onEditAcc: (id, form) => dispatch(editLecturer(id, form)),
     onDeleteAcc: (id) => dispatch(deleteLecturer(id)),
     onCloseError: () => dispatch(removeAccError()),
-    onAddAcc: (form) => dispatch(addLecturer(form))
+    onAddAcc: (form) => dispatch(addLecturer(form)),
+    onSearchAcc: (keyword, type) => dispatch(searchLecturer(keyword, type))
   }
 }
 

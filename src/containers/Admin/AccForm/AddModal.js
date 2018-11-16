@@ -17,6 +17,7 @@ class EditModal extends Component{
           validation: { 
             required: true
           },
+          touched: false,
           valid: false,
           message: null
         }}
@@ -33,6 +34,7 @@ class EditModal extends Component{
         validation: { 
           required: true
         },
+        touched: false,
         valid: false,
         message: null
       },
@@ -44,6 +46,7 @@ class EditModal extends Component{
           required: true,
         },
         valid: false,
+        touched: false,
         message: null
       },
       fullname: {
@@ -54,6 +57,7 @@ class EditModal extends Component{
           required: true
         },
         valid: false,
+        touched: false,
         message: null
       },
       VUNemail: {
@@ -65,6 +69,7 @@ class EditModal extends Component{
           isEmail: true
         },
         valid: false,
+        touched: false,
         message: null
       },
     
@@ -123,7 +128,7 @@ class EditModal extends Component{
               <div className={classes.InputHolder}>
                 <p className={classes.InputLabel}>{formElement.config.label}</p>
                 <input 
-                  className={classes.Input}
+                  className={(formElement.config.valid || !formElement.config.touched) ? classes.Input : classes.InputError}
                   value={formElement.config.value}
                   type={formElement.config.elementType}
                   onChange={(event) => this.onInputChangeHandler(event, formElement.id)} 

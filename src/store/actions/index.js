@@ -14,5 +14,7 @@ export {
   deleteStudent,
   removeAccError,
   addStudent,
-  addLecturer
+  addLecturer,
+  searchLecturer,
+  searchStudent
 } from './actionCreator/accounts';

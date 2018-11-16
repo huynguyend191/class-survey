@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError, addStudent } from '../../../store/actions';
+import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError, addStudent, searchStudent } from '../../../store/actions';
 import DataTable from '../../DataTable/DataTable';
 import { tableHeadStudent } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
+import { studentAcc } from '../../../utils/accountInfo';
 
 class StudentAccounts extends Component {
 
@@ -31,6 +32,10 @@ class StudentAccounts extends Component {
     this.props.onAddAcc(form);
   }
 
+  handleSearchAcc = (keyword, type) => {
+    this.props.onSearchAcc(keyword, type);
+  }
+
   componentDidMount() {
     if(this.props.accounts.length <= 0) {
       this.props.onFetchAcc(0);
@@ -46,6 +51,7 @@ class StudentAccounts extends Component {
         />
         <DataTable
           accType = "student"
+          accFormat = {studentAcc}
           history={this.props.history}
           path={this.props.match.path}
           accounts={this.props.accounts}
@@ -57,9 +63,11 @@ class StudentAccounts extends Component {
           handleDeleteAccount={this.handleDeleteAccount}
           handleRefresh={this.handleRefresh}
           handleAddAccount={this.handleAddAcc}
+          handleSearchAcc={this.handleSearchAcc}
 
           totalAcc={this.props.totalAcc}
           tableHeadInfo={tableHeadStudent}
+
         />
       </div>
     );
@@ -82,7 +90,8 @@ const mapDispatchToProps = dispatch => {
     onEditAcc: (id, form) => dispatch(editStudent(id, form)),
     onDeleteAcc: (id) => dispatch(deleteStudent(id)),
     onCloseError: () => dispatch(removeAccError()),
-    onAddAcc: (form) => dispatch(addStudent(form))
+    onAddAcc: (form) => dispatch(addStudent(form)),
+    onSearchAcc: (keyword, type) => dispatch(searchStudent(keyword, type))
   }
 }
 
