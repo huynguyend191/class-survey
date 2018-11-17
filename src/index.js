@@ -11,13 +11,15 @@ import * as serviceWorker from './serviceWorker';
 
 import authReducer from './store/reducers/authReducer';
 import accReducer from './store/reducers/accReducer';
+import surveyReducer  from './store/reducers/surveyReducer';
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer =  combineReducers({
   authReducer,
-  accReducer
+  accReducer,
+  surveyReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(ReduxThunk)));

@@ -2,9 +2,9 @@ import * as actionTypes from '../actionTypes';
 import uuidv4 from 'uuid';
 import axios from '../../../utils/axiosConfig';
 
-export const startFetching = () => {
+export const startFetchingAcc = () => {
   return {
-    type: actionTypes.START_FETCHING
+    type: actionTypes.START_FETCHING_ACC
   }
 };
 
@@ -12,7 +12,7 @@ export const removeAccError = () => {
   return {
     type: actionTypes.REMOVE_ACC_ERROR
   }
-}
+};
 
 export const fetchStudentSuccessful = (accounts, total) => {
   return {
@@ -30,9 +30,9 @@ export const fetchLecturerSuccessful = (accounts, total) => {
   }
 };
 
-export const fetchFailed = (error) => {
+export const fetchAccFailed = (error) => {
   return {
-    type: actionTypes.FETCH_FAILED,
+    type: actionTypes.FETCH_ACC_FAILED,
     error
   }
 };
@@ -43,20 +43,20 @@ export const updateStudentPage = (page) => {
     type: actionTypes.UPDATE_STUDENT_PAGE,
     page
   }
-}
+};
 
 export const updateLecturerPage = (page) => {
   return {
     type: actionTypes.UPDATE_LECTURER_PAGE,
     page
   }
-}
+};
 
 export const fetchStudentAccounts = (page) => {
   
   return dispatch => {
     dispatch(updateStudentPage(page));
-    dispatch(startFetching());
+    dispatch(startFetchingAcc());
     // axios.get('/students/')
     // .then(result => {
     //   let accounts;
@@ -64,7 +64,7 @@ export const fetchStudentAccounts = (page) => {
     //   dispatch(fetchStudentSuccessful(accounts, total))
     // })
     // .catch(error => {
-    //   dispatch(fetchFailed(error.message))
+    //   dispatch(fetchAccFailed(error.message))
     // })
     let accounts = [{
       id: uuidv4(),
@@ -81,7 +81,7 @@ export const fetchStudentAccounts = (page) => {
 export const fetchLecturerAccounts = (page) => {
   return dispatch => {
     dispatch(updateLecturerPage(page));   
-    dispatch(startFetching());
+    dispatch(startFetchingAcc());
     // axios.get('/lecturers/')
     // .then(result => {
     //   let accounts;
@@ -89,7 +89,7 @@ export const fetchLecturerAccounts = (page) => {
     //   dispatch(fetchStudentSuccessful(accounts, total))
     // })
     // .catch(error => {
-    //   dispatch(fetchFailed(error.message))
+    //   dispatch(fetchAccFailed(error.message))
     // })
     let accounts = [{
       id: uuidv4(),
@@ -100,108 +100,108 @@ export const fetchLecturerAccounts = (page) => {
     let total = accounts.length;
     dispatch(fetchLecturerSuccessful(accounts, total))
   }
-}
+};
 
 export const editStudent = (id, form) => {
   return dispatch => {
-    dispatch(startFetching());
+    dispatch(startFetchingAcc());
     axios.post('/students/' + id, form)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
     })
     .catch(error => {
-      dispatch(fetchFailed('Edit Student Failed'))
+      dispatch(fetchAccFailed('Edit Student Failed'))
     })
   }
-}
+};
 
 export const editLecturer = (id, form) => {
   return dispatch => {
-    dispatch(startFetching());
+    dispatch(startFetchingAcc());
     axios.post('/lecturers/' + id, form)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
     })
     .catch(error => {
-      dispatch(fetchFailed('Edit Lecturer Failed'))
+      dispatch(fetchAccFailed('Edit Lecturer Failed'))
     })
   }
-}
+};
 
 export const deleteStudent = (id) => {
   return dispatch => {
-    dispatch(startFetching());
+    dispatch(startFetchingAcc());
     axios.delete('/students/' + id)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
     })
     .catch(error => {
-      dispatch(fetchFailed('Delete Student Failed'))
+      dispatch(fetchAccFailed('Delete Student Failed'))
     })
   }
-}
+};
 
 export const deleteLecturer = (id) => {
   return dispatch => {
-    dispatch(startFetching());
+    dispatch(startFetchingAcc());
     axios.delete('/lecturers/' + id)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
     })
     .catch(error => {
-      dispatch(fetchFailed('Delete Lecturer Failed'))
+      dispatch(fetchAccFailed('Delete Lecturer Failed'))
     })
   }
-}
+};
 
 export const addStudent = (form) => {
   return dispatch => {
-    dispatch(startFetching());    
+    dispatch(startFetchingAcc());    
     axios.post('/students', form)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
     })
     .catch(error => {
-      dispatch(fetchFailed('Add Student Failed'))
+      dispatch(fetchAccFailed('Add Student Failed'))
     })
   }
-}
+};
 
 export const addLecturer = (form) => {
   return dispatch => {
-    dispatch(startFetching());
+    dispatch(startFetchingAcc());
     axios.post('/lecturers', form)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
     })
     .catch(error => {
-      dispatch(fetchFailed('Add Lecturer Failed'))
+      dispatch(fetchAccFailed('Add Lecturer Failed'))
     })
   }
-}
+};
 
 export const searchStudent = (keyword, type) => {
   return dispatch => {
-    dispatch(startFetching());
+    dispatch(startFetchingAcc());
     axios.post('/students')
     .then(result => {
       // dispatch(fetchStudentSuccessful())
     })
     .catch(error => {
-      dispatch(fetchFailed('Search Student Failed'))
+      dispatch(fetchAccFailed('Search Student Failed'))
     })
   }
-}
+};
 
 export const searchLecturer = (keyword, type) => {
   return dispatch => {
-    dispatch(startFetching());
+    dispatch(startFetchingAcc());
     axios.post('/lecturers')
     .then(result => {
       // dispatch(fetchLecturerSuccessful())
     })
     .catch(error => {
-      dispatch(fetchFailed('Search Lec Failed'))
+      dispatch(fetchAccFailed('Search Lec Failed'))
     })
   }
-}
+};

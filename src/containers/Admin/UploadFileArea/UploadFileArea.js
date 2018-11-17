@@ -55,14 +55,12 @@ class UploadFileArea extends Component {
     })
     this.setState({isUploading: true});
     const url =  this.props.match.url;
-    console.log(url);
-    axios('/products/upload',{
+    axios(url,{
       method: 'POST',
       data: formData,
     })
     .then(res => {
       this.setState({isUploading: false, files: []});
-      console.log(res.data);
     }).catch(err => {
       this.setState({isUploading: false, error: err.message});
     })

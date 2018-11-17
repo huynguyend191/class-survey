@@ -14,7 +14,7 @@ const initialState = {
 
 const reducer = ( state =  initialState, action) => {
   switch (action.type) {
-    case actionTypes.START_FETCHING:
+    case actionTypes.START_FETCHING_ACC:
       return updateObject(state, {loading: true, error: null});
 
     case actionTypes.FETCH_STUDENT_SUCCESSFUL:
@@ -31,7 +31,7 @@ const reducer = ( state =  initialState, action) => {
         totalLecturers: action.total
       });
 
-    case actionTypes.FETCH_FAILED:
+    case actionTypes.FETCH_ACC_FAILED:
       return updateObject(state, {loading: false, error: action.error});
     
     case actionTypes.UPDATE_STUDENT_PAGE:

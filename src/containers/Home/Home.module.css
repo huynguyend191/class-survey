@@ -5,6 +5,7 @@
 }
 
 .LeftArea {
+  padding: 15px;
   width: 90%;
 }
 
@@ -27,4 +28,12 @@
   margin:auto;
   margin-bottom: 30px;
   margin-top: 30px;
+  text-align: center;
+  color: #3f51b5;
+  width: 100%;
+}
+
+.Sticky {
+  top: 0;
+  position: sticky;
 }

@@ -16,8 +16,8 @@ class SearchAccount extends Component {
   }
   
   onSubmit = (event) => {
-    this.setState({searchType: 'username', searchKeyword: '', isValid: false});
     this.props.submit(this.state.searchKeyword, this.state.searchType);
+    this.setState({searchType: 'username', searchKeyword: '', isValid: false});
     event.preventDefault();
   }
 
@@ -34,6 +34,7 @@ class SearchAccount extends Component {
       <div className={classes.SearchAccount}>
         <form onSubmit={this.onSubmit} className={classes.SearchForm}>
           <input 
+            onSelect={this.checkEmtyKeyword}
             placeholder="Enter keyword here..."
             id="searchKeyword" 
             value={this.state.searchKeyword} 
