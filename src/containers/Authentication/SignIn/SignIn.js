@@ -62,7 +62,7 @@ class SignIn extends Component {
   render() {
     let loginRedirect = null;
     if (this.props.isAuthenticated) {
-      loginRedirect = <Redirect to="/" />;
+      loginRedirect = this.props.role === 'admin' ? <Redirect to="/surveys" /> : <Redirect to="/" />;
     }
     let header = (
       <p className={classes.Header}>CLASS SURVEY</p>
@@ -129,7 +129,8 @@ const mapStateToProps = state => {
   return {
     isAuthenticated: state.authReducer.isAuthenticated,
     error: state.authReducer.error,
-    isLoading: state.authReducer.loading
+    isLoading: state.authReducer.loading,
+    role: state.authReducer.role
   };
 };
 

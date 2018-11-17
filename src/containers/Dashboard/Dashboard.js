@@ -8,7 +8,6 @@ import classes from './Dashboard.module.css';
 import ManageStudents from '../Admin/ManageStudents/ManageStudents';
 import ManageLecturers from '../Admin/ManageLecturers/ManageLecturers';
 import ManageSurveys from '../Admin/ManageSurveys/ManageSurveys';
-import Home from '../Home/Home';
 import StudentClassList from '../Students/StudentClassList/StudentClassList';
 import LecturerClassList from '../Lecturers/LecturerClassList/LecturerClassList';
 
@@ -23,7 +22,6 @@ class Dashboard extends Component {
             <Route path='/students' component={ManageStudents} />
             <Route path='/lecturers' component={ManageLecturers} />
             <Route path='/surveys' component={ManageSurveys} />
-            <Route path='/' component={Home} />
           </Switch>
         );
         navigations = adminSideBar;
@@ -31,8 +29,7 @@ class Dashboard extends Component {
       case ('student'):
         routes = (
           <Switch>
-            <Route path='/classes' component={StudentClassList} />
-            <Route path='/' component={Home} />
+            <Route path='/' component={StudentClassList} />
           </Switch>
         );     
         navigations = studentSideBar;
@@ -40,8 +37,7 @@ class Dashboard extends Component {
       case ('lecturer'):
       routes = (
         <Switch>
-          <Route path='/classes' component={LecturerClassList} />          
-          <Route path='/' component={Home} />
+          <Route path='/' component={LecturerClassList} />          
         </Switch>
       );  
         navigations = lecturerSideBar;          

@@ -1,11 +1,6 @@
 //Navigation for Admin
 export const adminSideBar = [
   {
-    label: 'Home',
-    link: '/',
-    icon: 'home'
-  },
-  {
     label: 'Manage Surveys',
     link: '/surveys',
     icon: 'bar_chart'
@@ -67,13 +62,8 @@ export const manageSurveyToolbar = [
 //Navigation for Student
 export const studentSideBar = [
   {
-    label: 'Home',
+    label: 'Attend Survey',
     link: '/',
-    icon: 'home'
-  },
-  {
-    label: 'Classes List',
-    link: '/classes',
     icon: 'list'    
   }
 ];
@@ -82,13 +72,8 @@ export const studentSideBar = [
 //Navigation for Student
 export const lecturerSideBar = [
   {
-    label: 'Home',
+    label: 'Survey Results',
     link: '/',
-    icon: 'home'
-  },
-  {
-    label: 'Classes List',
-    link: '/classes',
     icon: 'list'
   }
 ];

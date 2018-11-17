@@ -39,11 +39,11 @@ class DataTable extends Component {
     this.setState({
       editAccount: account
     });
-    this.props.history.replace(this.props.path + '/edit');
+    this.props.history.push(this.props.path + '/edit');
   }
 
   openAddModal = () => {
-    this.props.history.replace(this.props.path + '/add');
+    this.props.history.push(this.props.path + '/add');
   }
 
   render() {
