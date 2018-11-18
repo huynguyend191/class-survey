@@ -4,11 +4,12 @@
   width: 90%;
   border: 1px solid rgba(224, 224, 224, 1);
   border-radius: 5px;
+  max-width: 1600px;
 }
 
 .TableHeadRow {
   border-top: 1px solid rgba(224, 224, 224, 1);
-  background-color: #e2e2e2;
+  background-color: #d7f2fc;
   height: 40px !important;
 }
 

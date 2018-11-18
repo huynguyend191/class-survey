@@ -37,9 +37,7 @@ class NavigationBar extends Component {
       <div className={classes.NavigationBar}>
         <div className={classes.NavContent}>
           <img className={classes.SurveyIcon} src={SurveyIcon} alt='Class Survey' />
-          <p className={classes.Header}>
-            CLASS SURVEY
-          </p>
+          <p className={classes.Header}>CLASS SURVEY</p>
         </div>
         <div
           className={classes.Account}

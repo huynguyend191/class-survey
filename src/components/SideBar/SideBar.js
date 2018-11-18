@@ -12,7 +12,7 @@ function SideBar(props) {
         {
           navigations.map(item => {
             return(
-              <NavLink exact key={item.label} className={classes.Nav} activeClassName={classes.activeLink} to={item.link} >
+              <NavLink key={item.label} className={classes.Nav} activeClassName={classes.activeLink} to={item.link} >
                 <Icon fontSize="small" className={classes.NavIcon}>{item.icon}</Icon>{item.label}
               </NavLink>
             );
