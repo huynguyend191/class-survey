@@ -23,7 +23,7 @@ export const manageStudentToolbar = [
     link: '/students'
   },
   {
-    label: 'Upload Files',
+    label: 'Upload Students',
     link: '/students/upload'
   }
 ];
@@ -34,7 +34,7 @@ export const manageLecturerToolbar = [
     link: '/lecturers',
   },
   {
-    label: 'Upload Files',
+    label: 'Upload Lecturers',
     link: '/lecturers/upload'
   }
 ];
