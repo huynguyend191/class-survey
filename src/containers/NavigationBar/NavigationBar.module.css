@@ -50,6 +50,8 @@
 
 .DropDown {
   min-width: 5px !important;
-  width: 5px;
+  width: 10px;
   background-color: transparent !important;
+  margin: auto !important;
+  margin-right: 10px !important;
 }

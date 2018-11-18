@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './NavigationBar.module.css';
 import SurveyIcon from '../../assets/icons/survey.png';
-import { Button, Menu, MenuItem } from '@material-ui/core';
+import { Button, Menu, MenuItem, IconButton } from '@material-ui/core';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import ArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -45,9 +45,9 @@ class NavigationBar extends Component {
         >
           <AccountCircle style={{ margin: 'auto' }} color="primary" />
           <p className={classes.Username}>{this.props.username}</p>
-          <Button onClick={this.handleClick} className={classes.DropDown}>
-            <ArrowDown style={{ margin: 'auto' }} color="primary" />
-          </Button>
+          <IconButton onClick={this.handleClick} className={classes.DropDown}>
+            <ArrowDown style={{ margin: 'auto' }} color="primary"  />
+          </IconButton>
         </div>
         <Menu
           anchorEl={anchorEl}
