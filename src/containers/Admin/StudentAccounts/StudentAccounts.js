@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError, addStudent, searchStudent } from '../../../store/actions';
-import DataTable from '../../DataTable/DataTable';
+import AccTable from '../AccTable/AccTable';
 import { tableHeadStudent } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 import { studentAcc } from '../../../utils/accountInfo';
@@ -49,7 +49,7 @@ class StudentAccounts extends Component {
           error={this.props.error}
           handleCloseModal={this.handleCloseError}
         />
-        <DataTable
+        <AccTable
           accType = "student"
           accFormat = {studentAcc}
           history={this.props.history}

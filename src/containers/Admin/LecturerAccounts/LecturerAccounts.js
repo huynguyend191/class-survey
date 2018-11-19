@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchLecturerAccounts, editLecturer, deleteLecturer, removeAccError, addLecturer, searchLecturer } from '../../../store/actions';
-import DataTable from '../../DataTable/DataTable';
+import AccTable from '../AccTable/AccTable';
 import { tableHeadLecturer } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 import { lecAcc } from '../../../utils/accountInfo';
@@ -51,7 +51,7 @@ class LecturerAccounts extends Component {
           handleCloseModal={this.handleCloseError}
         />
 
-        <DataTable
+        <AccTable
           accType = "lecturer"
           history={this.props.history}
           path={this.props.match.path}

@@ -91,12 +91,20 @@ export const fetchLecturerAccounts = (page) => {
     // .catch(error => {
     //   dispatch(fetchAccFailed(error.message))
     // })
-    let accounts = [{
-      id: uuidv4(),
-      username: 'abc123',
-      fullname: 'Yolo',
-      VNUemail: 'abc123@gmail.com'
-    }];
+    let accounts = [
+      {
+        id: uuidv4(),
+        username: 'abc123',
+        fullname: 'Yolo',
+        VNUemail: 'abc123@gmail.com'
+      },
+      {
+        id: uuidv4(),
+        username: 'ABC',
+        fullname: '123',
+        VNUemail: '123@gmail.com'
+      }
+    ];
     let total = accounts.length;
     dispatch(fetchLecturerSuccessful(accounts, total))
   }

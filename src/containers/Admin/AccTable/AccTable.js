@@ -5,15 +5,14 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import AddIcon from '@material-ui/icons/Add';
-import classes from './DataTable.module.css';
-import ConfirmDelete from '../../components/ConfirmDelete/ConfirmDelete';
-import EditModal from '../Admin/AccForm/EditModal';
-import AddModal from '../Admin/AccForm/AddModal';
-import SearchAccount from '../Admin/SearchAccount/SearchAccount';
+import classes from './AccTable.module.css';
+import ConfirmDelete from '../../../components/ConfirmDelete/ConfirmDelete';
+import EditModal from '../AccForm/EditModal';
+import AddModal from '../AccForm/AddModal';
+import SearchAccount from '../SearchAccount/SearchAccount';
 
-// import CreateSurvey from '../Admin/CreateSurvey/CreateSurvey';
 
-class DataTable extends Component {
+class AccTable extends Component {
 
   state = {
     openConfirmDelete: false,
@@ -39,7 +38,7 @@ class DataTable extends Component {
     this.setState({
       editAccount: account
     });
-    this.props.history.push(this.props.path + '/edit');
+    this.props.history.push(this.props.path + '/edit/' + account.id);
   }
 
   openAddModal = () => {
@@ -94,7 +93,7 @@ class DataTable extends Component {
     return (
       <div className={classes.Accounts}>
         <Route  
-          path={this.props.path + '/edit'}
+          path={this.props.path + '/edit/:id'}
           render={() =>
             <EditModal
               accType={this.props.accType}
@@ -173,4 +172,4 @@ class DataTable extends Component {
   
 }
 
-export default DataTable;
+export default AccTable;
