@@ -5,7 +5,7 @@ const initialState = {
   error: null,
   loading: false,
   surveys: [],
-  totalSurvey: 0,
+  totalSurveys: 0,
   currentPage: 0
 }
 
@@ -18,7 +18,7 @@ const reducer = ( state =  initialState, action) => {
       return updateObject(state, {
         loading: false, 
         surveys: action.surveys, 
-        totalSurvey: action.total
+        totalSurveys: action.total
       });
 
     case actionTypes.FETCH_SURVEY_FAILED:

@@ -56,9 +56,9 @@ class EditModal extends Component{
         message: null        
       },
       VUNemail: {
-        label: 'VNU email',
+        label: 'email',
         elementType: 'email',
-        value: this.props.account.VNUemail,
+        value: this.props.account.email,
         validation: { 
           required: true,
           isEmail: true

@@ -40,14 +40,23 @@ export const fetchSurveys = (page) => {
   return dispatch => {
     dispatch(updateSurveyPage(page));
     dispatch(startFetchingSurvey());
-    axios.get('/surveys')
-    .then(result => {
-      let surveys;
-      let total;
-      dispatch(fetchSurveySuccessful(surveys, total));
-    })
-    .catch(error => {
-      dispatch(fetchSurveyFailed(error.message));
-    })
+    const surveys = [
+      {
+        id: uuidv4(),
+        title: 'Phát triển ứng dụng web INT3306 1',
+        createdAt: 'Apr 14, 2018',
+        modifiedAt: 'May 6, 2018'
+      }
+    ];
+    dispatch(fetchSurveySuccessful(surveys, surveys.length));
+    // axios.get('/surveys')
+    // .then(result => {
+    //   let surveys;
+    //   let total;
+    //   dispatch(fetchSurveySuccessful(surveys, total));
+    // })
+    // .catch(error => {
+    //   dispatch(fetchSurveyFailed(error.message));
+    // })
   }
 };

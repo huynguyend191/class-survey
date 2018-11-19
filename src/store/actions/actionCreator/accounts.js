@@ -70,7 +70,7 @@ export const fetchStudentAccounts = (page) => {
       id: uuidv4(),
       username: 'abc123',
       fullname: 'Yolo',
-      VNUemail: 'abc123@gmail.com',
+      email: 'abc123@gmail.com',
       year: 'QH-CLC-123'
     }];
     let total = accounts.length;
@@ -96,13 +96,13 @@ export const fetchLecturerAccounts = (page) => {
         id: uuidv4(),
         username: 'abc123',
         fullname: 'Yolo',
-        VNUemail: 'abc123@gmail.com'
+        email: 'abc123@gmail.com'
       },
       {
         id: uuidv4(),
         username: 'ABC',
         fullname: '123',
-        VNUemail: '123@gmail.com'
+        email: '123@gmail.com'
       }
     ];
     let total = accounts.length;

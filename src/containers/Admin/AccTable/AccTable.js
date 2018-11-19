@@ -84,7 +84,7 @@ class AccTable extends Component {
       } else {
         tableBody = (
           <TableRow className={classes.TableBodyRow}>
-            <TableCell colSpan={this.props.tableHeadInfo.length + 2} style={{textAlign: 'center'}}>No result</TableCell>
+            <TableCell colSpan={this.props.tableHeadInfo.length + 2} style={{textAlign: 'center'}}>No account</TableCell>
           </TableRow>
         )
       }

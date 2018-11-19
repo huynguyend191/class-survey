@@ -8,8 +8,8 @@ import classes from './Dashboard.module.css';
 import ManageStudents from '../Admin/ManageStudents/ManageStudents';
 import ManageLecturers from '../Admin/ManageLecturers/ManageLecturers';
 import ManageSurveys from '../Admin/ManageSurveys/ManageSurveys';
-import StudentClassList from '../Students/StudentClassList/StudentClassList';
-import LecturerClassList from '../Lecturers/LecturerClassList/LecturerClassList';
+import StudentClassList from '../Student/StudentClassList/StudentClassList';
+import LecturerClassList from '../Lecturer/LecturerClassList/LecturerClassList';
 
 class Dashboard extends Component {
   render() {

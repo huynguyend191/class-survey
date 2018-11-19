@@ -45,8 +45,8 @@ export const manageSurveyToolbar = [
     link: '/surveys'
   },
   {
-    label: 'Generate Form',
-    link: '/surveys/generate'
+    label: 'Survey Form',
+    link: '/surveys/form'
   },
   {
     label: 'Create Survey',
@@ -64,7 +64,7 @@ export const studentSideBar = [
   {
     label: 'Attend Survey',
     link: '/',
-    icon: 'list'    
+    icon: 'playlist_add_check'    
   }
 ];
 

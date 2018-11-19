@@ -54,7 +54,7 @@ class UploadFileArea extends Component {
       formData.append('myArrayOfFiles', file);
     })
     this.setState({isUploading: true});
-    const url =  this.props.match.url;
+    const url = this.props.match.url;
     axios(url,{
       method: 'POST',
       data: formData,

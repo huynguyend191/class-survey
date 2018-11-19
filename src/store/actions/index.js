@@ -18,3 +18,7 @@ export {
   searchLecturer,
   searchStudent
 } from './actionCreator/accounts';
+
+export { 
+  fetchSurveys
+} from './actionCreator/surveys';
