@@ -61,7 +61,7 @@ class EditModal extends Component{
         message: null
       },
       VUNemail: {
-        label: 'VNU email',
+        label: 'email',
         elementType: 'email',
         value: '',
         validation: { 

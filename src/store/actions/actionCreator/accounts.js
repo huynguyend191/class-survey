@@ -91,22 +91,30 @@ export const fetchLecturerAccounts = (page) => {
     // .catch(error => {
     //   dispatch(fetchAccFailed(error.message))
     // })
-    let accounts = [
-      {
-        id: uuidv4(),
-        username: 'abc123',
-        fullname: 'Yolo',
-        email: 'abc123@gmail.com'
-      },
-      {
-        id: uuidv4(),
-        username: 'ABC',
-        fullname: '123',
-        email: '123@gmail.com'
+
+    let accounts = [];
+    if(page === 0) {
+      for(let i=0;i<10;i++){
+        accounts.push({
+          id: uuidv4(),
+          username: 'abc123',
+          fullname: 'Yolo',
+          email: 'abc123@gmail.com'
+        })
       }
-    ];
+    }else {
+      for(let i=0;i<2;i++){
+        accounts.push({
+          id: uuidv4(),
+          username: 'abc123',
+          fullname: 'Yolo',
+          email: 'abc123@gmail.com'
+        })
+      }
+    }
+   
     let total = accounts.length;
-    dispatch(fetchLecturerSuccessful(accounts, total))
+    dispatch(fetchLecturerSuccessful(accounts, 12))
   }
 };
 
@@ -204,12 +212,22 @@ export const searchStudent = (keyword, type) => {
 export const searchLecturer = (keyword, type) => {
   return dispatch => {
     dispatch(startFetchingAcc());
-    axios.post('/lecturers')
-    .then(result => {
-      // dispatch(fetchLecturerSuccessful())
-    })
-    .catch(error => {
-      dispatch(fetchAccFailed('Search Lec Failed'))
-    })
+    // axios.post('/lecturers')
+    // .then(result => {
+    //   // dispatch(fetchLecturerSuccessful())
+    // })
+    // .catch(error => {
+    //   dispatch(fetchAccFailed('Search Lec Failed'))
+    // })
+    let accounts = [];
+    for(let i=0;i<11;i++){
+      accounts.push({
+        id: uuidv4(),
+        username: 'abc123',
+        fullname: 'Yolo',
+        email: 'abc123@gmail.com'
+      })
+    }
+    dispatch(fetchLecturerSuccessful(accounts, accounts.length))
   }
 };
