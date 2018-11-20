@@ -103,7 +103,7 @@ export const fetchLecturerAccounts = (page) => {
         })
       }
     }else {
-      for(let i=0;i<2;i++){
+      for(let i=0;i<10;i++){
         accounts.push({
           id: uuidv4(),
           username: 'abc123',
@@ -113,8 +113,7 @@ export const fetchLecturerAccounts = (page) => {
       }
     }
    
-    let total = accounts.length;
-    dispatch(fetchLecturerSuccessful(accounts, 12))
+    dispatch(fetchLecturerSuccessful(accounts, 20))
   }
 };
 
