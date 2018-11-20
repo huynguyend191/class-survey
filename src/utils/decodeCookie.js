@@ -9,10 +9,16 @@ const decodeCookie = () => {
     token = cookies.get(cookieName);
   }
   const decoded = jwtDecode(token);
+  console.log(decoded)
+
   const userInfo = {
-    username: decoded.username,
-    role: decoded.role
+    // username: decoded.UserEntity.Username.toLowerCase(),
+    role: decoded.UserEntity.Roles[1].toLowerCase()
   }
+  // const userInfo = {
+  //   username: 'admin',
+  //   role: 'admin'
+  // }
   return userInfo;
 }
 

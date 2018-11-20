@@ -41,7 +41,7 @@ export const signOut = () => {
 export const initSignIn = (loginData) => {
   return dispatch => {
     dispatch(startSignIn());
-    axios.post('/user/login', loginData)
+    axios.post('/api/Users/login', loginData)
     .then(res => {
       const userInfo = decodeCookie();
       dispatch(signInSuccesful(userInfo.username, userInfo.role));
@@ -71,6 +71,7 @@ export const checkSignInState = () => {
       dispatch(signOut());
     } else {
       const userInfo = decodeCookie();
+      console.log(userInfo);
       dispatch(signInSuccesful(userInfo.username, userInfo.role));
     }
   }

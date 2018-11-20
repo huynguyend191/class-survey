@@ -54,8 +54,8 @@ class SurveyList extends Component {
           <TableHead>
             <TableRow>
               <TableCell>Title</TableCell>
-              <TableCell>Created At</TableCell>
-              <TableCell>Modified At</TableCell>
+              <TableCell>Open Time</TableCell>
+              <TableCell>Close Time</TableCell>
               <TableCell>Refresh</TableCell>
             </TableRow>
           </TableHead>

@@ -44,8 +44,8 @@ export const fetchSurveys = (page) => {
       {
         id: uuidv4(),
         title: 'Phát triển ứng dụng web INT3306 1',
-        createdAt: 'Apr 14, 2018',
-        modifiedAt: 'May 6, 2018'
+        openTime: 'Apr 14, 2018',
+        closeTime: 'May 6, 2018'
       }
     ];
     dispatch(fetchSurveySuccessful(surveys, surveys.length));
