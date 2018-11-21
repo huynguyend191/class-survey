@@ -1,7 +1,6 @@
 import * as actionTypes from '../actionTypes';
 import uuidv4 from 'uuid';
 import axios from '../../../utils/axiosConfig';
-
 export const startFetchingAcc = () => {
   return {
     type: actionTypes.START_FETCHING_ACC
@@ -53,28 +52,26 @@ export const updateLecturerPage = (page) => {
 };
 
 export const fetchStudentAccounts = (page) => {
-  
   return dispatch => {
-    dispatch(updateStudentPage(page));
+    dispatch(updateStudentPage(page));   
     dispatch(startFetchingAcc());
-    // axios.get('/students/')
-    // .then(result => {
-    //   let accounts;
-    //   let total;
-    //   dispatch(fetchStudentSuccessful(accounts, total))
-    // })
-    // .catch(error => {
-    //   dispatch(fetchAccFailed(error.message))
-    // })
-    let accounts = [{
-      id: uuidv4(),
-      username: 'abc123',
-      fullname: 'Yolo',
-      email: 'abc123@gmail.com',
-      year: 'QH-CLC-123'
-    }];
-    let total = accounts.length;
-    dispatch(fetchStudentSuccessful(accounts, total))
+    axios.get('http://localhost:5000/api/Students/List', {data:{}})
+    .then(result => {
+      let accounts = []
+      for(let index in result.data) {
+        // console.log(result.data[index]);
+        // accounts.push({
+        //   Id: result.data[index].Id,
+        //   Username: result.data[index].LecturerCode,
+        //   Name: result.data[index].Name,
+        //   Vnumail: result.data[index].Vnumail
+        // })
+      }
+      // dispatch(fetchStudentAccounts(accounts, accounts.length));
+    })
+    .catch(error => {
+      dispatch(fetchAccFailed("Fetched Students Failed"));
+    })
   }
 };
 
@@ -82,38 +79,23 @@ export const fetchLecturerAccounts = (page) => {
   return dispatch => {
     dispatch(updateLecturerPage(page));   
     dispatch(startFetchingAcc());
-    // axios.get('/lecturers/')
-    // .then(result => {
-    //   let accounts;
-    //   let total;
-    //   dispatch(fetchStudentSuccessful(accounts, total))
-    // })
-    // .catch(error => {
-    //   dispatch(fetchAccFailed(error.message))
-    // })
-
-    let accounts = [];
-    if(page === 0) {
-      for(let i=0;i<10;i++){
+    axios.get('http://localhost:5000/api/Lecturers/List', {data:{}})
+    .then(result => {
+      let accounts = []
+      for(let index in result.data) {
+        // console.log(result.data[index]);
         accounts.push({
-          id: uuidv4(),
-          username: 'abc123',
-          fullname: 'Yolo',
-          email: 'abc123@gmail.com'
+          Id: result.data[index].Id,
+          Username: result.data[index].LecturerCode,
+          Name: result.data[index].Name,
+          Vnumail: result.data[index].Vnumail
         })
       }
-    }else {
-      for(let i=0;i<10;i++){
-        accounts.push({
-          id: uuidv4(),
-          username: 'abc123',
-          fullname: 'Yolo',
-          email: 'abc123@gmail.com'
-        })
-      }
-    }
-   
-    dispatch(fetchLecturerSuccessful(accounts, 20))
+      dispatch(fetchLecturerSuccessful(accounts, accounts.length));
+    })
+    .catch(error => {
+      dispatch(fetchAccFailed("Fetched Lecturers Failed"));
+    })
   }
 };
 

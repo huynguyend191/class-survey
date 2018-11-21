@@ -27,7 +27,7 @@ class EditModal extends Component{
 
   state = {
     account: {
-      username: {
+      Username: {
         label: 'Tên đăng nhập',
         elementType: 'text',
         value: '',
@@ -38,7 +38,7 @@ class EditModal extends Component{
         valid: false,
         message: null
       },
-      password: {
+      Password: {
         label: 'Mật khẩu',
         elementType: 'text',
         value: '',
@@ -49,7 +49,7 @@ class EditModal extends Component{
         touched: false,
         message: null
       },
-      fullname: {
+      Name: {
         label: 'Họ và tên',
         elementType: 'text',
         value: '',
@@ -60,7 +60,7 @@ class EditModal extends Component{
         touched: false,
         message: null
       },
-      VUNemail: {
+      Vnumail: {
         label: 'email',
         elementType: 'email',
         value: '',

@@ -59,11 +59,11 @@ class AccTable extends Component {
         tableBody = this.props.accounts.map((account,index) => {
           const accountObject = account;
           return(
-            <TableRow className={classes.TableBodyRow} key={account.id}>
+            <TableRow className={classes.TableBodyRow} key={account.Id}>
               <TableCell>{(index + 1) + this.props.page * 10}</TableCell>
               { 
                 Object.keys(accountObject).map(key => {
-                  return key !== 'id' ?  <TableCell key={accountObject[key]}>{accountObject[key]}</TableCell> : null;
+                  return (key !== 'Id') ?  <TableCell key={accountObject[key]}>{accountObject[key]}</TableCell> : null;
                 })
               }
               <TableCell>

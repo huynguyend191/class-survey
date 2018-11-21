@@ -6,7 +6,8 @@ const baseURL = process.env.NODE_ENV === 'development'
 
 const axiosRequest = axios.create({
   baseURL,
-  withCredentials: true
+  withCredentials: true,
+  headers: {'Content-Type': 'application/json'}
 });
 
 axiosRequest.interceptors.response.use(

@@ -41,11 +41,12 @@ export const signOut = () => {
 export const initSignIn = (loginData) => {
   return dispatch => {
     dispatch(startSignIn());
-    axios.post('/api/Users/login', loginData)
+    axios.post('/api/Users/Login', loginData)
     .then(res => {
       const userInfo = decodeCookie();
       dispatch(signInSuccesful(userInfo.username, userInfo.role));
     }).catch(err => {
+      console.log(err)
       dispatch(signInFailed(err.message));
     })
   }

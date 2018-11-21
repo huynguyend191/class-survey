@@ -25,17 +25,17 @@ class EditModal extends Component{
 
   state = {
     account: {
-      username: {
+      Username: {
         label: 'Tên đăng nhập',
         elementType: 'text',
-        value: this.props.account.username,
+        value: this.props.account.Username,
         validation: { 
           required: true
         },
         valid: true,
         message: null
       },
-      password: {
+      Password: {
         label: 'Mật khẩu mới',
         elementType: 'text',
         value: '',
@@ -45,20 +45,20 @@ class EditModal extends Component{
         valid: true,
         message: null
       },
-      fullname: {
+      Name: {
         label: 'Họ và tên',
         elementType: 'text',
-        value: this.props.account.fullname,
+        value: this.props.account.Name,
         validation: { 
           required: true
         },
         valid: true,
         message: null        
       },
-      VUNemail: {
-        label: 'email',
+      Vnumail: {
+        label: 'VNUmail',
         elementType: 'email',
-        value: this.props.account.email,
+        value: this.props.account.Vnumail,
         validation: { 
           required: true,
           isEmail: true
@@ -102,6 +102,7 @@ class EditModal extends Component{
       formData[formElementIdentifier] = this.state.account[formElementIdentifier].value;
     }
     this.props.submit(this.props.account.id, formData);
+    console.log(formData)
     this.handleClose();
   }
 
