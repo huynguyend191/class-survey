@@ -10,7 +10,7 @@ class EditModal extends Component{
       this.setState({
         account: { 
         ...this.state.account,
-        year:{
+        Class:{
           label: 'Khóa đào tạo',
           elementType: 'text',
           value: '',

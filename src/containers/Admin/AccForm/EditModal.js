@@ -10,10 +10,10 @@ class EditModal extends Component{
       this.setState({
         account: { 
         ...this.state.account,
-        year:{
+        CLass:{
           label: 'Khóa đào tạo',
           elementType: 'text',
-          value: this.props.account.year,
+          value: this.props.account.Class,
           validation: { 
             required: true
           },

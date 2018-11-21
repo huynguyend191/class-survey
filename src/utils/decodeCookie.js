@@ -9,7 +9,6 @@ const decodeCookie = () => {
     token = cookies.get(cookieName);
   }
   const decoded = jwtDecode(token);
-  console.log(decoded);
 
   // const userInfo = {
   //   username: decoded.UserEntity.Username.toLowerCase(),

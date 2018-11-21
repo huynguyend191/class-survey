@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './NavigationBar.module.css';
 import SurveyIcon from '../../assets/icons/survey.png';
-import { Button, Menu, MenuItem, IconButton } from '@material-ui/core';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import ArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -41,25 +41,28 @@ class NavigationBar extends Component {
         </div>
         <div
           className={classes.Account}
-          
+          onClick={this.handleClick}
         >
           <AccountCircle style={{ margin: 'auto' }} color="primary" />
-          <p className={classes.Username}>{this.props.username}</p>
-          <IconButton onClick={this.handleClick} className={classes.DropDown}>
-            <ArrowDown style={{ margin: 'auto' }} color="primary"  />
-          </IconButton>
+          <p className={classes.Username} onClick={this.handleClick}>{this.props.username}</p>
+          <ArrowDown style={{ margin: 'auto', height: '20px' }} color="primary"  />
         </div>
+        
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
+          getContentAnchorEl={null}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          transformOrigin={{ vertical: "top", horizontal: "center" }}
         >
-          <MenuItem style={{ height: '10px' }}>
+          <MenuItem style={{ height: '10px'}}>
             <Button className={classes.SignOut} component={Link} to="/signout">
               <ExitToApp />Sign Out
             </Button>
           </MenuItem>
         </Menu>
+       
       </div>
     );
   }
