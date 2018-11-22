@@ -6,8 +6,7 @@ const baseURL = process.env.NODE_ENV === 'development'
 
 const axiosRequest = axios.create({
   baseURL,
-  withCredentials: true,
-  headers: {'Content-Type': 'application/json'}
+  withCredentials: true
 });
 
 axiosRequest.interceptors.response.use(
@@ -18,7 +17,7 @@ axiosRequest.interceptors.response.use(
       return (Promise.reject(error.response.data));
     } else {
       //when server is not running
-      const err = {message: 'Server error'};
+      const err = {message: 'Something went wrong'};
       return (Promise.reject(err));
     }
   }

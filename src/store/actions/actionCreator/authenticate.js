@@ -46,8 +46,7 @@ export const initSignIn = (loginData) => {
       const userInfo = decodeCookie();
       dispatch(signInSuccesful(userInfo.username, userInfo.role));
     }).catch(err => {
-      console.log(err)
-      dispatch(signInFailed(err.message));
+      dispatch(signInFailed("Authentication Failed"));
     })
   }
 }
@@ -72,7 +71,6 @@ export const checkSignInState = () => {
       dispatch(signOut());
     } else {
       const userInfo = decodeCookie();
-      console.log(userInfo);
       dispatch(signInSuccesful(userInfo.username, userInfo.role));
     }
   }

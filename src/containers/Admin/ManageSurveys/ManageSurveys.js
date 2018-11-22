@@ -5,7 +5,6 @@ import classes from './ManageSurveys.module.css';
 import { manageSurveyToolbar } from '../../../utils/navigations';
 import SurveyList from '../SurveyList/SurveyList';
 import SurveyForm from '../SurveyForm/SurveyForm';
-import SurveyCreate from '../SurveyCreate/SurveyCreate';
 import UploadFileArea from '../UploadFileArea/UploadFileArea';
 
 class ManageSurveys extends Component {
@@ -14,9 +13,8 @@ class ManageSurveys extends Component {
       <div className={classes.ManageSurveys}>
         <ToolBar navigations={manageSurveyToolbar} />
         <Switch>
-          <Route path='/surveys/generate' component={SurveyForm}/>  
-          <Route path='/surveys/create' component={SurveyCreate} /> 
-          <Route path='/surveys/upload' component={UploadFileArea} />    
+          <Route path='/surveys/form' component={SurveyForm}/>  
+          <Route path='/surveys/upload' render={() => <UploadFileArea url="/api/Classes/Upload"/>} />    
           <Route path='/surveys' exact component={SurveyList}/>                    
         </Switch>
       </div>

@@ -1,0 +1,16 @@
+.Footer {
+  height: 60px;
+  background-color: rgba(12,13,14,0.05);
+  color: #0C0D0E;
+  font-size: 12px;
+  padding: 5px;
+  box-shadow: 0 0 0 rgba(12,13,14,0.05);
+  box-sizing: border-box;
+  transition: box-shadow ease-in-out .1s,transform ease-in-out .1s;
+  border-top: 1px solid #d6d9dc;
+}
+
+.Content {
+  float: right;
+  padding: 0;
+}

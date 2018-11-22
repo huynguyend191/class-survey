@@ -1,5 +1,4 @@
 import * as actionTypes from '../actionTypes';
-import uuidv4 from 'uuid';
 import axios from '../../../utils/axiosConfig';
 
 export const startFetchingSurvey = () => {
@@ -40,23 +39,15 @@ export const fetchSurveys = (page) => {
   return dispatch => {
     dispatch(updateSurveyPage(page));
     dispatch(startFetchingSurvey());
-    const surveys = [
-      {
-        id: uuidv4(),
-        title: 'Phát triển ứng dụng web INT3306 1',
-        openTime: 'Apr 14, 2018',
-        closeTime: 'May 6, 2018'
-      }
-    ];
-    dispatch(fetchSurveySuccessful(surveys, surveys.length));
-    // axios.get('/surveys')
-    // .then(result => {
-    //   let surveys;
-    //   let total;
-    //   dispatch(fetchSurveySuccessful(surveys, total));
-    // })
-    // .catch(error => {
-    //   dispatch(fetchSurveyFailed(error.message));
-    // })
+    axios.get('/api/Classes/List', {data: {}})
+    .then(result => {
+      // let surveys;
+      // let total;
+      // dispatch(fetchSurveySuccessful(surveys, total));
+      console.log(result);
+    })
+    .catch(error => {
+      dispatch(fetchSurveyFailed(error.message));
+    })
   }
 };

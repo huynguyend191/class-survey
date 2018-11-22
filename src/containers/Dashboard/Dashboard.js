@@ -10,6 +10,7 @@ import ManageLecturers from '../Admin/ManageLecturers/ManageLecturers';
 import ManageSurveys from '../Admin/ManageSurveys/ManageSurveys';
 import StudentClassList from '../Student/StudentClassList/StudentClassList';
 import LecturerClassList from '../Lecturer/LecturerClassList/LecturerClassList';
+import Footer from '../../components/Footer/Footer';
 
 class Dashboard extends Component {
   render() {
@@ -51,7 +52,7 @@ class Dashboard extends Component {
           <SideBar navigations={navigations} />
           {routes}
         </div>
-        <div className={classes.footer}></div>
+        <Footer />
       </div>
     );
   }

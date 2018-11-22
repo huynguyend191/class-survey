@@ -38,7 +38,7 @@ class AccTable extends Component {
     this.setState({
       editAccount: account
     });
-    this.props.history.push(this.props.path + '/edit/' + account.id);
+    this.props.history.push(this.props.path + '/edit/' + account.Id);
   }
 
   openAddModal = () => {
@@ -73,7 +73,7 @@ class AccTable extends Component {
                     <EditIcon fontSize="small" color="primary" />
                   </IconButton>
   
-                  <IconButton className={classes.DeleteButton} onClick={() => this.openDeleteConfirm(account.id)} >
+                  <IconButton className={classes.DeleteButton} onClick={() => this.openDeleteConfirm(account.Id)} >
                     <DeleteIcon fontSize="small" color="error" />
                   </IconButton>
   

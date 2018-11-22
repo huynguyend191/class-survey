@@ -49,10 +49,6 @@ export const manageSurveyToolbar = [
     link: '/surveys/form'
   },
   {
-    label: 'Create Survey',
-    link: '/surveys/create'
-  },
-  {
     label: 'Upload Class',
     link: '/surveys/upload'
   }

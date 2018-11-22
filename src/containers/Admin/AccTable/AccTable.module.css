@@ -1,11 +1,11 @@
 .Accounts {
   margin: auto;
   margin-top: 30px;
+  margin-bottom: 30px;
   width: 90%;
   border: 1px solid rgba(224, 224, 224, 1);
   border-radius: 5px;
-  max-width: 1200
-  px;
+  max-width: 1200px;
 }
 
 .TableHeadRow {

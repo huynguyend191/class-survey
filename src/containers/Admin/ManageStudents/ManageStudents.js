@@ -12,7 +12,7 @@ class ManageStudents extends Component {
       <div className={classes.ManageStudents}>
         <ToolBar navigations={manageStudentToolbar} />
         <Switch>
-          <Route path='/students/upload' component={UploadFileArea}/>
+          <Route path='/students/upload' render={() => <UploadFileArea url="/api/Students/Upload"/>}/>
           <Route path='/students' component={StudentAccounts} />
         </Switch>
       </div>

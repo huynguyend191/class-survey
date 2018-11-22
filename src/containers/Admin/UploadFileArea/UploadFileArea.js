@@ -51,17 +51,18 @@ class UploadFileArea extends Component {
     let formData = new FormData();
     //upload multiples files
     this.state.files.forEach(file=> {
-      formData.append('myArrayOfFiles', file);
+      formData.append('myFiles', file);
     })
     this.setState({isUploading: true});
-    const url = this.props.match.url;
+    const url = this.props.url;
     axios(url,{
       method: 'POST',
       data: formData,
     })
     .then(res => {
       this.setState({isUploading: false, files: []});
-    }).catch(err => {
+    })
+    .catch(err => {
       this.setState({isUploading: false, error: err.message});
     })
   }

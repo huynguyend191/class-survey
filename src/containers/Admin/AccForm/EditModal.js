@@ -10,7 +10,7 @@ class EditModal extends Component{
       this.setState({
         account: { 
         ...this.state.account,
-        CLass:{
+        Class:{
           label: 'Khóa đào tạo',
           elementType: 'text',
           value: this.props.account.Class,
@@ -101,8 +101,7 @@ class EditModal extends Component{
     for (let formElementIdentifier in this.state.account) {
       formData[formElementIdentifier] = this.state.account[formElementIdentifier].value;
     }
-    this.props.submit(this.props.account.id, formData);
-    console.log(formData)
+    this.props.submit(this.props.account.Id, formData);
     this.handleClose();
   }
 

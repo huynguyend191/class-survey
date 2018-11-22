@@ -1,5 +1,4 @@
 import * as actionTypes from '../actionTypes';
-import uuidv4 from 'uuid';
 import axios from '../../../utils/axiosConfig';
 export const startFetchingAcc = () => {
   return {
@@ -57,7 +56,9 @@ export const fetchStudentAccounts = (page) => {
     dispatch(startFetchingAcc());
     axios.get('/api/Students/List', {data:{}})
     .then(result => {
-      let accounts = []
+      let accounts = [];
+      console.log(result);
+
       for(let index in result.data) {
         accounts.push({
           Id: result.data[index].Id,
@@ -81,9 +82,9 @@ export const fetchLecturerAccounts = (page) => {
     dispatch(startFetchingAcc());
     axios.get('/api/Lecturers/List', {data:{}})
     .then(result => {
-      let accounts = []
+      let accounts = [];
+      console.log(result);
       for(let index in result.data) {
-        // console.log(result.data[index]);
         accounts.push({
           Id: result.data[index].Id,
           Username: result.data[index].LecturerCode,
@@ -101,8 +102,10 @@ export const fetchLecturerAccounts = (page) => {
 
 export const editStudent = (id, form) => {
   return dispatch => {
+    console.log(form);
+
     dispatch(startFetchingAcc());
-    axios.post('/students/' + id, form)
+    axios.put('/api/Students/' + id, form)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
     })
@@ -115,7 +118,7 @@ export const editStudent = (id, form) => {
 export const editLecturer = (id, form) => {
   return dispatch => {
     dispatch(startFetchingAcc());
-    axios.post('/lecturers/' + id, form)
+    axios.put('/api/Lecturers/' + id, form)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
     })
@@ -128,7 +131,7 @@ export const editLecturer = (id, form) => {
 export const deleteStudent = (id) => {
   return dispatch => {
     dispatch(startFetchingAcc());
-    axios.delete('/students/' + id)
+    axios.delete('/api/Students/' + id)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
     })
@@ -141,9 +144,9 @@ export const deleteStudent = (id) => {
 export const deleteLecturer = (id) => {
   return dispatch => {
     dispatch(startFetchingAcc());
-    axios.delete('/lecturers/' + id)
+    axios.delete('/api/Lecturers/' + id)
     .then(result => {
-      dispatch(fetchStudentAccounts(0))
+      dispatch(fetchLecturerAccounts(0))
     })
     .catch(error => {
       dispatch(fetchAccFailed('Delete Lecturer Failed'))
@@ -180,7 +183,7 @@ export const addLecturer = (form) => {
 export const searchStudent = (keyword, type) => {
   return dispatch => {
     dispatch(startFetchingAcc());
-    axios.post('/students')
+    axios.get('/students')
     .then(result => {
       // dispatch(fetchStudentSuccessful())
     })
@@ -193,22 +196,13 @@ export const searchStudent = (keyword, type) => {
 export const searchLecturer = (keyword, type) => {
   return dispatch => {
     dispatch(startFetchingAcc());
-    // axios.post('/lecturers')
+    // axios.get('/lecturers')
     // .then(result => {
     //   // dispatch(fetchLecturerSuccessful())
     // })
     // .catch(error => {
     //   dispatch(fetchAccFailed('Search Lec Failed'))
     // })
-    let accounts = [];
-    for(let i=0;i<11;i++){
-      accounts.push({
-        id: uuidv4(),
-        username: 'abc123',
-        fullname: 'Yolo',
-        email: 'abc123@gmail.com'
-      })
-    }
-    dispatch(fetchLecturerSuccessful(accounts, accounts.length))
+
   }
 };
