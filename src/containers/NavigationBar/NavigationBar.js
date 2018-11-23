@@ -14,6 +14,9 @@ class NavigationBar extends Component {
     anchorEl: null,
   }
 
+  onRedirect = () => {
+    this.props.history.push('/surveys');
+  }
 
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -35,7 +38,7 @@ class NavigationBar extends Component {
     const { anchorEl } = this.state;
     return (
       <div className={classes.NavigationBar}>
-        <div className={classes.NavContent}>
+        <div className={classes.NavContent} onClick={this.onRedirect}>
           <img className={classes.SurveyIcon} src={SurveyIcon} alt='Class Survey' />
           <p className={classes.Header}>CLASS SURVEY</p>
         </div>

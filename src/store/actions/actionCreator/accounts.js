@@ -57,15 +57,13 @@ export const fetchStudentAccounts = (page) => {
     axios.get('/api/Students/List', {data:{}})
     .then(result => {
       let accounts = [];
-      console.log(result);
-
       for(let index in result.data) {
         accounts.push({
           Id: result.data[index].Id,
-          Username: result.data[index].Code,
-          Name: result.data[index].Name,
+          Username: result.data[index].Code.trim(),
+          Name: result.data[index].Name.trim(),
           Vnumail: result.data[index].Vnumail.trim(),
-          Class: result.data[index].Class
+          Class: result.data[index].Class.trim()
         })
       }
       dispatch(fetchStudentSuccessful(accounts, accounts.length));
@@ -83,13 +81,12 @@ export const fetchLecturerAccounts = (page) => {
     axios.get('/api/Lecturers/List', {data:{}})
     .then(result => {
       let accounts = [];
-      console.log(result);
       for(let index in result.data) {
         accounts.push({
           Id: result.data[index].Id,
-          Username: result.data[index].LecturerCode,
-          Name: result.data[index].Name,
-          Vnumail: result.data[index].Vnumail
+          Username: result.data[index].LecturerCode.trim(),
+          Name: result.data[index].Name.trim(),
+          Vnumail: result.data[index].Vnumail.trim()
         })
       }
       dispatch(fetchLecturerSuccessful(accounts, accounts.length));

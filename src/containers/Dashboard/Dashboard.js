@@ -47,7 +47,7 @@ class Dashboard extends Component {
     }
     return (
       <div>
-        <NavigationBar username={this.props.username} />
+        <NavigationBar username={this.props.username} history={this.props.history}/>
         <div className={classes.container}>
           <SideBar navigations={navigations} />
           {routes}

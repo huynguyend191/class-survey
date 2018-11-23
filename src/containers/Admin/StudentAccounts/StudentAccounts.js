@@ -10,6 +10,8 @@ class StudentAccounts extends Component {
 
   handleDeleteAccount = (id) => {
     this.props.onDeleteAcc(id);
+    this.props.onFetchAcc(0);
+
   }
 
   handleEditAccount = (id, form) => {

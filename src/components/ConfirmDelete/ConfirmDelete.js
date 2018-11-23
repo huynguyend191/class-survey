@@ -9,7 +9,7 @@ function ConfirmDelete(props) {
       onClose={props.handleClose}
     >
       <DialogTitle>
-        <p style={{fontSize: '16px'}}>Do you want to delete this?</p>
+        <p style={{fontSize: '16px'}}>Do you want to delete this account?</p>
       </DialogTitle>
       <DialogActions>
         <Button 

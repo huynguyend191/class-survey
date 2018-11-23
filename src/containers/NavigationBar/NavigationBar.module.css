@@ -41,6 +41,7 @@
 .NavContent, .Account {
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
 .Account {
@@ -48,10 +49,10 @@
   margin: auto;
   margin-right: 20px;
   height: 40px;
-  cursor: pointer;
+  padding: 0 5px 0 5px;
 }
 
 .Account:hover {
   background-color: rgba(12,13,14,0.05);
-  border-radius: 5px;
+  border-radius: 15px;
 }
