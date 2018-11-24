@@ -17,10 +17,7 @@ const decodeCookie = () => {
     username: decoded.UserEntity.Username.toLowerCase(),
     role: 'admin'
   }
-  // const userInfo = {
-  //   username: 'admin',
-  //   role: 'admin'
-  // }
+ 
   return userInfo;
 }
 

@@ -50,22 +50,24 @@ export const updateLecturerPage = (page) => {
   }
 };
 
-export const fetchStudentAccounts = (page) => {
+export const fetchStudentAccounts = () => {
   return dispatch => {
-    dispatch(updateStudentPage(page));   
+    dispatch(updateStudentPage(0));   
     dispatch(startFetchingAcc());
     axios.get('/api/Students/List', {data:{}})
     .then(result => {
+      // console.log(result)
       let accounts = [];
       for(let index in result.data) {
         accounts.push({
           Id: result.data[index].Id,
-          Username: result.data[index].Code.trim(),
-          Name: result.data[index].Name.trim(),
-          Vnumail: result.data[index].Vnumail.trim(),
-          Class: result.data[index].Class.trim()
+          Username: result.data[index].Code,
+          Name: result.data[index].Name,
+          Vnumail: result.data[index].Vnumail,
+          Class: result.data[index].Class
         })
       }
+      
       dispatch(fetchStudentSuccessful(accounts, accounts.length));
     })
     .catch(error => {
@@ -74,9 +76,9 @@ export const fetchStudentAccounts = (page) => {
   }
 };
 
-export const fetchLecturerAccounts = (page) => {
+export const fetchLecturerAccounts = () => {
   return dispatch => {
-    dispatch(updateLecturerPage(page));   
+    dispatch(updateLecturerPage(0));   
     dispatch(startFetchingAcc());
     axios.get('/api/Lecturers/List', {data:{}})
     .then(result => {
@@ -84,9 +86,9 @@ export const fetchLecturerAccounts = (page) => {
       for(let index in result.data) {
         accounts.push({
           Id: result.data[index].Id,
-          Username: result.data[index].LecturerCode.trim(),
-          Name: result.data[index].Name.trim(),
-          Vnumail: result.data[index].Vnumail.trim()
+          Username: result.data[index].Username,
+          Name: result.data[index].Name,
+          Vnumail: result.data[index].Vnumail
         })
       }
       dispatch(fetchLecturerSuccessful(accounts, accounts.length));

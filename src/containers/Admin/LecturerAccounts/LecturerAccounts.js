@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchLecturerAccounts, editLecturer, deleteLecturer, removeAccError, addLecturer, searchLecturer } from '../../../store/actions';
+import { fetchLecturerAccounts, editLecturer, deleteLecturer, removeAccError, addLecturer, searchLecturer, updateLecturerPage } from '../../../store/actions';
 import AccTable from '../AccTable/AccTable';
 import { tableHeadLecturer } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
@@ -11,7 +11,7 @@ class LecturerAccounts extends Component {
 
   handleDeleteAccount = (id) => {
     this.props.onDeleteAcc(id);
-    this.props.onFetchAcc(0);
+    this.props.onFetchAcc();
   }
 
   handleEditAccount = (id, form) => {
@@ -19,11 +19,11 @@ class LecturerAccounts extends Component {
   }
 
   handleChangePage = (event, page) => {
-    this.props.onFetchAcc(page);
+    this.props.onChangePage(page);
   }
 
   handleRefresh = () => {
-    this.props.onFetchAcc(0);
+    this.props.onFetchAcc();
   }
 
   handleCloseError = () => {
@@ -93,7 +93,8 @@ const mapDispatchToProps = dispatch => {
     onDeleteAcc: (id) => dispatch(deleteLecturer(id)),
     onCloseError: () => dispatch(removeAccError()),
     onAddAcc: (form) => dispatch(addLecturer(form)),
-    onSearchAcc: (keyword, type) => dispatch(searchLecturer(keyword, type))
+    onSearchAcc: (keyword, type) => dispatch(searchLecturer(keyword, type)),
+    onChangePage: (page) => dispatch(updateLecturerPage(page))
   }
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError, addStudent, searchStudent } from '../../../store/actions';
+import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError, addStudent, searchStudent, updateStudentPage } from '../../../store/actions';
 import AccTable from '../AccTable/AccTable';
 import { tableHeadStudent } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
@@ -10,7 +10,7 @@ class StudentAccounts extends Component {
 
   handleDeleteAccount = (id) => {
     this.props.onDeleteAcc(id);
-    this.props.onFetchAcc(0);
+    this.props.onFetchAcc();
 
   }
 
@@ -19,11 +19,11 @@ class StudentAccounts extends Component {
   }
 
   handleRefresh = () => {
-    this.props.onFetchAcc(0);
+    this.props.onFetchAcc();
   }
 
   handleChangePage = (event, page) => {
-    this.props.onFetchAcc(page);
+    this.props.onChangePage(page);
   }
 
   handleCloseError = () => {
@@ -40,7 +40,7 @@ class StudentAccounts extends Component {
 
   componentDidMount() {
     if(this.props.accounts.length <= 0) {
-      this.props.onFetchAcc(0);
+      this.props.onFetchAcc();
     }
   }
   render() {
@@ -93,7 +93,9 @@ const mapDispatchToProps = dispatch => {
     onDeleteAcc: (id) => dispatch(deleteStudent(id)),
     onCloseError: () => dispatch(removeAccError()),
     onAddAcc: (form) => dispatch(addStudent(form)),
-    onSearchAcc: (keyword, type) => dispatch(searchStudent(keyword, type))
+    onSearchAcc: (keyword, type) => dispatch(searchStudent(keyword, type)),
+    onChangePage: (page) => dispatch(updateStudentPage(page))
+
   }
 }
 

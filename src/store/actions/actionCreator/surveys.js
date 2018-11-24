@@ -44,7 +44,7 @@ export const fetchSurveys = (page) => {
       // let surveys;
       // let total;
       // dispatch(fetchSurveySuccessful(surveys, total));
-      console.log(result);
+      // console.log(result);
     })
     .catch(error => {
       dispatch(fetchSurveyFailed(error.message));

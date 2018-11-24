@@ -56,7 +56,9 @@ class AccTable extends Component {
     //finish loading
     if (!this.props.isLoading) {
       if (this.props.accounts.length > 0) {
-        tableBody = this.props.accounts.map((account,index) => {
+        const rowsPerPage = 10;
+        const accounts = this.props.accounts.slice(this.props.page * rowsPerPage, this.props.page * rowsPerPage + rowsPerPage)
+        tableBody = accounts.map((account,index) => {
           const accountObject = account;
           return(
             <TableRow className={classes.TableBodyRow} key={account.Id}>
