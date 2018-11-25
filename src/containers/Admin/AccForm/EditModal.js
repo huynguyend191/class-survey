@@ -35,16 +35,16 @@ class EditModal extends Component{
         valid: true,
         message: null
       },
-      // Password: {
-      //   label: 'Mật khẩu mới',
-      //   elementType: 'text',
-      //   value: '',
-      //   validation: { 
-      //     required: false,
-      //   },
-      //   valid: true,
-      //   message: null
-      // },
+      Password: {
+        label: 'Mật khẩu mới',
+        elementType: 'text',
+        value: '',
+        validation: { 
+          required: false,
+        },
+        valid: true,
+        message: null
+      },
       Name: {
         label: 'Họ và tên',
         elementType: 'text',

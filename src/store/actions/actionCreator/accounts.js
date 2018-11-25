@@ -83,9 +83,12 @@ export const fetchLecturerAccounts = () => {
 export const editStudent = (id, form) => {
   return dispatch => {
     dispatch(startFetchingAcc());
+    if(form.Password !== '') {
+      axios.put('/api/Users/' + id, form)
+    }
     axios.put('/api/Students/' + id, form)
     .then(result => {
-      dispatch(fetchStudentAccounts(0))
+      dispatch(fetchStudentAccounts())
     })
     .catch(error => {
       dispatch(fetchAccFailed('Edit Student Failed'))
@@ -96,6 +99,9 @@ export const editStudent = (id, form) => {
 export const editLecturer = (id, form) => {
   return dispatch => {
     dispatch(startFetchingAcc());
+    if(form.Password !== '') {
+      axios.put('/api/Users/' + id, form)
+    }
     axios.put('/api/Lecturers/' + id, form)
     .then(result => {
       dispatch(fetchLecturerAccounts())
