@@ -56,7 +56,6 @@ export const fetchStudentAccounts = () => {
     dispatch(startFetchingAcc());
     axios.get('/api/Students/List', {data:{}})
     .then(result => {
-      // console.log(result)
       let accounts = result.data;
       dispatch(fetchStudentSuccessful(accounts, accounts.length));
     })
@@ -164,12 +163,11 @@ export const addLecturer = (form) => {
 
 export const searchStudent = (keyword, type) => {
   return dispatch => {
-    console.log({[type]: keyword});
     dispatch(startFetchingAcc());
-    axios.get('api/Students/List',{data: {}})
+    axios.get(`api/Students/List?${type}=${keyword}`,{data: {}})
     .then(result => {
-      console.log(result)
-      // dispatch(fetchStudentSuccessful())
+      let accounts = result.data;
+      dispatch(fetchStudentSuccessful(accounts, accounts.length));
     })
     .catch(error => {
       dispatch(fetchAccFailed('Search Student Failed'))
@@ -180,13 +178,14 @@ export const searchStudent = (keyword, type) => {
 export const searchLecturer = (keyword, type) => {
   return dispatch => {
     dispatch(startFetchingAcc());
-    // axios.get('/lecturers')
-    // .then(result => {
-    //   // dispatch(fetchLecturerSuccessful())
-    // })
-    // .catch(error => {
-    //   dispatch(fetchAccFailed('Search Lec Failed'))
-    // })
+    axios.get(`api/Lecturers/List?${type}=${keyword}`,{data: {}})
+    .then(result => {
+      let accounts = result.data;
+      dispatch(fetchLecturerSuccessful(accounts, accounts.length));
+    })
+    .catch(error => {
+      dispatch(fetchAccFailed('Search Lec Failed'))
+    })
 
   }
 };
