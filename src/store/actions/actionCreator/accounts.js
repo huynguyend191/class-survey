@@ -101,10 +101,10 @@ export const fetchLecturerAccounts = () => {
 
 export const editStudent = (id, form) => {
   return dispatch => {
-    console.log(form);
+    let data = {...form, StudentClass: []}
 
     dispatch(startFetchingAcc());
-    axios.put('/api/Students/' + id, form)
+    axios.put('/api/Students/' + id, data)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
     })
@@ -155,10 +155,10 @@ export const deleteLecturer = (id) => {
 
 export const addStudent = (form) => {
   return dispatch => {
-    dispatch(startFetchingAcc());    
-    axios.post('/students', form)
+    dispatch(startFetchingAcc());
+    axios.post('/api/Students', form)
     .then(result => {
-      dispatch(fetchStudentAccounts(0))
+      dispatch(fetchStudentAccounts())
     })
     .catch(error => {
       dispatch(fetchAccFailed('Add Student Failed'))
@@ -169,9 +169,10 @@ export const addStudent = (form) => {
 export const addLecturer = (form) => {
   return dispatch => {
     dispatch(startFetchingAcc());
-    axios.post('/lecturers', form)
+    console.log(form)
+    axios.post('/api/Lecturers', form)
     .then(result => {
-      dispatch(fetchStudentAccounts(0))
+      dispatch(fetchLecturerAccounts())
     })
     .catch(error => {
       dispatch(fetchAccFailed('Add Lecturer Failed'))
@@ -181,9 +182,11 @@ export const addLecturer = (form) => {
 
 export const searchStudent = (keyword, type) => {
   return dispatch => {
+    console.log({[type]: keyword});
     dispatch(startFetchingAcc());
-    axios.get('/students')
+    axios.get('api/Students/List',{data: {}})
     .then(result => {
+      console.log(result)
       // dispatch(fetchStudentSuccessful())
     })
     .catch(error => {

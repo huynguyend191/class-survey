@@ -10,7 +10,7 @@ class EditModal extends Component{
       this.setState({
         account: { 
         ...this.state.account,
-        Class:{
+        Class: {
           label: 'Khóa đào tạo',
           elementType: 'text',
           value: '',
@@ -21,6 +21,23 @@ class EditModal extends Component{
           valid: false,
           message: null
         }}
+      })
+    }else if(this.props.accType === 'lecturer') {
+      this.setState({
+        account: { 
+        ...this.state.account,
+        LecturerCode: {
+          label: 'Mã giảng viên',
+          elementType: 'text',
+          value: '',
+          validation: { 
+            required: true
+          },
+          touched: false,
+          valid: false,
+          message: null
+        }
+      }
       })
     }
   }

@@ -5,19 +5,19 @@ export const tableHeadStudent = ['Tên đăng nhập', 'Họ và tên', 'Email',
 export const studentAcc = [
   {
     label: 'Tên đăng nhập',
-    value: 'username'
+    value: 'Username'
   },
   {
     label: 'Họ và tên',
-    value: 'fullname'
+    value: 'Name'
   },
   {
     label: 'Email',
-    value: 'email'
+    value: 'Vnumail'
   },
   {
     label: 'Khóa đào tạo',
-    value: 'year'
+    value: 'Class'
   }
  
 ];
@@ -25,14 +25,14 @@ export const studentAcc = [
 export const lecAcc = [
   {
     label: 'Tên đăng nhập',
-    value: 'username'
+    value: 'Username'
   },
   {
     label: 'Họ và tên',
-    value: 'fullname'
+    value: 'Name'
   },
   {
     label: 'Email',
-    value: 'email'
+    value: 'Vnumail'
   }
 ];
