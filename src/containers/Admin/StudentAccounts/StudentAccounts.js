@@ -7,6 +7,9 @@ import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 import { studentAcc } from '../../../utils/accountInfo';
 
 class StudentAccounts extends Component {
+  state= {
+    studentAcc: []
+  }
 
   handleDeleteAccount = (id) => {
     this.props.onDeleteAcc(id);

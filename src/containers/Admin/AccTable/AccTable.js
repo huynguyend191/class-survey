@@ -63,8 +63,27 @@ class AccTable extends Component {
       if (this.props.accounts.length > 0) {
         //Table pagination 
         const rowsPerPage = this.state.rowsPerPage;
-        const accounts = this.props.accounts.slice(this.props.page * rowsPerPage, this.props.page * rowsPerPage + rowsPerPage)
-        tableBody = accounts.map((account,index) => {
+        const accounts = this.props.accounts.slice(this.props.page * rowsPerPage, this.props.page * rowsPerPage + rowsPerPage);
+        const formatAcc = [];
+        for(let index in accounts) {
+          if(this.props.accType === 'student') {
+            formatAcc.push({
+              Id: accounts[index].Id,
+              Username: accounts[index].Code,
+              Name: accounts[index].Name,
+              Vnumail: accounts[index].Vnumail,
+              Class: accounts[index].Class
+            })
+          }else if(this.props.accType === 'lecturer') {
+            formatAcc.push({
+              Id: accounts[index].Id,
+              Username: accounts[index].Username,
+              Name: accounts[index].Name,
+              Vnumail: accounts[index].Vnumail,
+            })
+          }
+        }
+        tableBody = formatAcc.map((account,index) => {
           const accountObject = account;
           return(
             <TableRow className={classes.TableBodyRow} key={account.Id}>
@@ -76,7 +95,7 @@ class AccTable extends Component {
               }
               <TableCell>
                   <IconButton className={classes.EditButton}
-                    onClick={() => this.openEditModal(account)}
+                    onClick={() => this.openEditModal(this.props.accounts[index])}
                   >
                     <EditIcon fontSize="small" color="primary" />
                   </IconButton>

@@ -39,7 +39,7 @@ class LecturerAccounts extends Component {
 
   componentDidMount() {
     if(this.props.accounts.length <= 0) {
-      this.props.onFetchAcc(this.props.page);
+      this.props.onFetchAcc();
     }
   }
   render() {

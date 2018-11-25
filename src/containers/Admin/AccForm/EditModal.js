@@ -101,7 +101,7 @@ class EditModal extends Component{
     for (let formElementIdentifier in this.state.account) {
       formData[formElementIdentifier] = this.state.account[formElementIdentifier].value;
     }
-    this.props.submit(this.props.account.Id, formData);
+    this.props.submit(this.props.account.Id, {...this.props.account, ...formData});
     this.handleClose();
   }
 

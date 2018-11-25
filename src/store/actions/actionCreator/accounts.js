@@ -57,17 +57,7 @@ export const fetchStudentAccounts = () => {
     axios.get('/api/Students/List', {data:{}})
     .then(result => {
       // console.log(result)
-      let accounts = [];
-      for(let index in result.data) {
-        accounts.push({
-          Id: result.data[index].Id,
-          Username: result.data[index].Code,
-          Name: result.data[index].Name,
-          Vnumail: result.data[index].Vnumail,
-          Class: result.data[index].Class
-        })
-      }
-      
+      let accounts = result.data;
       dispatch(fetchStudentSuccessful(accounts, accounts.length));
     })
     .catch(error => {
@@ -82,15 +72,7 @@ export const fetchLecturerAccounts = () => {
     dispatch(startFetchingAcc());
     axios.get('/api/Lecturers/List', {data:{}})
     .then(result => {
-      let accounts = [];
-      for(let index in result.data) {
-        accounts.push({
-          Id: result.data[index].Id,
-          Username: result.data[index].Username,
-          Name: result.data[index].Name,
-          Vnumail: result.data[index].Vnumail
-        })
-      }
+      let accounts = result.data;
       dispatch(fetchLecturerSuccessful(accounts, accounts.length));
     })
     .catch(error => {
