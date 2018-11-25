@@ -11,7 +11,6 @@ class LecturerAccounts extends Component {
 
   handleDeleteAccount = (id) => {
     this.props.onDeleteAcc(id);
-    this.props.onFetchAcc();
   }
 
   handleEditAccount = (id, form) => {

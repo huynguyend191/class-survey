@@ -15,12 +15,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import axios from '../../../utils/axiosConfig';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
+import UploadedModal from '../../../components/UploadedModal/UploadedModal';
 
 class UploadFileArea extends Component {
   state = {
     files: [],
     isUploading: false,
     error: null,
+    openModal: false
   }
 
   onSelectedFiles = (acceptedFiles, rejectedFiles) => {
@@ -60,7 +62,8 @@ class UploadFileArea extends Component {
       data: formData,
     })
     .then(res => {
-      this.setState({isUploading: false, files: []});
+      this.props.refresh();
+      this.setState({isUploading: false, files: [], openModal: true});
     })
     .catch(err => {
       this.setState({isUploading: false, error: err.message});
@@ -69,6 +72,10 @@ class UploadFileArea extends Component {
 
   handleCloseError = () => {
     this.setState({error: null});
+  }
+
+  handleCloseSuccess = () => {
+    this.setState({openModal: false})
   }
 
   render() {
@@ -103,6 +110,7 @@ class UploadFileArea extends Component {
           handleCloseModal = {this.handleCloseError}
           error = {this.state.error}
         />
+        <UploadedModal isOpen={this.state.openModal} handleCloseModal={this.handleCloseSuccess}/>
         <Dropzone 
           className={classes.Dropzone}
           onDrop={this.onSelectedFiles}

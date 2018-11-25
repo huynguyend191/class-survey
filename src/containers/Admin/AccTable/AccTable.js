@@ -17,7 +17,12 @@ class AccTable extends Component {
   state = {
     openConfirmDelete: false,
     deleteId: null,
-    editAccount: null
+    editAccount: null,
+    rowsPerPage: 10
+  }
+
+  handleChangeRowsPerPage = (event) => {
+    this.setState({ rowsPerPage: event.target.value });
   }
 
   closeDeleteConfirm = () => {
@@ -56,13 +61,14 @@ class AccTable extends Component {
     //finish loading
     if (!this.props.isLoading) {
       if (this.props.accounts.length > 0) {
-        const rowsPerPage = 10;
+        //Table pagination 
+        const rowsPerPage = this.state.rowsPerPage;
         const accounts = this.props.accounts.slice(this.props.page * rowsPerPage, this.props.page * rowsPerPage + rowsPerPage)
         tableBody = accounts.map((account,index) => {
           const accountObject = account;
           return(
             <TableRow className={classes.TableBodyRow} key={account.Id}>
-              <TableCell>{(index + 1) + this.props.page * 10}</TableCell>
+              <TableCell>{(index + 1) + this.props.page * rowsPerPage}</TableCell>
               { 
                 Object.keys(accountObject).map(key => {
                   return (key !== 'Id') ?  <TableCell key={accountObject[key]}>{accountObject[key]}</TableCell> : null;
@@ -157,9 +163,10 @@ class AccTable extends Component {
         <TablePagination 
           component="div"
           count={this.props.totalAcc}  
-          rowsPerPageOptions={[]}
-          rowsPerPage={10}
+          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPage={this.state.rowsPerPage}
           page={this.props.page} 
+          onChangeRowsPerPage={this.handleChangeRowsPerPage}
           backIconButtonProps={{
             'aria-label': 'Previous Page',
           }}

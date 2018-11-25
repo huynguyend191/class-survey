@@ -119,7 +119,7 @@ export const editLecturer = (id, form) => {
     dispatch(startFetchingAcc());
     axios.put('/api/Lecturers/' + id, form)
     .then(result => {
-      dispatch(fetchStudentAccounts(0))
+      dispatch(fetchLecturerAccounts())
     })
     .catch(error => {
       dispatch(fetchAccFailed('Edit Lecturer Failed'))
@@ -132,7 +132,7 @@ export const deleteStudent = (id) => {
     dispatch(startFetchingAcc());
     axios.delete('/api/Students/' + id)
     .then(result => {
-      dispatch(fetchStudentAccounts(0))
+      dispatch(fetchStudentAccounts());
     })
     .catch(error => {
       dispatch(fetchAccFailed('Delete Student Failed'))
@@ -145,7 +145,7 @@ export const deleteLecturer = (id) => {
     dispatch(startFetchingAcc());
     axios.delete('/api/Lecturers/' + id)
     .then(result => {
-      dispatch(fetchLecturerAccounts(0))
+      dispatch(fetchLecturerAccounts());
     })
     .catch(error => {
       dispatch(fetchAccFailed('Delete Lecturer Failed'))
