@@ -82,10 +82,8 @@ export const fetchLecturerAccounts = () => {
 
 export const editStudent = (id, form) => {
   return dispatch => {
-    let data = {...form, StudentClass: []}
-
     dispatch(startFetchingAcc());
-    axios.put('/api/Students/' + id, data)
+    axios.put('/api/Students/' + id, form)
     .then(result => {
       dispatch(fetchStudentAccounts(0))
     })
