@@ -9,8 +9,8 @@ import classes from './AccTable.module.css';
 import ConfirmDelete from '../../../components/ConfirmDelete/ConfirmDelete';
 import EditModal from '../AccForm/EditModal';
 import AddModal from '../AccForm/AddModal';
-import SearchAccount from '../SearchAccount/SearchAccount';
-
+import SearchAccount from '../SearchBar/SearchAccount';
+import uuidv4 from 'uuid';
 
 class AccTable extends Component {
 
@@ -90,7 +90,7 @@ class AccTable extends Component {
               <TableCell>{(index + 1) + this.props.page * rowsPerPage}</TableCell>
               { 
                 Object.keys(accountObject).map(key => {
-                  return (key !== 'Id') ?  <TableCell key={accountObject[key]}>{accountObject[key]}</TableCell> : null;
+                  return (key !== 'Id') ?  <TableCell key={uuidv4()}>{accountObject[key]}</TableCell> : null;
                 })
               }
               <TableCell>

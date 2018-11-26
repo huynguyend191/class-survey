@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import classes from './SearchAccount.module.css';
+import classes from './SearchBar.module.css';
 import { Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 class SearchAccount extends Component {
   state = {
-    searchType: 'username',
+    searchType: 'ClassCode',
     searchKeyword: '',
     isValid: false
   }
@@ -16,8 +16,8 @@ class SearchAccount extends Component {
   }
   
   onSubmit = (event) => {
-    this.props.submit(this.state.searchKeyword, this.state.searchType);
-    this.setState({searchType: 'username', searchKeyword: '', isValid: false});
+    console.log(this.state.searchKeyword, this.state.searchType);
+    this.setState({searchType: 'ClassCode', searchKeyword: '', isValid: false});
     event.preventDefault();
   }
 
@@ -31,7 +31,7 @@ class SearchAccount extends Component {
 
   render() {
     return (
-      <div className={classes.SearchAccount}>
+      <div className={classes.SearchBar}>
         <form onSubmit={this.onSubmit} className={classes.SearchForm}>
           <input 
             onSelect={this.checkEmtyKeyword}
@@ -41,11 +41,8 @@ class SearchAccount extends Component {
             onChange={this.handleChange} 
             className={classes.Input}/>
           <select id="searchType" value={this.state.searchType} onChange={this.handleChange} className={classes.Select}>
-            {
-              this.props.accFormat.map(option => (
-                <option value={option.value} key={option.value}>{option.label}</option>
-              ))
-            }
+            <option value="ClassCode">Mã môn học</option>
+            <option value="Subject">Tên môn học</option>
           </select>
           <Button
             className={classes.SearchButton}
