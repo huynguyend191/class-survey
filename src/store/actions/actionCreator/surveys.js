@@ -35,19 +35,18 @@ export const updateSurveyPage = (page) => {
   }
 };
 
-export const fetchSurveys = (page) => {
+export const fetchSurveys = () => {
   return dispatch => {
-    dispatch(updateSurveyPage(page));
+    dispatch(updateSurveyPage(0));
     dispatch(startFetchingSurvey());
     axios.get('/api/Classes/List', {data: {}})
     .then(result => {
-      // let surveys;
-      // let total;
-      // dispatch(fetchSurveySuccessful(surveys, total));
-      // console.log(result);
+      const surveys = result.data;
+      dispatch(fetchSurveySuccessful(surveys, surveys.length));
+      console.log(surveys);
     })
     .catch(error => {
-      dispatch(fetchSurveyFailed(error.message));
+      dispatch(fetchSurveyFailed('Fetch Survey Failed'));
     })
   }
 };

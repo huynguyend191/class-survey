@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import classes from './SurveyForm.module.css';
 
 class SurveyForm extends Component {
   render() {
     return (
-      <div>
+      <div className={classes.SurveyForm}>
         Form
       </div>
     );
