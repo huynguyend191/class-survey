@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Table, TableBody, TableCell, TableHead, TableRow, TablePagination, CircularProgress, Tooltip, IconButton } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ShowIcon from '@material-ui/icons/Visibility';
 import classes from './SurveyList.module.css';
 import { fetchSurveys } from '../../../store/actions';
 import { updateSurveyPage } from '../../../store/actions/actionCreator/surveys';
@@ -64,8 +67,23 @@ class SurveyList extends Component {
                   return key !== 'Id' ?  <TableCell key={uuidv4()}>{surveyObject[key]}</TableCell> : null;
                 })
               }
-              <TableCell>Delete</TableCell>
-            </TableRow>
+              <TableCell style={{textAlign: "center"}}>
+
+                <IconButton className={classes.ShowButton} onClick={() => this.showSurvey(survey.Id)} >
+                  <ShowIcon fontSize="small" />
+                </IconButton>
+
+                <IconButton className={classes.EditButton}
+                  onClick={() => this.openEditModal(this.props.accounts[index])}
+                >
+                  <EditIcon fontSize="small" color="primary" />
+                </IconButton>
+    
+                <IconButton className={classes.DeleteButton} onClick={() => this.openDeleteConfirm(survey.Id)} >
+                  <DeleteIcon fontSize="small" color="error" />
+                </IconButton>
+              </TableCell>
+            </TableRow> 
           )
         })
       } else {
@@ -90,7 +108,7 @@ class SurveyList extends Component {
               <TableCell className={classes.Cell}>Sinh viên</TableCell>
               <TableCell className={classes.Cell}>Thời gian mở</TableCell>
               <TableCell className={classes.Cell}>Thời gian đóng</TableCell>
-              <TableCell>
+              <TableCell style={{textAlign: "center"}}>
                 <Tooltip title="Refresh" disableFocusListener>
                   <IconButton className={classes.RefreshButton} onClick={this.handleRefresh}>
                     <RefreshIcon fontSize="small"/>

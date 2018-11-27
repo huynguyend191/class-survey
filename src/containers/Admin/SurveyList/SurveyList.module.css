@@ -7,7 +7,7 @@
   border-radius: 5px;
 }
 
-.RefreshButton {
+.EditButton, .DeleteButton, .RefreshButton, .ShowButton {
   padding: 6px !important;
 }
 
