@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError, addStudent, searchStudent, updateStudentPage } from '../../../store/actions';
+import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError, addStudent, searchStudent } from '../../../store/actions';
 import AccTable from '../AccTable/AccTable';
 import { tableHeadStudent } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
@@ -21,10 +21,6 @@ class StudentAccounts extends Component {
 
   handleRefresh = () => {
     this.props.onFetchAcc();
-  }
-
-  handleChangePage = (event, page) => {
-    this.props.onChangePage(page);
   }
 
   handleCloseError = () => {
@@ -58,10 +54,8 @@ class StudentAccounts extends Component {
           history={this.props.history}
           path={this.props.match.path}
           accounts={this.props.accounts}
-          page={this.props.page}
           isLoading={this.props.isLoading}
 
-          handleChangePage={this.handleChangePage}
           handleEditAccount={this.handleEditAccount}
           handleDeleteAccount={this.handleDeleteAccount}
           handleRefresh={this.handleRefresh}
@@ -83,7 +77,6 @@ const mapStateToProps = state => {
     error:  state.accReducer.error,
     accounts: state.accReducer.studentAccounts,
     totalAcc: state.accReducer.totalStudents,
-    page: state.accReducer.currentPageStudent
   };
 }
 
@@ -95,8 +88,6 @@ const mapDispatchToProps = dispatch => {
     onCloseError: () => dispatch(removeAccError()),
     onAddAcc: (form) => dispatch(addStudent(form)),
     onSearchAcc: (keyword, type) => dispatch(searchStudent(keyword, type)),
-    onChangePage: (page) => dispatch(updateStudentPage(page))
-
   }
 }
 

@@ -35,24 +35,9 @@ export const fetchAccFailed = (error) => {
   }
 };
 
-export const updateStudentPage = (page) => {
-  
-  return {
-    type: actionTypes.UPDATE_STUDENT_PAGE,
-    page
-  }
-};
-
-export const updateLecturerPage = (page) => {
-  return {
-    type: actionTypes.UPDATE_LECTURER_PAGE,
-    page
-  }
-};
 
 export const fetchStudentAccounts = () => {
   return dispatch => {
-    dispatch(updateStudentPage(0));   
     dispatch(startFetchingAcc());
     axios.get('/api/Students/List', {data:{}})
     .then(result => {
@@ -67,7 +52,6 @@ export const fetchStudentAccounts = () => {
 
 export const fetchLecturerAccounts = () => {
   return dispatch => {
-    dispatch(updateLecturerPage(0));   
     dispatch(startFetchingAcc());
     axios.get('/api/Lecturers/List', {data:{}})
     .then(result => {
@@ -188,7 +172,7 @@ export const searchLecturer = (keyword, type) => {
       dispatch(fetchLecturerSuccessful(accounts, accounts.length));
     })
     .catch(error => {
-      dispatch(fetchAccFailed('Search Lec Failed'))
+      dispatch(fetchAccFailed('Search Lecturer Failed'))
     })
 
   }

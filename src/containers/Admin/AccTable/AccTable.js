@@ -18,7 +18,12 @@ class AccTable extends Component {
     openConfirmDelete: false,
     deleteId: null,
     editAccount: null,
-    rowsPerPage: 10
+    rowsPerPage: 10,
+    page: 0
+  }
+
+  handleChangePage = (event, page) => {
+    this.setState({page: page});
   }
 
   handleChangeRowsPerPage = (event) => {
@@ -63,7 +68,7 @@ class AccTable extends Component {
       if (this.props.accounts.length > 0) {
         //Table pagination 
         const rowsPerPage = this.state.rowsPerPage;
-        const accounts = this.props.accounts.slice(this.props.page * rowsPerPage, this.props.page * rowsPerPage + rowsPerPage);
+        const accounts = this.props.accounts.slice(this.state.page * rowsPerPage, this.state.page * rowsPerPage + rowsPerPage);
         const formatAcc = [];
         for(let index in accounts) {
           if(this.props.accType === 'student') {
@@ -87,7 +92,7 @@ class AccTable extends Component {
           const accountObject = account;
           return(
             <TableRow className={classes.TableBodyRow} key={account.Id}>
-              <TableCell>{(index + 1) + this.props.page * rowsPerPage}</TableCell>
+              <TableCell>{(index + 1) + this.state.page * rowsPerPage}</TableCell>
               { 
                 Object.keys(accountObject).map(key => {
                   return (key !== 'Id') ?  <TableCell key={uuidv4()}>{accountObject[key]}</TableCell> : null;
@@ -184,7 +189,7 @@ class AccTable extends Component {
           count={this.props.totalAcc}  
           rowsPerPageOptions={[5, 10, 25]}
           rowsPerPage={this.state.rowsPerPage}
-          page={this.props.page} 
+          page={this.state.page} 
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
           backIconButtonProps={{
             'aria-label': 'Previous Page',
@@ -192,7 +197,7 @@ class AccTable extends Component {
           nextIconButtonProps={{
             'aria-label': 'Next Page',
           }}
-          onChangePage={this.props.handleChangePage}
+          onChangePage={this.handleChangePage}
         />
       </div>
     );

@@ -6,7 +6,6 @@ const initialState = {
   loading: false,
   surveys: [],
   totalSurveys: 0,
-  currentPage: 0
 }
 
 const reducer = ( state =  initialState, action) => {
@@ -23,10 +22,7 @@ const reducer = ( state =  initialState, action) => {
 
     case actionTypes.FETCH_SURVEY_FAILED:
       return updateObject(state, {loading: false, error: action.error});
-    
-    case actionTypes.UPDATE_SURVEY_PAGE:
-      return updateObject(state, {currentPage: action.page});
-    
+     
     case actionTypes.REMOVE_SURVEY_ERROR:
       return updateObject(state, {error: null});
 

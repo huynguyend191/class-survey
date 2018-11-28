@@ -8,8 +8,6 @@ const initialState = {
   lecturerAccounts: [],
   totalStudents: 0,
   totalLecturers: 0,
-  currentPageStudent: 0,
-  currentPageLecturer: 0
 }
 
 const reducer = ( state =  initialState, action) => {
@@ -33,13 +31,7 @@ const reducer = ( state =  initialState, action) => {
 
     case actionTypes.FETCH_ACC_FAILED:
       return updateObject(state, {loading: false, error: action.error});
-    
-    case actionTypes.UPDATE_STUDENT_PAGE:
-      return updateObject(state, {currentPageStudent: action.page});
-
-    case actionTypes.UPDATE_LECTURER_PAGE:
-      return updateObject(state, {currentPageLecturer: action.page});
-    
+ 
     case actionTypes.REMOVE_ACC_ERROR:
       return updateObject(state, {error: null});
 

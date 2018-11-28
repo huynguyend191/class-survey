@@ -7,7 +7,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ShowIcon from '@material-ui/icons/Visibility';
 import classes from './SurveyList.module.css';
 import { fetchSurveys } from '../../../store/actions';
-import { updateSurveyPage } from '../../../store/actions/actionCreator/surveys';
 import uuidv4 from 'uuid';
 import SearchSurvey from '../SearchBar/SearchSurvey';
 
@@ -15,6 +14,7 @@ class SurveyList extends Component {
 
   state = {
     rowsPerPage: 10,
+    page: 0
   }
 
   componentDidMount() {
@@ -32,9 +32,34 @@ class SurveyList extends Component {
   }
 
   handleChangePage = (event, page) => {
-    this.props.onChangePage(page);
+    this.setState({page: page});
   }
 
+  openDeleteConfirm = () => {
+
+  }
+
+  closeDeleteConfirm = () => {
+
+  }
+
+  openEditModal = () => {
+
+  }
+
+  closeEditModal = () => {
+
+  }
+
+  showSurveyResult = () => {
+
+  }
+
+  hideSurveyResult = () => {
+
+  }
+
+  
   render() {
     let tableBody = (
       <TableRow>
@@ -45,7 +70,7 @@ class SurveyList extends Component {
     if (!this.props.loading) {
       if (this.props.surveys.length > 0) {
         const rowsPerPage = this.state.rowsPerPage;
-        const surveys = this.props.surveys.slice(this.props.page * rowsPerPage, this.props.page * rowsPerPage + rowsPerPage);
+        const surveys = this.props.surveys.slice(this.state.page * rowsPerPage, this.state.page * rowsPerPage + rowsPerPage);
         const formatSurveys = [];
         for(let index in surveys) {
           formatSurveys.push({
@@ -61,7 +86,7 @@ class SurveyList extends Component {
           const surveyObject = survey;
           return(
             <TableRow key={survey.Id} className={classes.TableBodyRow}>
-              <TableCell>{(index + 1) + this.props.page * rowsPerPage}</TableCell>
+              <TableCell>{(index + 1) + this.state.page * rowsPerPage}</TableCell>
               { 
                 Object.keys(surveyObject).map(key => {
                   return key !== 'Id' ?  <TableCell key={uuidv4()}>{surveyObject[key]}</TableCell> : null;
@@ -69,7 +94,7 @@ class SurveyList extends Component {
               }
               <TableCell style={{textAlign: "center"}}>
 
-                <IconButton className={classes.ShowButton} onClick={() => this.showSurvey(survey.Id)} >
+                <IconButton className={classes.ShowButton} onClick={() => this.showSurveyResult(survey.Id)} >
                   <ShowIcon fontSize="small" />
                 </IconButton>
 
@@ -126,7 +151,7 @@ class SurveyList extends Component {
             count={this.props.total}  
             rowsPerPageOptions={[5, 10, 25]}
             rowsPerPage={this.state.rowsPerPage}
-            page={this.props.page} 
+            page={this.state.page} 
             onChangeRowsPerPage={this.handleChangeRowsPerPage}
               backIconButtonProps={{
               'aria-label': 'Previous Page',
@@ -147,14 +172,12 @@ const mapStateToProps = state => {
     error: state.surveyReducer.error,
     surveys: state.surveyReducer.surveys,
     total: state.surveyReducer.totalSurveys,
-    page: state.surveyReducer.currentPage
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     onFetchSurvey: () => dispatch(fetchSurveys()),
-    onChangePage: (page) => dispatch(updateSurveyPage(page))
   };
 }
 

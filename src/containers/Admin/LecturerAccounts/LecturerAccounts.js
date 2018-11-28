@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchLecturerAccounts, editLecturer, deleteLecturer, removeAccError, addLecturer, searchLecturer, updateLecturerPage } from '../../../store/actions';
+import { fetchLecturerAccounts, editLecturer, deleteLecturer, removeAccError, addLecturer, searchLecturer } from '../../../store/actions';
 import AccTable from '../AccTable/AccTable';
 import { tableHeadLecturer } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
@@ -17,9 +17,6 @@ class LecturerAccounts extends Component {
     this.props.onEditAcc(id, form);    
   }
 
-  handleChangePage = (event, page) => {
-    this.props.onChangePage(page);
-  }
 
   handleRefresh = () => {
     this.props.onFetchAcc();
@@ -56,10 +53,8 @@ class LecturerAccounts extends Component {
           history={this.props.history}
           path={this.props.match.path}
           accounts={this.props.accounts}
-          page={this.props.page}
           isLoading={this.props.isLoading}
 
-          handleChangePage={this.handleChangePage}
           handleEditAccount={this.handleEditAccount}
           handleDeleteAccount={this.handleDeleteAccount}
           handleRefresh={this.handleRefresh}
@@ -81,7 +76,6 @@ const mapStateToProps = state => {
     error:  state.accReducer.error,
     accounts: state.accReducer.lecturerAccounts,
     totalAcc: state.accReducer.totalLecturers,
-    page: state.accReducer.currentPageLecturer
   };
 }
 
@@ -93,7 +87,6 @@ const mapDispatchToProps = dispatch => {
     onCloseError: () => dispatch(removeAccError()),
     onAddAcc: (form) => dispatch(addLecturer(form)),
     onSearchAcc: (keyword, type) => dispatch(searchLecturer(keyword, type)),
-    onChangePage: (page) => dispatch(updateLecturerPage(page))
   }
 }
 

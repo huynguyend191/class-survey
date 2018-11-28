@@ -28,16 +28,9 @@ export const fetchSurveyFailed = (error) => {
   }
 };
 
-export const updateSurveyPage = (page) => {
-  return {
-    type: actionTypes.UPDATE_SURVEY_PAGE,
-    page
-  }
-};
 
 export const fetchSurveys = () => {
   return dispatch => {
-    dispatch(updateSurveyPage(0));
     dispatch(startFetchingSurvey());
     axios.get('/api/Classes/List', {data: {}})
     .then(result => {

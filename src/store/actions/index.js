@@ -16,9 +16,7 @@ export {
   addStudent,
   addLecturer,
   searchLecturer,
-  searchStudent,
-  updateLecturerPage,
-  updateStudentPage
+  searchStudent
 } from './actionCreator/accounts';
 
 export { 
