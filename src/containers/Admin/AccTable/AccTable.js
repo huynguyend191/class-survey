@@ -150,6 +150,7 @@ class AccTable extends Component {
           handleClose={this.closeDeleteConfirm}
           confirmDelete={this.props.handleDeleteAccount}
           deleteId={this.state.deleteId}
+          msg="account"
         />
         <SearchAccount 
           accFormat={this.props.accFormat}

@@ -9,12 +9,14 @@ import classes from './SurveyList.module.css';
 import { fetchSurveys } from '../../../store/actions';
 import uuidv4 from 'uuid';
 import SearchSurvey from '../SearchBar/SearchSurvey';
+import ConfirmDelete from '../../../components/ConfirmDelete/ConfirmDelete';
 
 class SurveyList extends Component {
 
   state = {
     rowsPerPage: 10,
-    page: 0
+    page: 0,
+    openConfirmDetele: false,
   }
 
   componentDidMount() {
@@ -35,19 +37,25 @@ class SurveyList extends Component {
     this.setState({page: page});
   }
 
-  openDeleteConfirm = () => {
-
+  openDeleteConfirm = (id) => {
+    this.setState({
+      openConfirmDelete: true,
+      deleteId: id
+    });
   }
 
   closeDeleteConfirm = () => {
+    this.setState({
+      openConfirmDelete: false,
+      deleteId: null
+    });
+  }
 
+  handleDeleteClass = () => {
+    alert(this.state.deleteId)
   }
 
   openEditModal = () => {
-
-  }
-
-  closeEditModal = () => {
 
   }
 
@@ -99,7 +107,7 @@ class SurveyList extends Component {
                 </IconButton>
 
                 <IconButton className={classes.EditButton}
-                  onClick={() => this.openEditModal(this.props.accounts[index])}
+                  onClick={() => this.openEditModal(this.props.surveys[index])}
                 >
                   <EditIcon fontSize="small" color="primary" />
                 </IconButton>
@@ -123,6 +131,13 @@ class SurveyList extends Component {
 
     return (
       <div className={classes.SurveyList}>
+        <ConfirmDelete 
+          isOpen={this.state.openConfirmDelete}
+          handleClose={this.closeDeleteConfirm}
+          confirmDelete={this.handleDeleteClass}
+          deleteId={this.state.deleteId}
+          msg="class"
+        />
         <SearchSurvey />
         <Table>
           <TableHead>
@@ -178,6 +193,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchSurvey: () => dispatch(fetchSurveys()),
+    handleDeleteClass: (id) => dispatch()
   };
 }
 
