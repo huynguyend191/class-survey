@@ -28,7 +28,6 @@ export const fetchSurveyFailed = (error) => {
   }
 };
 
-
 export const fetchSurveys = () => {
   return dispatch => {
     dispatch(startFetchingSurvey());
@@ -36,10 +35,22 @@ export const fetchSurveys = () => {
     .then(result => {
       const surveys = result.data;
       dispatch(fetchSurveySuccessful(surveys, surveys.length));
-      console.log(surveys);
+      // console.log(surveys);
     })
     .catch(error => {
       dispatch(fetchSurveyFailed('Fetch Survey Failed'));
     })
   }
 };
+
+export const deleteSurvey = (id) => {
+  return dispatch => {
+    dispatch(startFetchingSurvey());
+    axios.delete('/api/Classes/' + id).then(result => {
+      dispatch(fetchSurveys());
+    })
+    .catch(error => {
+      dispatch(fetchSurveyFailed('Delete Survey Failed'));
+    })
+  }
+}

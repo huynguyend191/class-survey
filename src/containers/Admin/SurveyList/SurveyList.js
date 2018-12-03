@@ -6,17 +6,19 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ShowIcon from '@material-ui/icons/Visibility';
 import classes from './SurveyList.module.css';
-import { fetchSurveys } from '../../../store/actions';
+import { fetchSurveys, removeSurveyError } from '../../../store/actions';
 import uuidv4 from 'uuid';
 import SearchSurvey from '../SearchBar/SearchSurvey';
 import ConfirmDelete from '../../../components/ConfirmDelete/ConfirmDelete';
+import ErrorModal from '../../../components/ErrorModal/ErrorModal';
+import { deleteSurvey } from '../../../store/actions/actionCreator/surveys';
 
 class SurveyList extends Component {
 
   state = {
     rowsPerPage: 10,
     page: 0,
-    openConfirmDetele: false,
+    showDeleteModal: false,
   }
 
   componentDidMount() {
@@ -39,21 +41,18 @@ class SurveyList extends Component {
 
   openDeleteConfirm = (id) => {
     this.setState({
-      openConfirmDelete: true,
+      showDeleteModal: true,
       deleteId: id
     });
   }
 
   closeDeleteConfirm = () => {
     this.setState({
-      openConfirmDelete: false,
+      showDeleteModal: false,
       deleteId: null
     });
   }
 
-  handleDeleteClass = () => {
-    alert(this.state.deleteId)
-  }
 
   openEditModal = () => {
 
@@ -131,10 +130,15 @@ class SurveyList extends Component {
 
     return (
       <div className={classes.SurveyList}>
+        <ErrorModal 
+          isOpen={this.props.error ? true : false}
+          error={this.props.error}
+          handleCloseModal={this.props.handleCloseError}
+        />
         <ConfirmDelete 
-          isOpen={this.state.openConfirmDelete}
+          isOpen={this.state.showDeleteModal}
           handleClose={this.closeDeleteConfirm}
-          confirmDelete={this.handleDeleteClass}
+          confirmDelete={this.props.handleDeleteSurvey}
           deleteId={this.state.deleteId}
           msg="class"
         />
@@ -193,7 +197,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchSurvey: () => dispatch(fetchSurveys()),
-    handleDeleteClass: (id) => dispatch()
+    handleDeleteSurvey: (id) => dispatch(deleteSurvey(id)),
+    handleCloseError: () => dispatch(removeSurveyError())
   };
 }
 

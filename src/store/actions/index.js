@@ -20,5 +20,6 @@ export {
 } from './actionCreator/accounts';
 
 export { 
-  fetchSurveys
+  fetchSurveys,
+  removeSurveyError
 } from './actionCreator/surveys';
