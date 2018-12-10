@@ -2,9 +2,9 @@
   margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;
-  width: 95%;
-  border: 1px solid rgba(224, 224, 224, 1);
-  border-radius: 5px;
+  width: 100%;
+  /* border: 1px solid rgba(224, 224, 224, 1); */
+  /* border-radius: 5px; */
 }
 
 .EditButton, .DeleteButton, .RefreshButton, .ShowButton {

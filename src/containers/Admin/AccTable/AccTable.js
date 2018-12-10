@@ -11,7 +11,7 @@ import EditModal from '../AccForm/EditModal';
 import AddModal from '../AccForm/AddModal';
 import SearchAccount from '../SearchBar/SearchAccount';
 import uuidv4 from 'uuid';
-
+// import _ from 'lodash';
 class AccTable extends Component {
 
   state = {
@@ -88,6 +88,7 @@ class AccTable extends Component {
             })
           }
         }
+        // console.log(_.orderBy(formatAcc, ['Name'], ['asc']));
         tableBody = formatAcc.map((account,index) => {
           const accountObject = account;
           return(
