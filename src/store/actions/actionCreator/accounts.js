@@ -55,6 +55,8 @@ export const fetchLecturerAccounts = () => {
     dispatch(startFetchingAcc());
     axios.get('/api/Lecturers/List', {data:{}})
     .then(result => {
+      console.log(result)
+
       let accounts = result.data;
       dispatch(fetchLecturerSuccessful(accounts, accounts.length));
     })
