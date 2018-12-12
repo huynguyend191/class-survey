@@ -1,11 +1,15 @@
 import * as actionTypes from '../actionTypes';
 import axios from '../../../utils/axiosConfig';
-export const startFetchingAcc = () => {
+export const startFetchingStudentAcc = () => {
   return {
-    type: actionTypes.START_FETCHING_ACC
+    type: actionTypes.START_FETCHING_STUDENT_ACC
   }
 };
-
+export const startFetchingLecturerAcc = () => {
+  return {
+    type: actionTypes.START_FETCHING_LECTURER_ACC
+  }
+};
 export const removeAccError = () => {
   return {
     type: actionTypes.REMOVE_ACC_ERROR
@@ -38,7 +42,7 @@ export const fetchAccFailed = (error) => {
 
 export const fetchStudentAccounts = () => {
   return dispatch => {
-    dispatch(startFetchingAcc());
+    dispatch(startFetchingStudentAcc());
     axios.get('/api/Students/List', {data:{}})
     .then(result => {
       let accounts = result.data;
@@ -52,7 +56,7 @@ export const fetchStudentAccounts = () => {
 
 export const fetchLecturerAccounts = () => {
   return dispatch => {
-    dispatch(startFetchingAcc());
+    dispatch(startFetchingLecturerAcc());
     axios.get('/api/Lecturers/List', {data:{}})
     .then(result => {
       let accounts = result.data;
@@ -66,7 +70,7 @@ export const fetchLecturerAccounts = () => {
 
 export const editStudent = (id, form) => {
   return dispatch => {
-    dispatch(startFetchingAcc());
+    dispatch(startFetchingStudentAcc());
     if(form.Password !== '') {
       axios.put('/api/Users/' + id, form)
     }
@@ -82,7 +86,7 @@ export const editStudent = (id, form) => {
 
 export const editLecturer = (id, form) => {
   return dispatch => {
-    dispatch(startFetchingAcc());
+    dispatch(startFetchingLecturerAcc());
     if(form.Password !== '') {
       axios.put('/api/Users/' + id, form)
     }
@@ -99,7 +103,7 @@ export const editLecturer = (id, form) => {
 
 export const deleteStudent = (id) => {
   return dispatch => {
-    dispatch(startFetchingAcc());
+    dispatch(startFetchingStudentAcc());
     axios.delete('/api/Students/' + id)
     .then(result => {
       dispatch(fetchStudentAccounts());
@@ -112,7 +116,7 @@ export const deleteStudent = (id) => {
 
 export const deleteLecturer = (id) => {
   return dispatch => {
-    dispatch(startFetchingAcc());
+    dispatch(startFetchingLecturerAcc());
     axios.delete('/api/Lecturers/' + id)
     .then(result => {
       dispatch(fetchLecturerAccounts());
@@ -125,7 +129,7 @@ export const deleteLecturer = (id) => {
 
 export const addStudent = (form) => {
   return dispatch => {
-    dispatch(startFetchingAcc());
+    dispatch(startFetchingStudentAcc());
     axios.post('/api/Students', form)
     .then(result => {
       dispatch(fetchStudentAccounts())
@@ -138,7 +142,7 @@ export const addStudent = (form) => {
 
 export const addLecturer = (form) => {
   return dispatch => {
-    dispatch(startFetchingAcc());
+    dispatch(startFetchingLecturerAcc());
     console.log(form)
     axios.post('/api/Lecturers', form)
     .then(result => {
@@ -152,7 +156,7 @@ export const addLecturer = (form) => {
 
 export const searchStudent = (keyword, type) => {
   return dispatch => {
-    dispatch(startFetchingAcc());
+    dispatch(startFetchingStudentAcc());
     axios.get(`api/Students/List?${type}=${keyword}`,{data: {}})
     .then(result => {
       let accounts = result.data;
@@ -166,7 +170,7 @@ export const searchStudent = (keyword, type) => {
 
 export const searchLecturer = (keyword, type) => {
   return dispatch => {
-    dispatch(startFetchingAcc());
+    dispatch(startFetchingLecturerAcc());
     axios.get(`api/Lecturers/List?${type}=${keyword}`,{data: {}})
     .then(result => {
       let accounts = result.data;

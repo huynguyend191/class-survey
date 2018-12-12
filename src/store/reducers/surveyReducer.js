@@ -3,7 +3,7 @@ import updateObject from '../../utils/updateObject';
 
 const initialState = {
   error: null,
-  loading: false,
+  loadingSurvey: false,
   surveys: [],
   totalSurveys: 0,
 }
@@ -11,17 +11,17 @@ const initialState = {
 const reducer = ( state =  initialState, action) => {
   switch (action.type) {
     case actionTypes.START_FETCHING_SURVEY:
-      return updateObject(state, {loading: true, error: null});
+      return updateObject(state, {loadingSurvey: true, error: null});
 
     case actionTypes.FETCH_SURVEY_SUCCESSFUL:
       return updateObject(state, {
-        loading: false, 
+        loadingSurvey: false, 
         surveys: action.surveys, 
         totalSurveys: action.total
       });
 
     case actionTypes.FETCH_SURVEY_FAILED:
-      return updateObject(state, {loading: false, error: action.error});
+      return updateObject(state, {loadingSurvey: false, error: action.error});
      
     case actionTypes.REMOVE_SURVEY_ERROR:
       return updateObject(state, {error: null});

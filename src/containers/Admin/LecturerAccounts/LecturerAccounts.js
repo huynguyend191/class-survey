@@ -72,7 +72,7 @@ class LecturerAccounts extends Component {
 }
 const mapStateToProps = state => {
   return {
-    isLoading: state.accReducer.loading,
+    isLoading: state.accReducer.loadingLecturer,
     error:  state.accReducer.error,
     accounts: state.accReducer.lecturerAccounts,
     totalAcc: state.accReducer.totalLecturers,

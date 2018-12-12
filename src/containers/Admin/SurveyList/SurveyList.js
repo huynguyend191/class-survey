@@ -187,7 +187,7 @@ class SurveyList extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.surveyReducer.loading,
+    loading: state.surveyReducer.loadingSurvey,
     error: state.surveyReducer.error,
     surveys: state.surveyReducer.surveys,
     total: state.surveyReducer.totalSurveys,
