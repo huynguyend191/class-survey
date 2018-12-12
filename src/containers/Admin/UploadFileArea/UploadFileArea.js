@@ -16,6 +16,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from '../../../utils/axiosConfig';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 import UploadedModal from '../../../components/UploadedModal/UploadedModal';
+import UploadImg from '../../../assets/icons/drag-and-drop.png';
 
 class UploadFileArea extends Component {
   state = {
@@ -83,7 +84,7 @@ class UploadFileArea extends Component {
     let selectedFiles = (
       <div>
         <p>Drag file here or click select button</p>
-        
+        <img src={UploadImg} alt="" className={classes.UploadImg} draggable="false" />
       </div>
     );
     let uploadAvailability = true;

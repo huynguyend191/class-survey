@@ -41,3 +41,13 @@
   margin-left: 5px !important;
   color: white !important;
 }
+
+.UploadImg {
+  margin: 0;
+  height: 180px;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}

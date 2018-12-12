@@ -55,8 +55,6 @@ export const fetchLecturerAccounts = () => {
     dispatch(startFetchingAcc());
     axios.get('/api/Lecturers/List', {data:{}})
     .then(result => {
-      console.log(result)
-
       let accounts = result.data;
       dispatch(fetchLecturerSuccessful(accounts, accounts.length));
     })
@@ -93,6 +91,7 @@ export const editLecturer = (id, form) => {
       dispatch(fetchLecturerAccounts())
     })
     .catch(error => {
+      console.log(error)
       dispatch(fetchAccFailed('Edit Lecturer Failed'))
     })
   }

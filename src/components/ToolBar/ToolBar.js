@@ -10,7 +10,7 @@ function ToolBar(props) {
       {
         props.navigations.map(nav => {
           return (
-            <NavLink exact key={nav.label} className={classes.Nav} activeClassName={classes.activeLink} to={nav.link} >
+            <NavLink draggable="false" exact key={nav.label} className={classes.Nav} activeClassName={classes.activeLink} to={nav.link} >
               {nav.label}
             </NavLink>
           );

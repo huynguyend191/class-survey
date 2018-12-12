@@ -39,7 +39,7 @@ class NavigationBar extends Component {
     return (
       <div className={classes.NavigationBar}>
         <div className={classes.NavContent} onClick={this.onRedirect}>
-          <img className={classes.SurveyIcon} src={SurveyIcon} alt='Class Survey' />
+          <img className={classes.SurveyIcon} src={SurveyIcon} alt='Class Survey' draggable="false" />
           <p className={classes.Header}>CLASS SURVEY</p>
         </div>
         <div
