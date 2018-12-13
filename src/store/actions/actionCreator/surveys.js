@@ -69,3 +69,42 @@ export const searchSurveys = (keyword, type) => {
   }
 }
 
+export const startFetchingSurveyVer = () => {
+  return {
+    type: actionTypes.START_FETCHING_SURVEY_VER
+  }
+}
+
+export const removeSurveyVerError = () => {
+  return {
+    type: actionTypes.REMOVE_SURVEY_VER_ERROR
+  }
+}
+
+export const fetchSurveyVerSuccessful = (surveyVersions) => {
+  return {
+    type: actionTypes.FETCH_SURVEY_VER_SUCCESSFUL,
+    surveyVersions
+  }
+}
+
+export const fetchSurveyVerFailed = (error) => {
+  return {
+    type: actionTypes.FETCH_SURVEY_FAILED,
+    error
+  }
+}
+
+export const fetchSurveyVer = () => {
+  return dispatch => {
+    dispatch(startFetchingSurveyVer());
+    axios.get('/api/VersionSurveys/List', {data: {}})
+    .then(result => {
+      dispatch()
+      console.log(result)
+    })
+    .catch(error => {
+      dispatch(fetchSurveyVerFailed('Fetch Survey Versions Failed'))
+    })
+  }
+}
