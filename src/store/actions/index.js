@@ -12,7 +12,8 @@ export {
   editStudent,
   deleteLecturer,
   deleteStudent,
-  removeAccError,
+  removeLecturerError,
+  removeStudentError,
   addStudent,
   addLecturer,
   searchLecturer,
@@ -21,5 +22,7 @@ export {
 
 export { 
   fetchSurveys,
-  removeSurveyError
+  removeSurveyError,
+  deleteSurvey,
+  searchSurveys
 } from './actionCreator/surveys';

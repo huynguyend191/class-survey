@@ -6,6 +6,7 @@ import checkValidity  from '../../../utils/checkValidity';
 class EditModal extends Component{
 
   componentDidMount() {
+    //check account type
     if(this.props.accType === 'student') {
       this.setState({
         account: { 
@@ -95,6 +96,7 @@ class EditModal extends Component{
   }
  
   onInputChangeHandler = (event, id) => {
+    //handle input change + validate
     const updatedForm = {
       ...this.state.account
     };

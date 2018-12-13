@@ -6,12 +6,11 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ShowIcon from '@material-ui/icons/Visibility';
 import classes from './SurveyList.module.css';
-import { fetchSurveys, removeSurveyError } from '../../../store/actions';
+import { fetchSurveys, removeSurveyError, deleteSurvey, searchSurveys } from '../../../store/actions';
 import uuidv4 from 'uuid';
 import SearchSurvey from '../SearchBar/SearchSurvey';
 import ConfirmDelete from '../../../components/ConfirmDelete/ConfirmDelete';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
-import { deleteSurvey } from '../../../store/actions/actionCreator/surveys';
 
 class SurveyList extends Component {
 
@@ -142,7 +141,9 @@ class SurveyList extends Component {
           deleteId={this.state.deleteId}
           msg="class"
         />
-        <SearchSurvey />
+        <SearchSurvey 
+          searchSurveys={this.props.onSearchSurvey}
+        />
         <Table>
           <TableHead>
             <TableRow className={classes.TableHeadRow}>
@@ -198,7 +199,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onFetchSurvey: () => dispatch(fetchSurveys()),
     handleDeleteSurvey: (id) => dispatch(deleteSurvey(id)),
-    handleCloseError: () => dispatch(removeSurveyError())
+    handleCloseError: () => dispatch(removeSurveyError()),
+    onSearchSurvey: (keyword, type) => dispatch(searchSurveys(keyword, type))
   };
 }
 

@@ -30,6 +30,7 @@ class UploadFileArea extends Component {
     if (rejectedFiles.length) {
       alert('Not excel file');
     }
+    //handle files with same names
     const renamedFiles = [];
     acceptedFiles.forEach(file => {
       const myNewFile = new File([file], file.name.split(".xlsx")[0] + '~' + uuidv4() +'.xlsx', {type: file.type});
@@ -83,7 +84,7 @@ class UploadFileArea extends Component {
     const dropzoneRef = React.createRef();
     let selectedFiles = (
       <div>
-        <p>Drag file here or click select button</p>
+        <p style={{color: "#8f8f8f", fontWeight: 'bold'}}>Drag file here or click select button</p>
         <img src={UploadImg} alt="" className={classes.UploadImg} draggable="false" />
       </div>
     );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchLecturerAccounts, editLecturer, deleteLecturer, removeAccError, addLecturer, searchLecturer } from '../../../store/actions';
+import { fetchLecturerAccounts, editLecturer, deleteLecturer, removeLecturerError, addLecturer, searchLecturer } from '../../../store/actions';
 import AccTable from '../AccTable/AccTable';
 import { tableHeadLecturer } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
@@ -73,7 +73,7 @@ class LecturerAccounts extends Component {
 const mapStateToProps = state => {
   return {
     isLoading: state.accReducer.loadingLecturer,
-    error:  state.accReducer.error,
+    error:  state.accReducer.lecturerError,
     accounts: state.accReducer.lecturerAccounts,
     totalAcc: state.accReducer.totalLecturers,
   };
@@ -81,10 +81,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchAcc: (page) => dispatch(fetchLecturerAccounts(page)),
+    onFetchAcc: () => dispatch(fetchLecturerAccounts()),
     onEditAcc: (id, form) => dispatch(editLecturer(id, form)),
     onDeleteAcc: (id) => dispatch(deleteLecturer(id)),
-    onCloseError: () => dispatch(removeAccError()),
+    onCloseError: () => dispatch(removeLecturerError()),
     onAddAcc: (form) => dispatch(addLecturer(form)),
     onSearchAcc: (keyword, type) => dispatch(searchLecturer(keyword, type)),
   }

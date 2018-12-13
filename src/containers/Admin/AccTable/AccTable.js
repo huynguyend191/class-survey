@@ -66,7 +66,7 @@ class AccTable extends Component {
     //finish loading
     if (!this.props.isLoading) {
       if (this.props.accounts.length > 0) {
-        //Table pagination 
+        //Table pagination + format data to map
         const rowsPerPage = this.state.rowsPerPage;
         const accounts = this.props.accounts.slice(this.state.page * rowsPerPage, this.state.page * rowsPerPage + rowsPerPage);
         const formatAcc = [];
@@ -96,6 +96,7 @@ class AccTable extends Component {
               <TableCell>{(index + 1) + this.state.page * rowsPerPage}</TableCell>
               { 
                 Object.keys(accountObject).map(key => {
+                  //ignore Id 
                   return (key !== 'Id') ?  <TableCell key={uuidv4()}>{accountObject[key]}</TableCell> : null;
                 })
               }

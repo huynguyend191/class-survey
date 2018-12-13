@@ -2,7 +2,8 @@ import * as actionTypes from '../actions/actionTypes';
 import updateObject from '../../utils/updateObject';
 
 const initialState = {
-  error: null,
+  studentError: null,
+  lecturerError: null,
   loadingStudent: false,
   loadingLecturer: false,
   studentAccounts: [],
@@ -14,10 +15,10 @@ const initialState = {
 const reducer = ( state =  initialState, action) => {
   switch (action.type) {
     case actionTypes.START_FETCHING_STUDENT_ACC:
-      return updateObject(state, {loadingStudent: true, error: null});
+      return updateObject(state, {loadingStudent: true, studentError: null});
       
     case actionTypes.START_FETCHING_LECTURER_ACC:
-      return updateObject(state, {loadingLecturer: true, error: null});
+      return updateObject(state, {loadingLecturer: true, lecturerError: null});
 
     case actionTypes.FETCH_STUDENT_SUCCESSFUL:
       return updateObject(state, {
@@ -33,12 +34,18 @@ const reducer = ( state =  initialState, action) => {
         totalLecturers: action.total
       });
 
-    case actionTypes.FETCH_ACC_FAILED:
-      return updateObject(state, {loadingLecturer: false, loadingStudent: false, error: action.error});
+    case actionTypes.FETCH_STUDENT_FAILED:
+      return updateObject(state, {loadingStudent: false, studentError: action.error});
+    
+      case actionTypes.FETCH_LECTURER_FAILED:
+      return updateObject(state, {loadingStudent: false, lecturerError: action.error});
  
-    case actionTypes.REMOVE_ACC_ERROR:
-      return updateObject(state, {error: null});
+    case actionTypes.REMOVE_STUDENT_ERROR:
+      return updateObject(state, {studentError: null, loadingStudent: false});
 
+    case actionTypes.REMOVE_LECTURER_ERROR:
+      return updateObject(state, {lecturerError: null, loadingLecturer: false});
+      
     default:
       return state;
   }

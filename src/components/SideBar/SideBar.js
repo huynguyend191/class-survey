@@ -10,6 +10,7 @@ function SideBar(props) {
     <div className={classes.SideBar}>
       <div className={classes.Sticky}>
         {
+          //dynamically create sidebar base on input items
           navigations.map(item => {
             return(
               <NavLink draggable="false" key={item.label} className={classes.Nav} activeClassName={classes.activeLink} to={item.link} >

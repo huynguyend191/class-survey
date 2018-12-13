@@ -54,3 +54,18 @@ export const deleteSurvey = (id) => {
     })
   }
 }
+
+export const searchSurveys = (keyword, type) => {
+  return dispatch => {
+    dispatch(startFetchingSurvey());
+    axios.get(`/api/Classes/List?${type}=${keyword}`, {data: {}})
+    .then(result => {
+      const surveys = result.data;
+      dispatch(fetchSurveySuccessful(surveys, surveys.length));
+    })
+    .catch(error => {
+      dispatch(fetchSurveyFailed('Fetch Survey Failed'));
+    })
+  }
+}
+

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudentAccounts, editStudent, deleteStudent, removeAccError, addStudent, searchStudent } from '../../../store/actions';
+import { fetchStudentAccounts, editStudent, deleteStudent, removeStudentError, addStudent, searchStudent } from '../../../store/actions';
 import AccTable from '../AccTable/AccTable';
 import { tableHeadStudent } from '../../../utils/accountInfo';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
@@ -74,7 +74,7 @@ class StudentAccounts extends Component {
 const mapStateToProps = state => {
   return {
     isLoading: state.accReducer.loadingStudent,
-    error:  state.accReducer.error,
+    error:  state.accReducer.studentError,
     accounts: state.accReducer.studentAccounts,
     totalAcc: state.accReducer.totalStudents,
   };
@@ -82,10 +82,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchAcc: (page) => dispatch(fetchStudentAccounts(page)),
+    onFetchAcc: () => dispatch(fetchStudentAccounts()),
     onEditAcc: (id, form) => dispatch(editStudent(id, form)),
     onDeleteAcc: (id) => dispatch(deleteStudent(id)),
-    onCloseError: () => dispatch(removeAccError()),
+    onCloseError: () => dispatch(removeStudentError()),
     onAddAcc: (form) => dispatch(addStudent(form)),
     onSearchAcc: (keyword, type) => dispatch(searchStudent(keyword, type)),
   }

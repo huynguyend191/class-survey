@@ -16,11 +16,10 @@ axiosRequest.interceptors.response.use(
       //when server is running
       return (Promise.reject(error.response.data));
     } 
-    // else {
-    //   //when server is not running
-    //   const err = {message: 'Something went wrong'};
-    //   return (Promise.reject(err));
-    // }
+    else {
+      //when server is not running
+      return (Promise.reject());
+    }
   }
 );
 

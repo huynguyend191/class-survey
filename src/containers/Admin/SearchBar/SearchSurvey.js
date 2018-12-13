@@ -16,9 +16,9 @@ class SearchAccount extends Component {
   }
   
   onSubmit = (event) => {
-    console.log(this.state.searchKeyword, this.state.searchType);
-    this.setState({searchType: 'ClassCode', searchKeyword: '', isValid: false});
     event.preventDefault();
+    this.props.searchSurveys(this.state.searchKeyword, this.state.searchType);
+    this.setState({searchType: 'ClassCode', searchKeyword: '', isValid: false});
   }
 
   checkEmtyKeyword = () => {

@@ -8,6 +8,7 @@ function ToolBar(props) {
   return (
     <div className={classes.ToolBar}>
       {
+          //dynamically create toolbar base on input items
         props.navigations.map(nav => {
           return (
             <NavLink draggable="false" exact key={nav.label} className={classes.Nav} activeClassName={classes.activeLink} to={nav.link} >

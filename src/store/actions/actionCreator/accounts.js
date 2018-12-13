@@ -10,9 +10,14 @@ export const startFetchingLecturerAcc = () => {
     type: actionTypes.START_FETCHING_LECTURER_ACC
   }
 };
-export const removeAccError = () => {
+export const removeStudentError = () => {
   return {
-    type: actionTypes.REMOVE_ACC_ERROR
+    type: actionTypes.REMOVE_STUDENT_ERROR
+  }
+};
+export const removeLecturerError = () => {
+  return {
+    type: actionTypes.REMOVE_LECTURER_ERROR
   }
 };
 
@@ -32,9 +37,16 @@ export const fetchLecturerSuccessful = (accounts, total) => {
   }
 };
 
-export const fetchAccFailed = (error) => {
+export const fetchStudentFailed = (error) => {
   return {
-    type: actionTypes.FETCH_ACC_FAILED,
+    type: actionTypes.FETCH_STUDENT_FAILED,
+    error
+  }
+};
+
+export const fetchLecturerFailed = (error) => {
+  return {
+    type: actionTypes.FETCH_LECTURER_FAILED,
     error
   }
 };
@@ -49,7 +61,7 @@ export const fetchStudentAccounts = () => {
       dispatch(fetchStudentSuccessful(accounts, accounts.length));
     })
     .catch(error => {
-      dispatch(fetchAccFailed("Fetched Students Failed"));
+      dispatch(fetchStudentFailed("Fetched Students Failed"));
     })
   }
 };
@@ -63,7 +75,7 @@ export const fetchLecturerAccounts = () => {
       dispatch(fetchLecturerSuccessful(accounts, accounts.length));
     })
     .catch(error => {
-      dispatch(fetchAccFailed("Fetched Lecturers Failed"));
+      dispatch(fetchLecturerFailed("Fetched Lecturers Failed"));
     })
   }
 };
@@ -79,7 +91,7 @@ export const editStudent = (id, form) => {
       dispatch(fetchStudentAccounts())
     })
     .catch(error => {
-      dispatch(fetchAccFailed('Edit Student Failed'))
+      dispatch(fetchStudentFailed('Edit Student Failed'))
     })
   }
 };
@@ -95,8 +107,7 @@ export const editLecturer = (id, form) => {
       dispatch(fetchLecturerAccounts())
     })
     .catch(error => {
-      console.log(error)
-      dispatch(fetchAccFailed('Edit Lecturer Failed'))
+      dispatch(fetchLecturerFailed('Edit Lecturer Failed'))
     })
   }
 };
@@ -109,7 +120,7 @@ export const deleteStudent = (id) => {
       dispatch(fetchStudentAccounts());
     })
     .catch(error => {
-      dispatch(fetchAccFailed('Delete Student Failed'))
+      dispatch(fetchStudentFailed('Delete Student Failed'))
     })
   }
 };
@@ -122,7 +133,7 @@ export const deleteLecturer = (id) => {
       dispatch(fetchLecturerAccounts());
     })
     .catch(error => {
-      dispatch(fetchAccFailed('Delete Lecturer Failed'))
+      dispatch(fetchLecturerFailed('Delete Lecturer Failed'))
     })
   }
 };
@@ -135,7 +146,7 @@ export const addStudent = (form) => {
       dispatch(fetchStudentAccounts())
     })
     .catch(error => {
-      dispatch(fetchAccFailed('Add Student Failed'))
+      dispatch(fetchStudentFailed('Add Student Failed'))
     })
   }
 };
@@ -149,7 +160,7 @@ export const addLecturer = (form) => {
       dispatch(fetchLecturerAccounts())
     })
     .catch(error => {
-      dispatch(fetchAccFailed('Add Lecturer Failed'))
+      dispatch(fetchLecturerFailed('Add Lecturer Failed'))
     })
   }
 };
@@ -163,7 +174,7 @@ export const searchStudent = (keyword, type) => {
       dispatch(fetchStudentSuccessful(accounts, accounts.length));
     })
     .catch(error => {
-      dispatch(fetchAccFailed('Search Student Failed'))
+      dispatch(fetchStudentFailed('Search Student Failed'))
     })
   }
 };
@@ -177,8 +188,7 @@ export const searchLecturer = (keyword, type) => {
       dispatch(fetchLecturerSuccessful(accounts, accounts.length));
     })
     .catch(error => {
-      dispatch(fetchAccFailed('Search Lecturer Failed'))
+      dispatch(fetchLecturerFailed('Search Lecturer Failed'))
     })
-
   }
 };
