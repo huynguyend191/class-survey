@@ -1,6 +1,5 @@
 import * as actionTypes from '../actionTypes';
 import axios from '../../../utils/axiosConfig';
-
 export const startFetchingSurvey = () => {
   return {
     type: actionTypes.START_FETCHING_SURVEY
@@ -100,11 +99,35 @@ export const fetchSurveyVer = () => {
     dispatch(startFetchingSurveyVer());
     axios.get('/api/VersionSurveys/List', {data: {}})
     .then(result => {
-      dispatch()
-      console.log(result)
+      const surveyVersions = result.data;
+      dispatch(fetchSurveyVerSuccessful(surveyVersions));
+      // console.log(moment(surveyVersions.CreatedDate).format('MMMM Do YYYY, h:mm:ss a'));
     })
     .catch(error => {
-      dispatch(fetchSurveyVerFailed('Fetch Survey Versions Failed'))
+      dispatch(fetchSurveyVerFailed('Fetch Survey Versions Failed'));
+    })
+  }
+}
+
+export const createSurvey = (Form) => {
+  return dispatch => {
+    dispatch(startFetchingSurveyVer());
+    let surveyForm = {
+      Content: JSON.stringify({
+        'Giảng đường': 'Cơ sở vật chất',
+        'Chất lượng giảng dạy': 'Giảng viên'
+      }),
+      Version: "323"
+    }
+    console.log(surveyForm)
+    axios.post('/api/VersionSurveys', surveyForm)
+    .then(result => {
+      const surveyVersions = result.data;
+      dispatch(fetchSurveyVerSuccessful(surveyVersions));
+      console.log(surveyVersions);
+    })
+    .catch(error => {
+      dispatch(fetchSurveyVerFailed('Fetch Survey Versions Failed'));
     })
   }
 }

@@ -11,6 +11,7 @@ import uuidv4 from 'uuid';
 import SearchSurvey from '../SearchBar/SearchSurvey';
 import ConfirmDelete from '../../../components/ConfirmDelete/ConfirmDelete';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
+import moment from 'moment'
 
 class SurveyList extends Component {
 
@@ -84,8 +85,8 @@ class SurveyList extends Component {
             ClassCode: surveys[index].ClassCode,
             Subject: surveys[index].Subject,
             Students: surveys[index].StudentNumber,
-            openedDate: surveys[index].openedDate,
-            closedDate: surveys[index].closedDate,
+            openedDate: moment(surveys[index].openedDate).format('lll'),
+            closedDate: moment(surveys[index].closedDate).format('lll'),
           })
         }
         tableBody = formatSurveys.map((survey, index) => {

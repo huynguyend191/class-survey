@@ -24,5 +24,6 @@ export {
   fetchSurveys,
   removeSurveyError,
   deleteSurvey,
-  searchSurveys
+  searchSurveys,
+  fetchSurveyVer
 } from './actionCreator/surveys';
