@@ -84,7 +84,7 @@ class UploadFileArea extends Component {
     const dropzoneRef = React.createRef();
     let selectedFiles = (
       <div>
-        <p style={{color: "#8f8f8f", fontWeight: 'bold'}}>Drag file here or click select button</p>
+        <p style={{color: "#8f8f8f", fontWeight: '500'}}>Drag files here or click select button</p>
         <img src={UploadImg} alt="" className={classes.UploadImg} draggable="false" />
       </div>
     );
