@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import classes from './SurveyVersion.module.css';
 import { fetchSurveyVer } from '../../../store/actions';
 import { createSurvey } from '../../../store/actions/actionCreator/surveys';
-
+// import { inverObjectServerToClient, invertObjectClientToServer } from '../../../utils/invertObject';
 
 class SurveyVersion extends Component {
 
   componentDidMount() {
-    // this.props.onCreateNew();
     if(!this.props.surveyVersions.length > 0) {
       this.props.onFetchSurveyVer()
     }
