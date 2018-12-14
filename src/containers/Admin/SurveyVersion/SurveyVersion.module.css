@@ -2,3 +2,28 @@
 .SurveyVersion {
   margin: auto 5px;
 }
+
+.EditButton, .DeleteButton, .RefreshButton, .ShowButton {
+  padding: 6px !important;
+}
+
+.SurveyVerTable {
+  margin: 30px auto;
+  border: 1px solid rgba(224, 224, 224, 1);
+  width: 1000px !important;
+}
+
+.TableHeadRow {
+  border-top: 1px solid rgba(224, 224, 224, 1);
+  background-color: #ececec;
+  height: 40px !important;
+}
+
+.TableHeadRow > .Cell {
+  color: #0C0D0E;
+  /* text-align: center !important; */
+}
+
+.TableBodyRow {
+  height: 40px !important;
+}

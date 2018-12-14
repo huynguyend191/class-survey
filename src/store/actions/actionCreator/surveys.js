@@ -109,7 +109,7 @@ export const fetchSurveyVer = () => {
   }
 }
 
-export const createSurvey = (Form) => {
+export const createSurveyVer = (Form) => {
   return dispatch => {
     dispatch(startFetchingSurveyVer());
     let surveyForm = {
@@ -128,6 +128,18 @@ export const createSurvey = (Form) => {
     })
     .catch(error => {
       dispatch(fetchSurveyVerFailed('Fetch Survey Versions Failed'));
+    })
+  }
+}
+
+export const deleteSurveyVer = (id) => {
+  return dispatch => {
+    dispatch(startFetchingSurvey());
+    axios.delete('/api/VersionSurveys/' + id).then(result => {
+      dispatch(fetchSurveyVer());
+    })
+    .catch(error => {
+      dispatch(fetchSurveyVerFailed('Delete Survey Failed'));
     })
   }
 }

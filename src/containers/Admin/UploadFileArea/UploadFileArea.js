@@ -68,7 +68,7 @@ class UploadFileArea extends Component {
       this.setState({isUploading: false, files: [], openModal: true});
     })
     .catch(err => {
-      this.setState({isUploading: false, error: 'Upload failed'});
+      this.setState({isUploading: false, error: 'Upload Failed'});
     })
   }
 

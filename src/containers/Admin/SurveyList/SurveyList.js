@@ -19,6 +19,7 @@ class SurveyList extends Component {
     rowsPerPage: 10,
     page: 0,
     showDeleteModal: false,
+    deleteId: null
   }
 
   componentDidMount() {
