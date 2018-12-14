@@ -148,12 +148,12 @@ class SurveyList extends Component {
         <Table>
           <TableHead>
             <TableRow className={classes.TableHeadRow}>
-              <TableCell className={classes.Cell}>STT</TableCell>
-              <TableCell className={classes.Cell}>Mã môn học</TableCell>
-              <TableCell className={classes.Cell}>Tên môn học</TableCell>
-              <TableCell className={classes.Cell}>Sinh viên</TableCell>
-              <TableCell className={classes.Cell}>Thời gian mở</TableCell>
-              <TableCell className={classes.Cell}>Thời gian đóng</TableCell>
+              <TableCell className={classes.Cell}>#</TableCell>
+              <TableCell className={classes.Cell}>Class Code</TableCell>
+              <TableCell className={classes.Cell}>Title</TableCell>
+              <TableCell className={classes.Cell}>Students</TableCell>
+              <TableCell className={classes.Cell}>Open Date</TableCell>
+              <TableCell className={classes.Cell}>Close Date</TableCell>
               <TableCell style={{textAlign: "center"}}>
                 <Tooltip title="Refresh" disableFocusListener>
                   <IconButton className={classes.RefreshButton} onClick={this.handleRefresh}>

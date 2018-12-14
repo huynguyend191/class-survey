@@ -1,14 +1,14 @@
-export const tableHeadLecturer = ['Tên đăng nhập', 'Họ và tên', 'Email'];
+export const tableHeadLecturer = ['Username', 'Fullname', 'Email'];
 
-export const tableHeadStudent = ['Tên đăng nhập', 'Họ và tên', 'Email', 'Khóa đào tạo'];
+export const tableHeadStudent = ['Usename', 'Fullname', 'Email', 'Class'];
 
 export const studentAcc = [
   {
-    label: 'Tên đăng nhập',
+    label: 'Username',
     value: 'Username'
   },
   {
-    label: 'Họ và tên',
+    label: 'Fullname',
     value: 'Name'
   },
   {
@@ -16,7 +16,7 @@ export const studentAcc = [
     value: 'Vnumail'
   },
   {
-    label: 'Khóa đào tạo',
+    label: 'Class',
     value: 'Class'
   }
  
@@ -24,11 +24,11 @@ export const studentAcc = [
 
 export const lecAcc = [
   {
-    label: 'Tên đăng nhập',
+    label: 'Username',
     value: 'Username'
   },
   {
-    label: 'Họ và tên',
+    label: 'Fullname',
     value: 'Name'
   },
   {

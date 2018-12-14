@@ -34,7 +34,7 @@ export const fetchSurveys = () => {
     .then(result => {
       const surveys = result.data;
       dispatch(fetchSurveySuccessful(surveys, surveys.length));
-      console.log(surveys);
+      // console.log(surveys);
     })
     .catch(error => {
       dispatch(fetchSurveyFailed('Fetch Survey Failed'));
@@ -119,12 +119,12 @@ export const createSurvey = (Form) => {
       }),
       Version: "323"
     }
-    console.log(surveyForm)
+    // console.log(surveyForm)
     axios.post('/api/VersionSurveys', surveyForm)
     .then(result => {
       const surveyVersions = result.data;
       dispatch(fetchSurveyVerSuccessful(surveyVersions));
-      console.log(surveyVersions);
+      // console.log(surveyVersions);
     })
     .catch(error => {
       dispatch(fetchSurveyVerFailed('Fetch Survey Versions Failed'));

@@ -161,7 +161,7 @@ class AccTable extends Component {
         <Table>
           <TableHead>
             <TableRow className={classes.TableHeadRow}>
-              <TableCell className={classes.Cell}>STT</TableCell>
+              <TableCell className={classes.Cell}>#</TableCell>
               {
                 this.props.tableHeadInfo.map(item => {
                   return(

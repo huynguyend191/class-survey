@@ -41,8 +41,8 @@ class SearchAccount extends Component {
             onChange={this.handleChange} 
             className={classes.Input}/>
           <select id="searchType" value={this.state.searchType} onChange={this.handleChange} className={classes.Select}>
-            <option value="ClassCode">Mã môn học</option>
-            <option value="Subject">Tên môn học</option>
+            <option value="ClassCode">Class Code</option>
+            <option value="Subject">Title</option>
           </select>
           <Button
             className={classes.SearchButton}

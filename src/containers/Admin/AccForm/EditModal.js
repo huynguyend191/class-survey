@@ -12,7 +12,7 @@ class EditModal extends Component{
         account: { 
         ...this.state.account,
         Class:{
-          label: 'Khóa đào tạo',
+          label: 'Class',
           elementType: 'text',
           value: this.props.account.Class,
           validation: { 
@@ -27,7 +27,7 @@ class EditModal extends Component{
   state = {
     account: {
       Username: {
-        label: 'Tên đăng nhập',
+        label: 'Username',
         elementType: 'text',
         value: this.props.account.Username,
         validation: { 
@@ -37,7 +37,7 @@ class EditModal extends Component{
         message: null
       },
       Password: {
-        label: 'Mật khẩu mới',
+        label: 'New Password',
         elementType: 'text',
         value: '',
         validation: { 
@@ -47,7 +47,7 @@ class EditModal extends Component{
         message: null
       },
       Name: {
-        label: 'Họ và tên',
+        label: 'Fullname',
         elementType: 'text',
         value: this.props.account.Name,
         validation: { 

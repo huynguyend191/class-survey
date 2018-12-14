@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import classes from './SurveyVersion.module.css';
 import { fetchSurveyVer } from '../../../store/actions';
 import { createSurvey } from '../../../store/actions/actionCreator/surveys';
-// import { inverObjectServerToClient, invertObjectClientToServer } from '../../../utils/invertObject';
+import { CircularProgress } from '@material-ui/core';
 
 class SurveyVersion extends Component {
 
@@ -14,6 +14,7 @@ class SurveyVersion extends Component {
   }
 
   render() {
+    console.log(this.props.surveyVersions)
     return (
       <div className={classes.SurveyVersion}>
         Manage Version here
