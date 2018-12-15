@@ -129,7 +129,7 @@ export const createSurveyVer = (formData) => {
 
 export const deleteSurveyVer = (id) => {
   return dispatch => {
-    dispatch(startFetchingSurvey());
+    dispatch(startFetchingSurveyVer());
     axios.delete('/api/VersionSurveys/' + id).then(result => {
       dispatch(fetchSurveyVer());
     })
