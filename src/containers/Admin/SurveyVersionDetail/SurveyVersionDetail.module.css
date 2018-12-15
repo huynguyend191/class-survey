@@ -1,3 +1,21 @@
 .SurveyVerDetail {
   height: 90vh;
 }
+
+.CloseButton {
+  padding: 8px !important;
+}
+
+.Header {
+  border-bottom: 1px solid #d6d9dc;
+  height: 40px;
+  margin: auto;
+  display: flex;
+  padding: 10px;
+  padding-left: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  background-color: #ebebeb;
+  color: #3f51b5;
+}

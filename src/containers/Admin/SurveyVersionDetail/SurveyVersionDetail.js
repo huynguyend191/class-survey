@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Dialog, Paper, Icon } from '@material-ui/core';
+import { Dialog, Paper, IconButton } from '@material-ui/core';
+import Close from '@material-ui/icons/Cancel';
 import classes from './SurveyVersionDetail.module.css';
 class SurveyVersionDetail extends Component {
   componentDidMount(){
@@ -17,11 +18,13 @@ class SurveyVersionDetail extends Component {
         maxWidth = {'md'}
       >
         <Paper className={classes.SurveyVerDetail}>
-          <div className={classes.EditHeader}>
-            Survey Form Detail
-            <Icon className={classes.CloseButton} onClick={this.handleClose}>close</Icon>
+          <div className={classes.Header}>
+            <p style={{fontSize: '24px', margin: '0', fontWeight: '500'}}>SURVEY DETAIL</p>
+            <IconButton className={classes.CloseButton} onClick={this.handleClose}><Close color="primary" /></IconButton>
           </div>
-      
+          <div className={classes.Content}>
+            Content
+          </div>
         </Paper>
       </Dialog>
      
