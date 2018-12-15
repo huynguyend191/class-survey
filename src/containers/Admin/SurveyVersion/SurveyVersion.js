@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 import classes from './SurveyVersion.module.css';
 import { fetchSurveyVer } from '../../../store/actions';
 import { createSurveyVer, deleteSurveyVer } from '../../../store/actions/';
@@ -12,11 +13,13 @@ import ConfirmDelete from '../../../components/ConfirmDelete/ConfirmDelete';
 import uuidv4 from 'uuid';
 import moment from 'moment';
 import { surveyForm } from '../../../utils/defaultSurveyForm';
+import SurveyVersionDetail from '../SurveyVersionDetail/SurveyVersionDetail';
 
 class SurveyVersion extends Component {
   state = {
     showDeleteModal: false,
-    deleteId: null
+    deleteId: null,
+    selectedVersion: null
   }
 
   componentDidMount() {
@@ -29,8 +32,9 @@ class SurveyVersion extends Component {
     this.props.onCreateNew(surveyForm)
   }
 
-  showVersionContent = (contentObject) => {
-    console.log(contentObject)
+  showVersionContent = (version) => {
+    this.props.history.push('/surveys/version/' + version.Id)
+    this.setState({selectedVersion: version})
   }
 
   handleRefresh = () => {
@@ -77,6 +81,8 @@ class SurveyVersion extends Component {
             CreatedDate: createdDate,
             ModifiedDate: modifiedDate
           })
+          createdDate = 'N/A';
+          modifiedDate = 'N/A';
         }
         tableBody = formatSurveyVer.map((surveyVer, index) => {
           const surveyVerObj = surveyVer;
@@ -90,7 +96,7 @@ class SurveyVersion extends Component {
               }
                <TableCell style={{textAlign: "center"}}>
 
-                  <IconButton className={classes.ShowButton} onClick={() => this.showVersionContent(this.props.surveyVersions[index].ContentCategory)} >
+                  <IconButton className={classes.ShowButton} onClick={() => this.showVersionContent(this.props.surveyVersions[index])} >
                     <ShowIcon fontSize="small" />
                   </IconButton>
                     <IconButton className={classes.DeleteButton} onClick={() => this.openDeleteConfirm(surveyVer.Id)} >
@@ -110,9 +116,19 @@ class SurveyVersion extends Component {
         )
       }
     }
-    console.log(this.props.surveyVersions)
+    // console.log(this.props.surveyVersions)
     return (
       <div className={classes.SurveyVersion}>
+        <Route  
+          path={this.props.match.path + '/:id'}
+          render={() =>
+            <SurveyVersionDetail
+              history={this.props.history} 
+              returnPath={this.props.match.path}
+              version={this.state.selectedVersion}
+            />
+          }
+        />
         <ConfirmDelete 
           isOpen={this.state.showDeleteModal}
           handleClose={this.closeDeleteConfirm}

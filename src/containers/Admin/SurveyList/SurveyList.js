@@ -74,7 +74,7 @@ class SurveyList extends Component {
 
   
   render() {
-    console.log(this.props.surveys)
+    // console.log(this.props.surveys)
     let tableBody = (
       <TableRow>
         <TableCell colSpan={7} style={{textAlign: 'center'}}><CircularProgress size={30} /></TableCell>
@@ -86,15 +86,25 @@ class SurveyList extends Component {
         const rowsPerPage = this.state.rowsPerPage;
         const surveys = this.props.surveys.slice(this.state.page * rowsPerPage, this.state.page * rowsPerPage + rowsPerPage);
         const formatSurveys = [];
+        let openedDate = 'N/A';
+        let closedDate = 'N/A';
         for(let index in surveys) {
+          if (moment(surveys[index].openedDate).year > 2000) {
+            openedDate = moment(surveys[index].openedDate).format('lll')
+          }
+          if (moment(surveys[index].closedDate).year > 2000) {
+            closedDate = moment(surveys[index].closedDate).format('lll')
+          }
           formatSurveys.push({
             Id: surveys[index].Id,
             ClassCode: surveys[index].ClassCode,
             Subject: surveys[index].Subject,
             Students: surveys[index].StudentNumber,
-            openedDate: moment(surveys[index].openedDate).format('lll'),
-            closedDate: moment(surveys[index].closedDate).format('lll'),
+            openedDate: openedDate,
+            closedDate: closedDate,
           })
+          openedDate = 'N/A';
+          closedDate = 'N/A';
         }
         tableBody = formatSurveys.map((survey, index) => {
           const surveyObject = survey;
