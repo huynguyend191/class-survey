@@ -3,7 +3,7 @@
   margin: auto 5px;
 }
 
-.EditButton, .DeleteButton, .RefreshButton, .ShowButton {
+.EditButton, .DeleteButton, .RefreshButton, .ShowButton, .GenerateDefaultBtn {
   padding: 6px !important;
 }
 

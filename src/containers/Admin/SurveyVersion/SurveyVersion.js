@@ -4,12 +4,14 @@ import classes from './SurveyVersion.module.css';
 import { fetchSurveyVer } from '../../../store/actions';
 import { createSurveyVer, deleteSurveyVer } from '../../../store/actions/';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import GenerateSurveyVer from '@material-ui/icons/PlaylistAdd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ShowIcon from '@material-ui/icons/Visibility';
-import {Table, TableBody, TableCell, TableHead, TableRow, TablePagination, CircularProgress, Tooltip, IconButton } from '@material-ui/core';
+import {Table, TableBody, TableCell, TableHead, TableRow, CircularProgress, Tooltip, IconButton } from '@material-ui/core';
 import ConfirmDelete from '../../../components/ConfirmDelete/ConfirmDelete';
 import uuidv4 from 'uuid';
 import moment from 'moment';
+import { surveyForm } from '../../../utils/defaultSurveyForm';
 
 class SurveyVersion extends Component {
   state = {
@@ -21,6 +23,10 @@ class SurveyVersion extends Component {
     if(!this.props.surveyVersions.length > 0) {
       this.props.onFetchSurveyVer();
     }
+  }
+
+  handleGenerateDefault = () => {
+    this.props.onCreateNew(surveyForm)
   }
 
   showVersionContent = (contentObject) => {
@@ -126,6 +132,11 @@ class SurveyVersion extends Component {
                   <IconButton className={classes.RefreshButton} onClick={this.handleRefresh}>
                     <RefreshIcon fontSize="small"/>
                   </IconButton>
+                </Tooltip>   
+                <Tooltip title="Generate Default" disableFocusListener>
+                  <IconButton className={classes.GenerateDefaultBtn} onClick={this.handleGenerateDefault}>
+                    <GenerateSurveyVer fontSize="small" color="primary"/>
+                  </IconButton>
                 </Tooltip>    
               </TableCell>
             </TableRow>
@@ -150,7 +161,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchSurveyVer: () => dispatch(fetchSurveyVer()),
-    onCreateNew: () => dispatch(createSurveyVer()),
+    onCreateNew: (form) => dispatch(createSurveyVer(form)),
     onDeleteSurveyVer: (id) => dispatch(deleteSurveyVer(id))
   }
 }

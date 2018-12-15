@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Table, TableBody, TableCell, TableHead, TableRow, TablePagination, CircularProgress, Tooltip, IconButton } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -54,6 +55,10 @@ class SurveyList extends Component {
     });
   }
 
+  addClass = () => {
+    this.props.history.push('/surveys/upload');
+  }
+
 
   openEditModal = () => {
 
@@ -69,6 +74,7 @@ class SurveyList extends Component {
 
   
   render() {
+    console.log(this.props.surveys)
     let tableBody = (
       <TableRow>
         <TableCell colSpan={7} style={{textAlign: 'center'}}><CircularProgress size={30} /></TableCell>
@@ -161,6 +167,11 @@ class SurveyList extends Component {
                     <RefreshIcon fontSize="small"/>
                   </IconButton>
                 </Tooltip>    
+                <Tooltip title="Add class" disableFocusListener>
+                  <IconButton className={classes.AddButton} onClick={this.addClass}>
+                    <AddIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
               </TableCell>
             </TableRow>
           </TableHead>

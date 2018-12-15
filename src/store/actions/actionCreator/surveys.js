@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes';
 import axios from '../../../utils/axiosConfig';
+import { invertObjectClientToServer } from '../../../utils/invertObject';
 export const startFetchingSurvey = () => {
   return {
     type: actionTypes.START_FETCHING_SURVEY
@@ -109,25 +110,19 @@ export const fetchSurveyVer = () => {
   }
 }
 
-export const createSurveyVer = (Form) => {
+export const createSurveyVer = (formData) => {
   return dispatch => {
     dispatch(startFetchingSurveyVer());
-    let surveyForm = {
-      Content: JSON.stringify({
-        'Giảng đường': 'Cơ sở vật chất',
-        'Chất lượng giảng dạy': 'Giảng viên'
-      }),
-      Version: "323"
+    const surveyForm = {
+      Content: JSON.stringify(invertObjectClientToServer(formData)),
+      Version: "1"
     }
-    // console.log(surveyForm)
     axios.post('/api/VersionSurveys', surveyForm)
     .then(result => {
-      const surveyVersions = result.data;
-      dispatch(fetchSurveyVerSuccessful(surveyVersions));
-      // console.log(surveyVersions);
+      dispatch(fetchSurveyVer());
     })
     .catch(error => {
-      dispatch(fetchSurveyVerFailed('Fetch Survey Versions Failed'));
+      dispatch(fetchSurveyVerFailed('Create Survey Version Failed'));
     })
   }
 }
