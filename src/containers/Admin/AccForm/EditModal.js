@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Dialog, Paper, Button, Icon } from '@material-ui/core';
+import { Dialog, Paper, Button, IconButton } from '@material-ui/core';
+import Close from '@material-ui/icons/Cancel';
 import classes from './EditModal.module.css';
 import checkValidity  from '../../../utils/checkValidity';
 
@@ -158,7 +159,7 @@ class EditModal extends Component{
         <Paper className={classes.EditModal}>
           <div className={classes.EditHeader}>
             Edit Account
-            <Icon className={classes.CloseButton} onClick={this.handleClose}>close</Icon>
+            <IconButton className={classes.CloseButton} onClick={this.handleClose}><Close color="primary" /></IconButton>
           </div>
           {form}
       

@@ -48,7 +48,7 @@ class AccTable extends Component {
     this.setState({
       editAccount: account
     });
-    this.props.history.push(this.props.path + '/' + account.Id);
+    this.props.history.push(this.props.path + '/edit/' + account.Id);
   }
 
   openAddModal = () => {
@@ -127,7 +127,7 @@ class AccTable extends Component {
     return (
       <div className={classes.Accounts}>
         <Route  
-          path={this.props.path + '/:id'}
+          path={this.props.path + '/edit/:id'}
           render={() =>
             <EditModal
               accType={this.props.accType}

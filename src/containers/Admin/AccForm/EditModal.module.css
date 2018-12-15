@@ -51,7 +51,7 @@
 }
 
 .CloseButton {
-  cursor: pointer;
+  padding: 0px !important;
 }
 
 .EditHeader {
