@@ -1,5 +1,7 @@
 .SurveyVerDetail {
-  height: 90vh;
+  min-height: 300px;
+  max-height: 100% !important;
+  overflow: auto;
 }
 
 .CloseButton {
@@ -19,3 +21,80 @@
   background-color: #ebebeb;
   color: #3f51b5;
 }
+
+.Content {
+  padding: 10px 30px 10px 30px;
+}
+
+ol {
+  counter-reset: li; /* Initiate a counter */
+  list-style: none; /* Remove default numbering */
+  *list-style: decimal; /* Keep using default numbering for IE6/7 */
+  padding: 0;
+  margin-bottom: 4em;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+
+ol ol {
+  margin: 0 0 0 2em; /* Add some left margin for inner lists */
+}
+
+.FormList p{
+  position: relative;
+  display: block;
+  padding: .4em .4em .4em .8em;
+  *padding: .4em;
+  margin: .5em 0 .5em 2.5em;
+  background: #eee;
+  color: #444;
+  text-decoration: none;
+  transition: all .3s ease-out;   
+}
+
+.FormList p:hover{
+  background: #72cffa;
+}   
+
+.FormList p:before {
+  content: counter(li, upper-roman);
+  counter-increment: li;
+  position: absolute; 
+  left: -2.5em;
+  top: 50%;
+  margin-top: -1em;
+  background: #72cffa;
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+.FormList ol p:before{
+  content: counter(li);
+  counter-increment: li;
+  position: absolute; 
+  left: -2.5em;
+  top: 50%;
+  margin-top: -1em;
+  background: #72cffa;
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.FormList p:after{
+  position: absolute; 
+  content: '';
+  border: .5em solid transparent;
+  left: -1em;
+  top: 50%;
+  margin-top: -.5em;
+  transition: all .3s ease-out;               
+}
+
+.FormList p:hover:after{
+  left: -.5em;
+  border-left-color: #72cffa;             
+}   
