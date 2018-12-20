@@ -20,9 +20,11 @@ class SurveyVersionDetail extends Component {
       versionContent = inverObjectServerToClient(this.state.version.ContentCategory);
       const renderItems = Object.keys(versionContent).map(key => {
         const listItems = versionContent[key].map(item => {
+          //return sub category
           return <li key={item}><p>{item}</p></li>
         })
         return (
+          //return category
           <li><p>{key}</p>
             <ol>{listItems}</ol>
           </li>

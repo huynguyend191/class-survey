@@ -5,7 +5,7 @@
 }
 
 .CloseButton {
-  padding: 0 !important;
+  padding: 5px !important;
 }
 
 .Header {
@@ -51,7 +51,7 @@ ol ol {
 }
 
 .FormList p:hover{
-  background: #72cffa;
+  background: #97ddfd;
 }   
 
 .FormList p:before {

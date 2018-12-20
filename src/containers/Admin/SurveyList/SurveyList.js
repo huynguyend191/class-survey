@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ShowIcon from '@material-ui/icons/Visibility';
+import DisableShowIcon from '@material-ui/icons/VisibilityOff';
 import classes from './SurveyList.module.css';
 import { fetchSurveys, removeSurveyError, deleteSurvey, searchSurveys } from '../../../store/actions';
 import uuidv4 from 'uuid';
@@ -20,6 +21,8 @@ class SurveyList extends Component {
     rowsPerPage: 10,
     page: 0,
     showDeleteModal: false,
+    showEditModal: false,
+    showResultModal: false,
     deleteId: null
   }
 
@@ -64,8 +67,8 @@ class SurveyList extends Component {
 
   }
 
-  showSurveyResult = () => {
-
+  showSurveyResult = (id) => {
+    console.log(id)
   }
 
   hideSurveyResult = () => {
@@ -102,32 +105,44 @@ class SurveyList extends Component {
             Students: surveys[index].StudentNumber,
             openedDate: openedDate,
             closedDate: closedDate,
+            surveyResult: surveys[index].M
           })
           openedDate = 'N/A';
           closedDate = 'N/A';
         }
         tableBody = formatSurveys.map((survey, index) => {
           const surveyObject = survey;
+          let resultBtn = (
+            <Tooltip title="Survey Result Unavailable">
+              <IconButton className={classes.ShowButton} >
+                <DisableShowIcon fontSize="small" />
+              </IconButton> 
+            </Tooltip>
+          )
+          if(survey.surveyResult) {
+            resultBtn = (
+              <Tooltip title="View Result">
+                <IconButton className={classes.ShowButton} onClick={() => this.showSurveyResult(survey.Id)} >
+                  <ShowIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            )
+          }
           return(
             <TableRow key={survey.Id} className={classes.TableBodyRow}>
               <TableCell>{(index + 1) + this.state.page * rowsPerPage}</TableCell>
               { 
                 Object.keys(surveyObject).map(key => {
-                  return key !== 'Id' ?  <TableCell key={uuidv4()}>{surveyObject[key]}</TableCell> : null;
+                  return (key !== 'Id' && key !== 'surveyResult') ?  <TableCell key={uuidv4()}>{surveyObject[key]}</TableCell> : null;
                 })
               }
               <TableCell style={{textAlign: "center"}}>
-
-                <IconButton className={classes.ShowButton} onClick={() => this.showSurveyResult(survey.Id)} >
-                  <ShowIcon fontSize="small" />
-                </IconButton>
-
+                {resultBtn}
                 <IconButton className={classes.EditButton}
                   onClick={() => this.openEditModal(this.props.surveys[index])}
                 >
                   <EditIcon fontSize="small" color="primary" />
                 </IconButton>
-    
                 <IconButton className={classes.DeleteButton} onClick={() => this.openDeleteConfirm(survey.Id)} >
                   <DeleteIcon fontSize="small" color="error" />
                 </IconButton>
