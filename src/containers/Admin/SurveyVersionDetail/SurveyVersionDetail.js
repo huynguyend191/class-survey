@@ -25,7 +25,7 @@ class SurveyVersionDetail extends Component {
         })
         return (
           //return category
-          <li><p>{key}</p>
+          <li key={key}><p>{key}</p>
             <ol>{listItems}</ol>
           </li>
         )

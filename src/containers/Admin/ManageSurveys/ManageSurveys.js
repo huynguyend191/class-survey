@@ -17,7 +17,7 @@ class ManageSurveys extends Component {
         <Switch>
           <Route path='/surveys/version' component={SurveyVersion}/>  
           <Route path='/surveys/upload' render={() => <UploadFileArea url="/api/Classes/Upload" refresh={this.props.onRefresh} />} />    
-          <Route path='/surveys' exact component={SurveyList}/>                    
+          <Route path='/surveys' component={SurveyList}/>                    
         </Switch>
       </div>
     );

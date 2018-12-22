@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 import {Table, TableBody, TableCell, TableHead, TableRow, TablePagination, CircularProgress, Tooltip, IconButton } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
@@ -14,6 +15,7 @@ import SearchSurvey from '../SearchBar/SearchSurvey';
 import ConfirmDelete from '../../../components/ConfirmDelete/ConfirmDelete';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 import moment from 'moment'
+import EditSurveyModal from '../EditSurveyModal/EditSurveyModal';
 
 class SurveyList extends Component {
 
@@ -23,7 +25,8 @@ class SurveyList extends Component {
     showDeleteModal: false,
     showEditModal: false,
     showResultModal: false,
-    deleteId: null
+    deleteId: null,
+    selectedSurvey: null
   }
 
   componentDidMount() {
@@ -63,8 +66,10 @@ class SurveyList extends Component {
   }
 
 
-  openEditModal = () => {
-
+  openEditModal = (survey) => {
+    console.log(this.props.match)
+    this.props.history.push('surveys/edit/' + survey.Id)
+    this.setState({selectedSurvey: survey})
   }
 
   showSurveyResult = (id) => {
@@ -89,26 +94,18 @@ class SurveyList extends Component {
         const rowsPerPage = this.state.rowsPerPage;
         const surveys = this.props.surveys.slice(this.state.page * rowsPerPage, this.state.page * rowsPerPage + rowsPerPage);
         const formatSurveys = [];
-        let openedDate = 'N/A';
-        let closedDate = 'N/A';
+     
         for(let index in surveys) {
-          if (moment(surveys[index].openedDate).year > 2000) {
-            openedDate = moment(surveys[index].openedDate).format('lll')
-          }
-          if (moment(surveys[index].closedDate).year > 2000) {
-            closedDate = moment(surveys[index].closedDate).format('lll')
-          }
           formatSurveys.push({
             Id: surveys[index].Id,
             ClassCode: surveys[index].ClassCode,
             Subject: surveys[index].Subject,
             Students: surveys[index].StudentNumber,
-            openedDate: openedDate,
-            closedDate: closedDate,
+            OpenedDate: surveys[index].OpenedDate ? moment(surveys[index].OpenedDate).format('lll') : 'N/A',
+            ClosedDate: surveys[index].ClosedDate ? moment(surveys[index].ClosedDate).format('lll') : 'N/A',
             surveyResult: surveys[index].M
           })
-          openedDate = 'N/A';
-          closedDate = 'N/A';
+          
         }
         tableBody = formatSurveys.map((survey, index) => {
           const surveyObject = survey;
@@ -176,6 +173,16 @@ class SurveyList extends Component {
         />
         <SearchSurvey 
           searchSurveys={this.props.onSearchSurvey}
+        />
+        <Route  
+          path={this.props.match.path + '/edit/:id'}
+          render={() =>
+            <EditSurveyModal
+              history={this.props.history} 
+              returnPath={this.props.match.path}
+              version={this.state.selectedVersion}
+            />
+          }
         />
         <Table>
           <TableHead>

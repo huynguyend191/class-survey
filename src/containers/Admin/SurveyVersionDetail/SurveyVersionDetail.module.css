@@ -32,10 +32,12 @@ ol {
   padding: 0;
   margin-bottom: 4em;
   text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  font-weight: bold;
 }
 
 ol ol {
   margin: 0 0 0 2em; /* Add some left margin for inner lists */
+  font-weight: normal;
 }
 
 .FormList p{
