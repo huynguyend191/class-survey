@@ -67,7 +67,6 @@ class SurveyList extends Component {
 
 
   openEditModal = (survey) => {
-    console.log(this.props.match)
     this.props.history.push('surveys/edit/' + survey.Id)
     this.setState({selectedSurvey: survey})
   }

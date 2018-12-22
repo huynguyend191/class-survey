@@ -6,10 +6,11 @@
 
 .CloseButton {
   padding: 5px !important;
+  background-color: transparent !important;
 }
 
 .Header {
-  border-bottom: 1px solid #d6d9dc;
+  border-bottom: 1px solid #fafbfb;
   height: 40px;
   margin: auto;
   display: flex;

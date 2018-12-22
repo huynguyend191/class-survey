@@ -44,7 +44,7 @@ class SurveyVersionDetail extends Component {
       >
         <Paper className={classes.SurveyVerDetail}>
           <div className={classes.Header}>
-            <p style={{fontSize: '27px', margin: '0', fontWeight: '500'}}>SURVEY DETAIL</p>
+            <p style={{fontSize: '27px', margin: '0', fontWeight: '500'}}>Survey Detail</p>
             <IconButton className={classes.CloseButton} onClick={this.handleClose}><Close color="primary" /></IconButton>
           </div>
           <div className={classes.Content}>

@@ -9,6 +9,7 @@
     "jwt-decode": "^2.2.0",
     "moment": "^2.23.0",
     "react": "^16.5.2",
+    "react-datepicker": "^2.0.0",
     "react-dom": "^16.5.2",
     "react-dropzone": "^6.2.2",
     "react-redux": "^5.0.7",
