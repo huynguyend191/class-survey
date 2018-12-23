@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import {Table, TableBody, TableCell, TableHead, TableRow, TablePagination, CircularProgress, Tooltip, IconButton } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from '@material-ui/icons/Settings';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ShowIcon from '@material-ui/icons/Visibility';
@@ -111,7 +111,7 @@ class SurveyList extends Component {
           let resultBtn = (
             <Tooltip title="Survey Result Unavailable">
               <IconButton className={classes.ShowButton} >
-                <DisableShowIcon fontSize="small" />
+                <DisableShowIcon fontSize="small" color="primary"/>
               </IconButton> 
             </Tooltip>
           )
@@ -119,7 +119,7 @@ class SurveyList extends Component {
             resultBtn = (
               <Tooltip title="View Result">
                 <IconButton className={classes.ShowButton} onClick={() => this.showSurveyResult(survey.Id)} >
-                  <ShowIcon fontSize="small" />
+                  <ShowIcon fontSize="small" color="primary"/>
                 </IconButton>
               </Tooltip>
             )
@@ -137,7 +137,7 @@ class SurveyList extends Component {
                 <IconButton className={classes.EditButton}
                   onClick={() => this.openEditModal(this.props.surveys[index])}
                 >
-                  <EditIcon fontSize="small" color="primary" />
+                  <EditIcon fontSize="small"  />
                 </IconButton>
                 <IconButton className={classes.DeleteButton} onClick={() => this.openDeleteConfirm(survey.Id)} >
                   <DeleteIcon fontSize="small" color="error" />
