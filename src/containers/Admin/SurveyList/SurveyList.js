@@ -179,7 +179,7 @@ class SurveyList extends Component {
             <EditSurveyModal
               history={this.props.history} 
               returnPath={this.props.match.path}
-              version={this.state.selectedVersion}
+              survey={this.state.selectedSurvey}
             />
           }
         />

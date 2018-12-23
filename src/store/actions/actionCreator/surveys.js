@@ -35,7 +35,6 @@ export const fetchSurveys = () => {
     .then(result => {
       const surveys = result.data;
       dispatch(fetchSurveySuccessful(surveys, surveys.length));
-      console.log(surveys);
     })
     .catch(error => {
       dispatch(fetchSurveyFailed('Fetch Survey Failed'));
@@ -102,7 +101,6 @@ export const fetchSurveyVer = () => {
     .then(result => {
       const surveyVersions = result.data;
       dispatch(fetchSurveyVerSuccessful(surveyVersions));
-      // console.log(moment(surveyVersions.CreatedDate).format('MMMM Do YYYY, h:mm:ss a'));
     })
     .catch(error => {
       dispatch(fetchSurveyVerFailed('Fetch Survey Versions Failed'));
