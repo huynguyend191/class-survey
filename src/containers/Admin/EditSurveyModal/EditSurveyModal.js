@@ -29,7 +29,7 @@ class EditSurveyModal extends Component {
       error: null
     },
     surveyVersion: {
-      value:  '',
+      value: this.props.survey.VersionSurveyId,
       error: null
     },
     title: {
@@ -155,7 +155,7 @@ class EditSurveyModal extends Component {
       Subject: this.state.title.value,
       OpenedDate: moment(this.state.openDate.value).format(),
       ClosedDate: moment(this.state.closeDate.value).format(),
-      VersionSurveyId: this.state.surveyVersion.value === '' ? this.versionSurveySelection.value : this.state.surveyVersion.value,
+      VersionSurveyId: this.state.surveyVersion.value ? this.versionSurveySelection.value : this.state.surveyVersion.value,
     }
     let form = {
       ...this.props.survey,

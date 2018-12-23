@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dialog, Paper, IconButton } from '@material-ui/core';
+import { Dialog, IconButton } from '@material-ui/core';
 import Close from '@material-ui/icons/Cancel';
 import classes from './SurveyVersionDetail.module.css';
 import  { inverObjectServerToClient } from '../../../utils/invertObject';
@@ -38,19 +38,18 @@ class SurveyVersionDetail extends Component {
     return (
       <Dialog
         open={true}
-        className={classes.DialogContainer}
         fullWidth={true}
         maxWidth={'md'}
       >
-        <Paper className={classes.SurveyVerDetail}>
+        <div className={classes.SurveyVerDetail}>
           <div className={classes.Header}>
-            <p style={{fontSize: '27px', margin: '0', fontWeight: '500'}}>Survey Detail</p>
+            <p style={{fontSize: '27px', margin: 'auto 0', fontWeight: '500'}}>Survey Detail</p>
             <IconButton className={classes.CloseButton} onClick={this.handleClose}><Close color="primary" /></IconButton>
           </div>
           <div className={classes.Content}>
             {renderContent}
           </div>
-        </Paper>
+        </div>
       </Dialog>
      
     );

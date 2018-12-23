@@ -1,7 +1,8 @@
 .SurveyVerDetail {
   min-height: 300px;
-  max-height: 100% !important;
+  height: 800px;
   overflow: auto;
+  width: 100%;
 }
 
 .CloseButton {
@@ -10,16 +11,18 @@
 }
 
 .Header {
-  border-bottom: 1px solid #fafbfb;
-  height: 40px;
-  margin: auto;
+  border-top: solid #3f51b5 3px;
   display: flex;
-  padding: 10px;
-  padding-left: 20px;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #ebebeb;
+  border-bottom: 1px solid rgb(163, 163, 163);
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
   color: #3f51b5;
+  font-weight: 500;
+  font-size: 18px;
+  background-color: #fafbfb;
 }
 
 .Content {
