@@ -67,19 +67,14 @@ class SurveyList extends Component {
 
 
   openEditModal = (survey) => {
-    this.props.history.push('surveys/edit/' + survey.Id)
-    this.setState({selectedSurvey: survey})
+    this.props.history.push('surveys/edit/' + survey.Id);
+    this.setState({selectedSurvey: survey});
   }
 
   showSurveyResult = (id) => {
-    console.log(id)
+    this.props.history.push('surveys/result/' + id);
   }
 
-  hideSurveyResult = () => {
-
-  }
-
-  
   render() {
     // console.log(this.props.surveys)
     let tableBody = (
@@ -102,7 +97,6 @@ class SurveyList extends Component {
             Students: surveys[index].StudentNumber,
             OpenedDate: surveys[index].OpenedDate ? moment(surveys[index].OpenedDate).format('lll') : 'N/A',
             ClosedDate: surveys[index].ClosedDate ? moment(surveys[index].ClosedDate).format('lll') : 'N/A',
-            surveyResult: surveys[index].M
           })
           
         }
@@ -115,7 +109,7 @@ class SurveyList extends Component {
               </IconButton> 
             </Tooltip>
           )
-          if(survey.surveyResult) {
+          if(new Date(Date.now()) > new Date(survey.ClosedDate)) {
             resultBtn = (
               <Tooltip title="View Result">
                 <IconButton className={classes.ShowButton} onClick={() => this.showSurveyResult(survey.Id)} >
@@ -129,7 +123,7 @@ class SurveyList extends Component {
               <TableCell>{(index + 1) + this.state.page * rowsPerPage}</TableCell>
               { 
                 Object.keys(surveyObject).map(key => {
-                  return (key !== 'Id' && key !== 'surveyResult') ?  <TableCell key={uuidv4()}>{surveyObject[key]}</TableCell> : null;
+                  return (key !== 'Id') ?  <TableCell key={uuidv4()}>{surveyObject[key]}</TableCell> : null;
                 })
               }
               <TableCell style={{textAlign: "center"}}>

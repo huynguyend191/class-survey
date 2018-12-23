@@ -1,7 +1,6 @@
 .SurveyVerDetail {
   min-height: 300px;
   height: 800px;
-  overflow: auto;
   width: 100%;
 }
 
@@ -27,6 +26,8 @@
 
 .Content {
   padding: 10px 30px 10px 30px;
+  overflow: auto;
+
 }
 
 ol {
