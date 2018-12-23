@@ -18,10 +18,14 @@ class EditSurveyModal extends Component {
 
   state = {
     openDate: {
-      value: this.props.survey.OpenedDate ? new Date(this.props.survey.OpenedDate) : new Date(Date.now()), //default = now
+      value: this.props.survey.OpenedDate ? 
+        new Date(this.props.survey.OpenedDate) : 
+        new Date(Date.now()), //default = now
     },
     closeDate: {
-      value:  this.props.survey.ClosedDate ? new Date(this.props.survey.ClosedDate) : new Date(moment(Date.now()).add(7, 'days')), //default = now + 7
+      value:  this.props.survey.ClosedDate 
+      ? new Date(this.props.survey.ClosedDate) 
+      : new Date(moment(Date.now()).add(7, 'days')), //default = now + 7
       error: null
     },
     classCode: {
@@ -47,7 +51,7 @@ class EditSurveyModal extends Component {
       },
       formIsValid: true
     })
-    if ( date > this.state.closeDate.value) {
+    if ( date.setHours(0,0,0,0) > this.state.closeDate.value.setHours(0,0,0,0)) {
       let closeDate = this.state.closeDate
       this.setState({
         closeDate: {
@@ -77,7 +81,7 @@ class EditSurveyModal extends Component {
       formIsValid: true
     })
 
-    if ( date < this.state.openDate.value) {
+    if ( date.setHours(0,0,0,0) < this.state.openDate.value.setHours(0,0,0,0)) {
       this.setState({
         closeDate: {
           value: date,
@@ -153,8 +157,9 @@ class EditSurveyModal extends Component {
     let data = {
       ClassCode: this.state.classCode.value,
       Subject: this.state.title.value,
-      OpenedDate: moment(this.state.openDate.value).format(),
-      ClosedDate: moment(this.state.closeDate.value).format(),
+      OpenedDate: moment(this.state.openDate.value.setHours(0,0,0,0)).format(),
+      ClosedDate: moment(this.state.closeDate.value.setHours(0,0,0,0)).format(),
+      // default select if value null
       VersionSurveyId: this.state.surveyVersion.value ? this.versionSurveySelection.value : this.state.surveyVersion.value,
     }
     let form = {

@@ -16,6 +16,7 @@ import ConfirmDelete from '../../../components/ConfirmDelete/ConfirmDelete';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 import moment from 'moment'
 import EditSurveyModal from '../EditSurveyModal/EditSurveyModal';
+import SurveyResult from '../SurveyResult/SurveyResult';
 
 class SurveyList extends Component {
 
@@ -26,7 +27,8 @@ class SurveyList extends Component {
     showEditModal: false,
     showResultModal: false,
     deleteId: null,
-    selectedSurvey: null
+    selectedSurvey: null,
+    resultId: null,
   }
 
   componentDidMount() {
@@ -73,6 +75,7 @@ class SurveyList extends Component {
 
   showSurveyResult = (id) => {
     this.props.history.push('surveys/result/' + id);
+    this.setState({resultId: id})
   }
 
   render() {
@@ -174,6 +177,16 @@ class SurveyList extends Component {
               history={this.props.history} 
               returnPath={this.props.match.path}
               survey={this.state.selectedSurvey}
+            />
+          }
+        />
+         <Route  
+          path={this.props.match.path + '/result/:id'}
+          render={() =>
+            <SurveyResult
+              history={this.props.history} 
+              returnPath={this.props.match.path}
+              id={this.state.resultId}
             />
           }
         />
