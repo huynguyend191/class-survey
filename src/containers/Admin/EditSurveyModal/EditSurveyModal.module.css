@@ -1,5 +1,5 @@
 .EditSurveyModal {
-  width: 400px;
+  width: 450px;
   height: 500px;
   display: flex;
   flex-direction: column;
@@ -31,4 +31,50 @@
   padding-top: 150px;
   text-align: center;
   font-size: 18px;
+}
+
+.EditSurveyForm {
+  margin: 30px 0 30px 0;
+}
+
+.InputHolder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.InputTitle {
+  font-size: 14px;
+  width: 100px;
+  margin: auto;
+  margin-left: 30px;
+  color: #0C0D0E;
+  font-weight: 500;
+}
+
+.Input {
+  width: 240px;
+  margin-right: 30px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid rgb(185, 183, 183);
+  padding: 2px;
+}
+
+.Select {
+  width: 246px;
+  margin-right: 30px;
+  height: 26px;
+  border-radius: 5px;
+  border: 1px solid rgb(185, 183, 183);
+  padding: 2px;
+}
+
+.ErrMsg {
+  font-size: 12px;
+  text-align: right;
+  height: 20px;
+  margin-right: 30px;
+  color: red;
 }
