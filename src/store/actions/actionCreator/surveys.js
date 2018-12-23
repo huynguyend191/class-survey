@@ -68,6 +68,19 @@ export const searchSurveys = (keyword, type) => {
   }
 }
 
+export const editSurvey = (id, form) => {
+  return dispatch => {
+    dispatch(startFetchingSurvey());
+    axios.put('/api/Classes/' + id, form)
+    .then(result =>
+      dispatch(fetchSurveys())
+    )
+    .catch(error => {
+      dispatch(fetchSurveyFailed('Edit Survey Failed'));
+    })
+  }
+}
+
 export const startFetchingSurveyVer = () => {
   return {
     type: actionTypes.START_FETCHING_SURVEY_VER

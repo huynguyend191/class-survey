@@ -25,6 +25,7 @@ export {
   removeSurveyError,
   deleteSurvey,
   searchSurveys,
+  editSurvey,
   fetchSurveyVer,
   deleteSurveyVer,
   createSurveyVer

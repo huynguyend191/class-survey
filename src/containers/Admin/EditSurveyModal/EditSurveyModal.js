@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Dialog, IconButton, CircularProgress, Button } from '@material-ui/core';
 import Close from '@material-ui/icons/Cancel';
 import classes from './EditSurveyModal.module.css';
-import { fetchSurveyVer } from '../../../store/actions';
+import { fetchSurveyVer, editSurvey } from '../../../store/actions';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
@@ -18,11 +18,10 @@ class EditSurveyModal extends Component {
 
   state = {
     openDate: {
-      value: new Date(Date.now()), //default = now
-      error: null
+      value: this.props.survey.OpenedDate ? new Date(this.props.survey.OpenedDate) : new Date(Date.now()), //default = now
     },
     closeDate: {
-      value: new Date(moment(Date.now()).add(7, 'days')), //default = now + 7
+      value:  this.props.survey.ClosedDate ? new Date(this.props.survey.ClosedDate) : new Date(moment(Date.now()).add(7, 'days')), //default = now + 7
       error: null
     },
     classCode: {
@@ -45,7 +44,8 @@ class EditSurveyModal extends Component {
       openDate: {
         value: date,
         error: null
-      }
+      },
+      formIsValid: true
     })
     if ( date > this.state.closeDate.value) {
       let closeDate = this.state.closeDate
@@ -53,7 +53,8 @@ class EditSurveyModal extends Component {
         closeDate: {
           ...closeDate,
           error: 'Open Date is greater than Close Date'
-        }
+        },
+        formIsValid: false
       })
     } else {
       let closeDate = this.state.closeDate
@@ -61,7 +62,8 @@ class EditSurveyModal extends Component {
         closeDate: {
           ...closeDate,
           error: null
-        }
+        },
+        formIsValid: true
       })
     }
   }
@@ -71,7 +73,8 @@ class EditSurveyModal extends Component {
       closeDate: {
         value: date,
         error: null
-      }
+      },
+      formIsValid: true
     })
 
     if ( date < this.state.openDate.value) {
@@ -79,7 +82,8 @@ class EditSurveyModal extends Component {
         closeDate: {
           value: date,
           error: 'Open Date is greater than Close Date'
-        }
+        },
+        formIsValid: false
       })
     }
   }
@@ -100,17 +104,21 @@ class EditSurveyModal extends Component {
     event.preventDefault();
     this.setState({
       classCode: {
-        value: event.target.value
-      }
+        value: event.target.value,
+        error: null
+      },
+      formIsValid: true
     })
     if (event.target.value.trim() === '') {
       this.setState({
         classCode: {
           value: event.target.value,
           error: 'Class code cannot be emty'
-        }
+        },
+        formIsValid: false
       })
     }
+
   }
 
   handleTitleChange = (event) => {
@@ -119,33 +127,42 @@ class EditSurveyModal extends Component {
       title: {
         value: event.target.value,
         error: null
-      }
+      },
+      formIsValid: true
     })
     if (event.target.value.trim() === '') {
       this.setState({
         title: {
           value: event.target.value,
           error: 'Title cannot be emty'
-        }
+        },
+        formIsValid: false
       })
     }
+
   }
 
   handleClose = () => (
     this.props.history.push(this.props.returnPath)
   )
 
+
+
   onSubmitForm = (event) => {
     event.preventDefault();
-    let form = {
+    let data = {
       ClassCode: this.state.classCode.value,
       Subject: this.state.title.value,
       OpenedDate: moment(this.state.openDate.value).format(),
       ClosedDate: moment(this.state.closeDate.value).format(),
-      VersionSurveyId: this.state.surveyVersion.value === '' ? this.versionSurveySelection.value : this.state.surveyVersion.value
+      VersionSurveyId: this.state.surveyVersion.value === '' ? this.versionSurveySelection.value : this.state.surveyVersion.value,
     }
-    
-    console.log(form)
+    let form = {
+      ...this.props.survey,
+      ...data
+    }
+    this.props.onEditSurvey(this.props.survey.Id, form)
+    this.handleClose();
   }
 
   render() {
@@ -289,6 +306,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps =  dispatch => {
   return {
     onFetchSurveyVer: () => dispatch(fetchSurveyVer()),
+    onEditSurvey: (id, form) => dispatch(editSurvey(id, form))
   }
 };
 
