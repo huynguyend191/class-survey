@@ -14,7 +14,7 @@ import uuidv4 from 'uuid';
 import SearchSurvey from '../SearchBar/SearchSurvey';
 import ConfirmDelete from '../../../components/ConfirmDelete/ConfirmDelete';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
-import moment from 'moment'
+import moment from 'moment';
 import EditSurveyModal from '../EditSurveyModal/EditSurveyModal';
 import SurveyResult from '../SurveyResult/SurveyResult';
 
@@ -79,7 +79,7 @@ class SurveyList extends Component {
   }
 
   render() {
-    // console.log(this.props.surveys)
+    
     let tableBody = (
       <TableRow>
         <TableCell colSpan={7} style={{textAlign: 'center'}}><CircularProgress size={30} /></TableCell>

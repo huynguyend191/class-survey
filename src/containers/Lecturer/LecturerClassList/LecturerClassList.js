@@ -6,9 +6,9 @@ import ShowIcon from '@material-ui/icons/Visibility';
 import DisableShowIcon from '@material-ui/icons/VisibilityOff';
 import RefreshIcon from '@material-ui/icons/Refresh';
 
-import moment from 'moment'
 import axios from '../../../utils/axiosConfig';
 import SurveyResult from '../../Admin/SurveyResult/SurveyResult';
+import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 import uuidv4 from 'uuid';
 
 import classes from './LecturerClassList.module.css';
@@ -62,12 +62,15 @@ class LecturerClassList extends Component {
     this.handleRefresh();
   }
 
+  handleCloseError = () => {
+    this.setState({error: null})
+  }
 
 
   render() {
     let tableBody = (
       <TableRow>
-        <TableCell colSpan={7} style={{textAlign: 'center'}}><CircularProgress size={30} /></TableCell>
+        <TableCell colSpan={5} style={{textAlign: 'center'}}><CircularProgress size={30} /></TableCell>
       </TableRow>
     );
 
@@ -83,8 +86,7 @@ class LecturerClassList extends Component {
             ClassCode: surveys[index].ClassCode,
             Subject: surveys[index].Subject,
             Students: surveys[index].StudentNumber,
-            OpenedDate: surveys[index].OpenedDate ? moment(surveys[index].OpenedDate).format('lll') : 'N/A',
-            ClosedDate: surveys[index].ClosedDate ? moment(surveys[index].ClosedDate).format('lll') : 'N/A',
+            
           })
           
         }
@@ -97,7 +99,7 @@ class LecturerClassList extends Component {
               </IconButton> 
             </Tooltip>
           )
-          if(new Date(Date.now()) > new Date(survey.ClosedDate)) {
+          if(new Date(Date.now()) > new Date(this.state.surveys[index].ClosedDate)) {
             resultBtn = (
               <Tooltip title="View Result">
                 <IconButton className={classes.ShowButton} onClick={() => this.showSurveyResult(survey.Id)} >
@@ -123,7 +125,7 @@ class LecturerClassList extends Component {
       } else {
         tableBody = (
           <TableRow className={classes.TableBodyRow}>
-            <TableCell colSpan={7} style={{textAlign: 'center'}}>No survey</TableCell>
+            <TableCell colSpan={5} style={{textAlign: 'center'}}>No survey</TableCell>
           </TableRow>
         )
       }
@@ -132,7 +134,11 @@ class LecturerClassList extends Component {
 
     return (
       <div className={classes.LecturerClassList}>
-       
+        <ErrorModal 
+          isOpen={this.state.error ? true : false}
+          error={this.state.error}
+          handleCloseModal={this.handleCloseError}
+        />
          <Route  
           path={this.props.match.path + 'surveys/result/:id'}
           render={() =>
@@ -150,8 +156,6 @@ class LecturerClassList extends Component {
               <TableCell className={classes.Cell}>Class Code</TableCell>
               <TableCell className={classes.Cell}>Title</TableCell>
               <TableCell className={classes.Cell}>Students</TableCell>
-              <TableCell className={classes.Cell}>Open Date</TableCell>
-              <TableCell className={classes.Cell}>Close Date</TableCell>
               <TableCell style={{textAlign: "center"}}>
                 <Tooltip title="Refresh" disableFocusListener>
                   <IconButton className={classes.RefreshButton} onClick={this.handleRefresh}>
