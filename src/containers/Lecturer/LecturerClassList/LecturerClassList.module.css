@@ -1,3 +1,25 @@
 .LecturerClassList {
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 30px;
   width: 100%;
+
+}
+
+.RefreshButton, .ShowButton {
+  padding: 6px !important;
+}
+
+.TableHeadRow {
+  border-top: 1px solid rgba(224, 224, 224, 1);
+  background-color: #ececec;
+  height: 40px !important;
+}
+
+.TableHeadRow > .Cell {
+  color: #0C0D0E;
+}
+
+.TableBodyRow {
+  height: 40px !important;
 }

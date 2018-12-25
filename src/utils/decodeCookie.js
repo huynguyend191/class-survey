@@ -11,7 +11,8 @@ const decodeCookie = () => {
   const decoded = jwtDecode(token);
   const userInfo = {
     username: decoded.UserEntity.Username.toLowerCase(),
-    role: decoded.UserEntity.Roles[1].toLowerCase()
+    role: decoded.UserEntity.Roles[1].toLowerCase(),
+    id: decoded.UserEntity.Id
   }
   return userInfo;
 }

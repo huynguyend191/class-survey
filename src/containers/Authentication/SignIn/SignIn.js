@@ -81,6 +81,8 @@ class SignIn extends Component {
             value={this.state.username}
             onBlur={this.checkUsernameValidity}
             error={this.state.usernameError}
+            autoComplete="new-username"
+
           />
         <TextField
             className={classes.Input}
@@ -95,6 +97,7 @@ class SignIn extends Component {
             value={this.state.password}
             onBlur={this.checkPasswordValidity}
             error={this.state.passwordError}
+            autoComplete="new-password"
           />
         <Button 
           className={classes.SignInButton}

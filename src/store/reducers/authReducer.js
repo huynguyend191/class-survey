@@ -6,7 +6,8 @@ const initialState = {
   error: null,
   loading: false,
   username: null,
-  role: null
+  role: null,
+  id: null
 }
 
 const reducer = ( state =  initialState, action) => {
@@ -20,7 +21,8 @@ const reducer = ( state =  initialState, action) => {
           error: null,  
           loading: false,
           username: action.username,
-          role: action.role
+          role: action.role,
+          id: action.id
         }
       );
     case actionTypes.SIGN_IN_FAILED:
@@ -31,7 +33,8 @@ const reducer = ( state =  initialState, action) => {
           isAuthenticated: false, 
           error: null,
           username: null,
-          role: null
+          role: null,
+          id: null
         }
       );
     case actionTypes.REMOVE_AUTH_ERROR:

@@ -17,11 +17,12 @@ export const removeAuthError = () => {
   }
 }
 
-export const signInSuccesful = (username, role) => {
+export const signInSuccesful = (username, role, id) => {
   return {
     type: actionTypes.SIGN_IN_SUCCESSFUL,
     username,
-    role
+    role,
+    id
   }
 }
 
@@ -44,7 +45,7 @@ export const initSignIn = (loginData) => {
     axios.post('/api/Users/Login', loginData)
     .then(res => {
       const userInfo = decodeCookie();
-      dispatch(signInSuccesful(userInfo.username, userInfo.role));
+      dispatch(signInSuccesful(userInfo.username, userInfo.role, userInfo.id));
     }).catch(err => {
       dispatch(signInFailed("Authentication Failed"));
     })
@@ -71,7 +72,7 @@ export const checkSignInState = () => {
       dispatch(signOut());
     } else {
       const userInfo = decodeCookie();
-      dispatch(signInSuccesful(userInfo.username, userInfo.role));
+      dispatch(signInSuccesful(userInfo.username, userInfo.role, userInfo.id));
     }
   }
 }
