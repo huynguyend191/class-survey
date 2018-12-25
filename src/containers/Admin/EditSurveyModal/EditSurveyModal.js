@@ -166,6 +166,7 @@ class EditSurveyModal extends Component {
       ...this.props.survey,
       ...data
     }
+    console.log(form)
     this.props.onEditSurvey(this.props.survey.Id, form)
     this.handleClose();
   }

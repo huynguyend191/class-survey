@@ -8,7 +8,7 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import GenerateSurveyVer from '@material-ui/icons/PlaylistAdd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ShowIcon from '@material-ui/icons/Visibility';
-import {Table, TableBody, TableCell, TableHead, TableRow, CircularProgress, Tooltip, IconButton } from '@material-ui/core';
+import {Table, TableBody, TableCell, TableHead, TableRow, CircularProgress, Tooltip, IconButton, TablePagination } from '@material-ui/core';
 import ConfirmDelete from '../../../components/ConfirmDelete/ConfirmDelete';
 import uuidv4 from 'uuid';
 import moment from 'moment';
@@ -17,6 +17,8 @@ import SurveyVersionDetail from '../SurveyVersionDetail/SurveyVersionDetail';
 
 class SurveyVersion extends Component {
   state = {
+    rowsPerPage: 10,
+    page: 0,
     showDeleteModal: false,
     deleteId: null,
     selectedVersion: null
@@ -56,6 +58,14 @@ class SurveyVersion extends Component {
     });
   }
 
+  handleChangeRowsPerPage = (event) => {
+    this.setState({ rowsPerPage: event.target.value });
+  }
+
+  handleChangePage = (event, page) => {
+    this.setState({page: page});
+  }
+
   render() {
     let tableBody = (
       <TableRow>
@@ -64,7 +74,8 @@ class SurveyVersion extends Component {
     );
     if (!this.props.loading) {
       if (this.props.surveyVersions.length > 0) {
-        const surveyVer =  this.props.surveyVersions;
+        const rowsPerPage = this.state.rowsPerPage;
+        const surveyVer = this.props.surveyVersions.slice(this.state.page * rowsPerPage, this.state.page * rowsPerPage + rowsPerPage);
         const formatSurveyVer = [];
         let createdDate = 'N/A';
         let modifiedDate = 'N/A';
@@ -161,6 +172,21 @@ class SurveyVersion extends Component {
             {tableBody}
           </TableBody>
         </Table>
+        <TablePagination 
+          component="div"
+          count={this.props.surveyVersions.length}  
+          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPage={this.state.rowsPerPage}
+          page={this.state.page} 
+          onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            backIconButtonProps={{
+            'aria-label': 'Previous Page',
+          }}
+          nextIconButtonProps={{
+            'aria-label': 'Next Page',
+          }}
+          onChangePage={this.handleChangePage}
+        />
       </div>
     );
   }

@@ -1,6 +1,8 @@
 
 .SurveyVersion {
-  margin: auto 5px;
+  margin: auto;
+  margin-top: 30px;
+  width: 1000px;
 }
 
 .EditButton, .DeleteButton, .RefreshButton, .ShowButton, .GenerateDefaultBtn {
@@ -8,9 +10,7 @@
 }
 
 .SurveyVerTable {
-  margin: 30px auto;
   border: 1px solid rgba(224, 224, 224, 1);
-  width: 1000px !important;
 }
 
 .TableHeadRow {

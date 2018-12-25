@@ -218,20 +218,20 @@ class SurveyList extends Component {
           </TableBody>
         </Table>
         <TablePagination 
-            component="div"
-            count={this.props.total}  
-            rowsPerPageOptions={[5, 10, 25]}
-            rowsPerPage={this.state.rowsPerPage}
-            page={this.state.page} 
-            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-              backIconButtonProps={{
-              'aria-label': 'Previous Page',
-            }}
-            nextIconButtonProps={{
-              'aria-label': 'Next Page',
-            }}
-            onChangePage={this.handleChangePage}
-          />
+          component="div"
+          count={this.props.total}  
+          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPage={this.state.rowsPerPage}
+          page={this.state.page} 
+          onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            backIconButtonProps={{
+            'aria-label': 'Previous Page',
+          }}
+          nextIconButtonProps={{
+            'aria-label': 'Next Page',
+          }}
+          onChangePage={this.handleChangePage}
+        />
       </div>
     );
   }
