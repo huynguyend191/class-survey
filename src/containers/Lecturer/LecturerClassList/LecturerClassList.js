@@ -40,7 +40,7 @@ class LecturerClassList extends Component {
     this.setState({resultId: id})
   }
 
-  componentDidMount() {
+  handleRefresh = () => {
     this.setState({loading: true});
     axios.get('/api/Classes/List?LecturerId=' + this.props.lecId, {data:{}})
     .then(result => {
@@ -56,6 +56,10 @@ class LecturerClassList extends Component {
         error: 'Fetched Surveys Failed'
       })
     })
+  }
+
+  componentDidMount() {
+    this.handleRefresh();
   }
 
 
