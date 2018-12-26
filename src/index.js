@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import ReduxThunk from 'redux-thunk';
 
 import './index.css';
@@ -14,7 +14,6 @@ import accReducer from './store/reducers/accReducer';
 import surveyReducer  from './store/reducers/surveyReducer';
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
-const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer = combineReducers({
   authReducer,
@@ -22,7 +21,7 @@ const rootReducer = combineReducers({
   surveyReducer
 })
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(ReduxThunk)));
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const app = (
   <Provider store={store}>

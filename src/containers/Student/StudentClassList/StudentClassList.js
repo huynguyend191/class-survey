@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from '../../../utils/axiosConfig';
 import {Table, TableBody, TableCell, TableHead, TableRow, TablePagination, CircularProgress, Tooltip, IconButton } from '@material-ui/core';
+import { Route } from 'react-router-dom';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import ShowIcon from '@material-ui/icons/Visibility';
+import DisableShowIcon from '@material-ui/icons/VisibilityOff';
 import moment from 'moment';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
+import SurveyForm from '../SurveyForm/SurveyForm';
 
 
 import classes from './StudentClassList.module.css';
@@ -16,6 +20,8 @@ class StudentClassList extends Component {
     loading: false,
     error: null,
     
+    selectedSurvey: null,
+
     rowsPerPage: 10,
     page: 0,
     total: 0
@@ -31,6 +37,10 @@ class StudentClassList extends Component {
 
   handleCloseError = () => {
     this.setState({error: null})
+  }
+
+  handleViewSurvey = (Class) => {
+    console.log(Class)
   }
   
   componentDidMount() {
@@ -65,8 +75,30 @@ class StudentClassList extends Component {
       if (this.state.classes.length > 0) {
         const rowsPerPage = this.state.rowsPerPage;
         const classInfo = this.state.classes.slice(this.state.page * rowsPerPage, this.state.page * rowsPerPage + rowsPerPage);
-        const buttons = null;
+        
+        
+
+        //render table info
         tableBody = classInfo.map((Class, index) => {
+          let buttons = (
+            <Tooltip title="Survey Unavailable">
+                <IconButton className={classes.ShowButton} >
+                  <DisableShowIcon fontSize="small" />
+                </IconButton> 
+            </Tooltip>
+          )
+  
+          //check if survey is in available date and has content
+          const today = new Date(Date.now());
+          if(today <= new Date(Class.ClosedDate).setHours(0,0,0,0) && today >= new Date(Class.OpenedDate).setHours(0,0,0,0) && Class.VersionSurveyEntity) {
+            buttons = (
+              <Tooltip title="Show Survey">
+                <IconButton className={classes.ShowButton} onClick={() => this.handleViewSurvey(Class)} >
+                  <ShowIcon fontSize="small" color="primary"/>
+                </IconButton>
+              </Tooltip>
+            )
+          }
           return (
             <TableRow key={Class.Id} className={classes.TableBodyRow}>
               <TableCell>{(index + 1) + this.state.page * rowsPerPage}</TableCell>

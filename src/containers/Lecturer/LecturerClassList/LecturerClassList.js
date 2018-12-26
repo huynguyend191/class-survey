@@ -36,8 +36,8 @@ class LecturerClassList extends Component {
   }
 
   showSurveyResult = (id) => {
-    this.props.history.push('surveys/result/' + id);
     this.setState({resultId: id})
+    this.props.history.push('surveys/result/' + id);
   }
 
   handleRefresh = () => {
@@ -95,7 +95,7 @@ class LecturerClassList extends Component {
           let resultBtn = (
             <Tooltip title="Survey Result Unavailable">
               <IconButton className={classes.ShowButton} >
-                <DisableShowIcon fontSize="small" color="primary"/>
+                <DisableShowIcon fontSize="small" />
               </IconButton> 
             </Tooltip>
           )

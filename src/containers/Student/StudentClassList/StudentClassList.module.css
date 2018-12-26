@@ -1,8 +1,9 @@
 .StudentClassList {
   width: 100%;
+  margin: 40px auto;
 }
 
-.RefreshButton {
+.RefreshButton, .ShowButton {
   padding: 6px !important;
 }
 
