@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dialog, IconButton, RadioGroup, Radio, Button } from '@material-ui/core';
+import { Dialog, IconButton, RadioGroup, Radio, Button, CircularProgress } from '@material-ui/core';
 import Close from '@material-ui/icons/Cancel';
 import classes from './SurveyForm.module.css';
 import  { invertObjectServerToClient } from '../../../utils/invertObject';
@@ -10,10 +10,14 @@ class SurveyForm extends Component {
     surveyContent: null,
     formIsValid: false,
     formId: null,
-    newForm: false
+    newForm: false,
+    loading: false,
+    error: null,
+    invalidMsg: false
   }
   componentDidMount() {
     //check if form exist
+    this.setState({loading: true});
     axios.get('/api/Forms/List?StudentClassId=' + this.props.surveyInfo.studentClassId, {data: {}})
     .then(result => {
       if(result.data.length > 0) {
@@ -34,9 +38,10 @@ class SurveyForm extends Component {
           newForm: true
         })
       }
+      this.setState({loading: false});
     })
     .catch(error => {
-
+      this.setState({loading: false, error: 'Get survey failed, please try again'});
     })
     
   }
@@ -65,10 +70,10 @@ class SurveyForm extends Component {
         Content: JSON.stringify(this.state.surveyContent)
       })
       .then(result => {
-        console.log('OK')
+        this.setState({loading: false})
       })
       .catch(error => {
-        console.log('GG ez')
+        this.setState({loading: false, error: 'Submit form failed, please try again'});
       })
     } else {
       axios.put('/api/Forms/' + this.state.formId, {
@@ -76,10 +81,10 @@ class SurveyForm extends Component {
         Content: JSON.stringify(this.state.surveyContent)
       })
       .then(result => {
-        console.log('Updated')
+        this.setState({loading: false})
       })
       .catch(error => {
-        console.log('fck')
+        this.setState({loading: false, error: 'Submit form failed, please try again'});
       })
     }
    
@@ -88,67 +93,78 @@ class SurveyForm extends Component {
   checkFormValidation = (form) => {
     // if 0 doesn't exist, valid
     const isValid = Object.values(form).indexOf('0') < 0
+    if (isValid) {
+      this.setState({invalidMsg: null})
+    }else {
+      this.setState({invalidMsg: 'Please complete the form before submit'})
+    }
     this.setState({formIsValid: isValid});
   }
 
   render() {
-    let surveyForm = null;
-    if (this.state.surveyContent) {
-      
-      const formInfo = invertObjectServerToClient(this.props.surveyInfo.content);
-      let surveyFormContent = Object.keys(formInfo).map((key, index) => {
-        const listItems = formInfo[key].map(item => {
-          //return sub category
+    let surveyForm =  <div style={{display: 'flex', justifyContent: 'center', marginTop:'100px'}}><CircularProgress size={70}/></div>
+    if (!this.state.loading) {
+      if (this.state.error) {
+        //error handler
+        surveyForm = <div className={classes.ErrorMsg}>{this.state.error}</div>
+      }
+      else if (this.state.surveyContent) {
+        const formInfo = invertObjectServerToClient(this.props.surveyInfo.content);
+        let surveyFormContent = Object.keys(formInfo).map((key, index) => {
+          const listItems = formInfo[key].map(item => {
+            //return sub category
+            return (
+              <div key={item} className={classes.RadioGroup}>
+                <p style={{width: '60%'}}>{item}</p>
+                <RadioGroup 
+                  style={{ display: 'flex', flexDirection:'row' }} 
+                  onChange={(event) => this.handleChange(event, item)}
+                  value={this.state.surveyContent[item]}
+                > 
+                  <Radio color="primary" value="1" />
+                  <Radio color="primary" value="2" />
+                  <Radio color="primary" value="3" />
+                  <Radio color="primary" value="4" />
+                  <Radio color="primary" value="5" />
+                </RadioGroup>
+              </div>
+            )
+          })
           return (
-            <div key={item} className={classes.RadioGroup}>
-              <p style={{width: '60%'}}>{item}</p>
-              <RadioGroup 
-                style={{ display: 'flex', flexDirection:'row' }} 
-                onChange={(event) => this.handleChange(event, item)}
-                value={this.state.surveyContent[item]}
-              > 
-                <Radio color="primary" value="1" />
-                <Radio color="primary" value="2" />
-                <Radio color="primary" value="3" />
-                <Radio color="primary" value="4" />
-                <Radio color="primary" value="5" />
-              </RadioGroup>
-            </div>
-            
+              <div key={key} style={{borderBottom: '1px solid rgb(163, 163, 163)'}}>
+                <div style={{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}>
+                  <p style={{fontWeight: '500'}}>{index+1}. {key}</p>
+                  <div style={{display: 'flex', flexDirection:'row'}}>
+                    <p className={classes.RadioLabel}>1</p>
+                    <p className={classes.RadioLabel}>2</p>
+                    <p className={classes.RadioLabel}>3</p>
+                    <p className={classes.RadioLabel}>4</p>
+                    <p className={classes.RadioLabel}>5</p>
+                  </div>
+                </div>
+                {listItems}
+                
+              </div>
+             
           )
         })
-        return (
-            <div key={key} style={{borderBottom: '1px solid rgb(163, 163, 163)'}}>
-              <div style={{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}>
-                <p style={{fontWeight: '500'}}>{index+1}. {key}</p>
-                <div style={{display: 'flex', flexDirection:'row'}}>
-                  <p className={classes.RadioLabel}>1</p>
-                  <p className={classes.RadioLabel}>2</p>
-                  <p className={classes.RadioLabel}>3</p>
-                  <p className={classes.RadioLabel}>4</p>
-                  <p className={classes.RadioLabel}>5</p>
-                </div>
-              </div>
-              {listItems}
-              
+        surveyForm = (
+          <form onSubmit={this.handleSubmitForm}>
+            {surveyFormContent}
+            <div className={classes.InvalidForm}>{this.state.invalidMsg}</div> 
+            <div className={classes.ButtonHolder}>
+            <Button 
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              disabled={!this.state.formIsValid}
+            >Submit</Button>
             </div>
-           
-        )
-      })
-      surveyForm = (
-        <form onSubmit={this.handleSubmitForm}>
-          {surveyFormContent} 
-          <div className={classes.ButtonHolder}>
-          <Button 
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            disabled={!this.state.formIsValid}
-          >Submit</Button>
-          </div>
-        </form>)
+          </form>)
+      }
     }
+    
     
     return (
       <Dialog

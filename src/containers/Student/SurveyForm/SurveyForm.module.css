@@ -28,6 +28,7 @@
 .Content {
   padding: 10px 20px 3px 20px;
   overflow: auto;
+  min-height: 200px;
 }
 
 .RadioGroup {
@@ -48,4 +49,19 @@
   margin: auto;
   margin-top: 10px;
   width: 200px;
+}
+
+.ErrorMsg {
+  color: red;
+  padding: 6px;
+  padding-top: 100px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.InvalidForm {
+  color: red;
+  padding: 6px;
+  text-align: center;
+  font-size: 14px;
 }
