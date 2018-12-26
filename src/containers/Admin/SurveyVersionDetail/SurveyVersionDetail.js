@@ -18,8 +18,17 @@ class SurveyVersionDetail extends Component {
     validVersionName: true,
 
     isLoading: false,
-    succesfulModal: false
+    succesfulModal: false,
 
+    //input to add, edit
+    inputValue: null,
+    isEditing: false,
+    inputError: null,
+    isValidInput: false,
+
+    //different value
+    subCatergory: null,
+    category: null
   }
   componentDidMount(){
     this.setState({version: this.props.version, versionName: this.props.version.Version});
@@ -83,7 +92,26 @@ class SurveyVersionDetail extends Component {
     this.setState({invalidVersionNameErr: error, validVersionName: isValid})
   }
   addSubcategory = (category) => {
-
+    this.setState({isEditing: true, inputValue: null, inputError: null, isValidInput: false, category: category});
+  }
+  handleInputChange = (event) => {
+    this.setState({inputValue: event.target.value});
+    if(event.target.value.trim() === '') {
+      this.setState({inputError: 'Category cannot be emty', isValidInput: false});
+    }else {
+      this.setState({inputError: null, isValidInput: true});
+    }
+  }
+  saveSubCategory = () => {
+    const content = {...this.state.version.ContentCategory, ...{[this.state.inputValue]: this.state.category}};
+    const versionDetail = {
+      ...this.state.version,
+      ContentCategory: content
+    }
+    this.setState({isEditing: false, version: versionDetail})
+  }
+  closeInput = () => {
+    this.setState({isEditing: false})
   }
   render() {
     let versionContent = null; //data
@@ -163,10 +191,21 @@ class SurveyVersionDetail extends Component {
       > 
         <UploadedModal isOpen={this.state.succesfulModal} handleCloseModal={this.handleClose} />
         <Dialog
-          // open={true}
+          open={this.state.isEditing}
+          onClose={this.closeInput}
         >
-          <div className={classes.inputArea}>
-            <input />
+          <div className={classes.InputArea}>
+            <div>Add Sub-category</div>
+            <textarea className={classes.CategoryInput} value={this.state.inputValue} onChange={this.handleInputChange} />
+            <div style={{fontSize: '12px', height: '14px', color: 'red', margin: '2px auto'}}>{this.state.inputError}</div>
+            <Button 
+              variant="contained" 
+              color="primary" 
+              size="small" 
+              style={{float: 'right'}}
+              onClick={this.saveSubCategory}
+              disabled={!this.state.isValidInput}
+            >Ok</Button>
           </div>
         </Dialog>
         <div className={classes.SurveyVerDetail}>

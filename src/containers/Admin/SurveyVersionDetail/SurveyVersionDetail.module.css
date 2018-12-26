@@ -113,3 +113,18 @@ ol ol {
   border: 1px solid rgb(185, 183, 183);
   text-align: center;
 }
+
+.InputArea {
+  width: 400px;
+  height: 130px;
+  padding: 10px;
+}
+
+.CategoryInput {
+  height: 50px;
+  width: 98%;
+  border-radius: 3px;
+  resize: none;
+  margin: auto;
+  font-family: sans-serif;
+}
