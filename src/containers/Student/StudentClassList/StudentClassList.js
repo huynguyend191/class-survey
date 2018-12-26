@@ -140,7 +140,7 @@ class StudentClassList extends Component {
             <SurveyForm
               history={this.props.history} 
               returnPath={this.props.match.path}
-              info={this.state.selectedSurvey}
+              surveyInfo={this.state.selectedSurvey}
             />
           }
         />

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export const inverObjectServerToClient = (object) => {
+export const invertObjectServerToClient = (object) => {
   const newObject = _.invertBy(object)
   return newObject;
 }

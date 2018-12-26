@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Dialog, IconButton } from '@material-ui/core';
 import Close from '@material-ui/icons/Cancel';
 import classes from './SurveyVersionDetail.module.css';
-import  { inverObjectServerToClient } from '../../../utils/invertObject';
+import  { invertObjectServerToClient } from '../../../utils/invertObject';
 class SurveyVersionDetail extends Component {
   state = {
     version: null
@@ -17,7 +17,7 @@ class SurveyVersionDetail extends Component {
     let versionContent = null; //data
     let renderContent = null; //render HTML
     if (this.state.version) {
-      versionContent = inverObjectServerToClient(this.state.version.ContentCategory);
+      versionContent = invertObjectServerToClient(this.state.version.ContentCategory);
       const renderItems = Object.keys(versionContent).map(key => {
         const listItems = versionContent[key].map(item => {
           //return sub category
