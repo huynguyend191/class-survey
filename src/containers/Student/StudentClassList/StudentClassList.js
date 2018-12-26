@@ -9,7 +9,7 @@ import DisableShowIcon from '@material-ui/icons/VisibilityOff';
 import moment from 'moment';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 import SurveyForm from '../SurveyForm/SurveyForm';
-
+import _ from 'lodash';
 
 import classes from './StudentClassList.module.css';
 
@@ -40,7 +40,13 @@ class StudentClassList extends Component {
   }
 
   handleViewSurvey = (Class) => {
-    console.log(Class)
+    const studentIndex = _.findIndex(Class.StudentClasses, {StudentId: this.props.studentId}); //find student class of current student 
+    const selectedSurvey = {
+      studentClassId: Class.StudentClasses[studentIndex].Id,
+      content: Class.VersionSurveyEntity.ContentCategory
+    }
+    this.setState({selectedSurvey: selectedSurvey});
+    this.props.history.push('surveys/submit/' + Class.Id);
   }
   
   componentDidMount() {
@@ -127,6 +133,16 @@ class StudentClassList extends Component {
           isOpen={this.state.error ? true : false}
           error={this.state.error}
           handleCloseModal={this.handleCloseError}
+        />
+        <Route  
+          path={this.props.match.path + 'surveys/submit/:id'}
+          render={() =>
+            <SurveyForm
+              history={this.props.history} 
+              returnPath={this.props.match.path}
+              info={this.state.selectedSurvey}
+            />
+          }
         />
         <Table>
           <TableHead>

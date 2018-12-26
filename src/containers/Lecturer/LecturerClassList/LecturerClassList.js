@@ -139,7 +139,7 @@ class LecturerClassList extends Component {
           error={this.state.error}
           handleCloseModal={this.handleCloseError}
         />
-         <Route  
+        <Route  
           path={this.props.match.path + 'surveys/result/:id'}
           render={() =>
             <SurveyResult
