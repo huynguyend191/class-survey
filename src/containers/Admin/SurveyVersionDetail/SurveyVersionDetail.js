@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Dialog, IconButton, Button, CircularProgress } from '@material-ui/core';
+import { Dialog, IconButton, Button, CircularProgress, Tooltip } from '@material-ui/core';
 import Close from '@material-ui/icons/Cancel';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
 import classes from './SurveyVersionDetail.module.css';
 import axios from '../../../utils/axiosConfig';
+import UploadedModal from '../../../components/UploadedModal/UploadedModal';
 import  { invertObjectServerToClient, invertObjectClientToServer } from '../../../utils/invertObject';
 class SurveyVersionDetail extends Component {
   state = {
@@ -15,7 +17,8 @@ class SurveyVersionDetail extends Component {
     invalidVersionNameErr: null,
     validVersionName: true,
 
-    isLoading: false
+    isLoading: false,
+    succesfulModal: false
 
   }
   componentDidMount(){
@@ -32,7 +35,11 @@ class SurveyVersionDetail extends Component {
       Content: JSON.stringify(this.state.version.ContentCategory)
     })
     .then(result => {
-      alert('Hello World')
+      this.setState({succesfulModal: true, isLoading: false})
+    })
+    .catch(error => {
+      this.setState({isLoading: false});
+      console.log(error)
     })
   }
   removeCategory = (category) => {
@@ -74,7 +81,8 @@ class SurveyVersionDetail extends Component {
       this.setState({invalidVersionNameErr: error, validVersionName: isValid})
     }
     this.setState({invalidVersionNameErr: error, validVersionName: isValid})
-
+  }
+  addSubcategory = (category) => {
 
   }
   render() {
@@ -101,11 +109,20 @@ class SurveyVersionDetail extends Component {
           //return category
           <li key={key}>
             <p>{key}
-            <IconButton 
-                  style={{ backgroundColor: 'transparent', padding: '3px', margin:'auto', float: 'right' }} 
-                  onClick={() => this.removeCategory(key)}>
-                  <DeleteIcon fontSize="small" color="error" />
-                </IconButton>
+            <Tooltip title='Remove'>
+              <IconButton 
+                style={{ backgroundColor: 'transparent', padding: '3px', margin:'auto', float: 'right' }} 
+                onClick={() => this.removeCategory(key)}>
+                <DeleteIcon fontSize="small" color="error" />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title='Add sub-category'>
+              <IconButton 
+                style={{ backgroundColor: 'transparent', padding: '3px', margin:'auto', float: 'right' }} 
+                onClick={() => this.addSubcategory(key)}>
+                <AddIcon fontSize="small" color="primary" />
+              </IconButton>
+            </Tooltip>
             </p>
             <ol>{listItems}</ol>
           </li>
@@ -143,7 +160,15 @@ class SurveyVersionDetail extends Component {
         fullWidth={true}
         maxWidth={'md'}
         // onClose = {this.handleClose}
-      >
+      > 
+        <UploadedModal isOpen={this.state.succesfulModal} handleCloseModal={this.handleClose} />
+        <Dialog
+          // open={true}
+        >
+          <div className={classes.inputArea}>
+            <input />
+          </div>
+        </Dialog>
         <div className={classes.SurveyVerDetail}>
           <div className={classes.Header}>
             <p style={{fontSize: '27px', margin: 'auto 0', fontWeight: '500'}}>Survey Detail</p>
