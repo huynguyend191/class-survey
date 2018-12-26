@@ -8,16 +8,13 @@
 
 .TableHeadRow {
   border-top: 1px solid rgba(224, 224, 224, 1);
-  border-right: 1px solid rgba(224, 224, 224, 1);
-  border-left: 1px solid rgba(224, 224, 224, 1);
   background-color: #ececec;
   height: 40px !important;
 }
 
-.TableBodyRow {
-  border-right: 1px solid rgba(224, 224, 224, 1);
-  border-left: 1px solid rgba(224, 224, 224, 1);
-}
+/* .TableBodyRow {
+  
+} */
 
 .TableHeadRow > .Cell {
   color: #0C0D0E;

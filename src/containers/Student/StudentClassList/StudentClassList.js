@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from '../../../utils/axiosConfig';
 import {Table, TableBody, TableCell, TableHead, TableRow, TablePagination, CircularProgress, Tooltip, IconButton } from '@material-ui/core';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import uuidv4 from 'uuid';
+import moment from 'moment';
 import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 
 
@@ -39,7 +39,7 @@ class StudentClassList extends Component {
 
   fetchStudentClasses = () => {
     this.setState({loading: true})
-    axios.get('/api/Students/Classes/' + this.props.studentId, {data:{}})
+    axios.get('/api/Students/Classes/' + this.props.studentId)
     .then(result => {
       this.setState({
         loading: false,
@@ -63,7 +63,23 @@ class StudentClassList extends Component {
     );
     if (!this.state.loading) {
       if (this.state.classes.length > 0) {
-        console.log(this.state.classes)
+        const rowsPerPage = this.state.rowsPerPage;
+        const classInfo = this.state.classes.slice(this.state.page * rowsPerPage, this.state.page * rowsPerPage + rowsPerPage);
+        const buttons = null;
+        tableBody = classInfo.map((Class, index) => {
+          return (
+            <TableRow key={Class.Id} className={classes.TableBodyRow}>
+              <TableCell>{(index + 1) + this.state.page * rowsPerPage}</TableCell>
+              <TableCell>{Class.ClassCode} - {Class.Subject}</TableCell>
+              <TableCell>{Class.Lecturer.Name}</TableCell>
+              <TableCell>{Class.OpenedDate ? moment(Class.OpenedDate).format('DD/MM/YYYY') : 'N/A'}</TableCell>
+              <TableCell>{Class.ClosedDate ? moment(Class.ClosedDate).format('DD/MM/YYYY') : 'N/A'}</TableCell>
+              <TableCell style={{textAlign: "center"}}>
+                {buttons}
+              </TableCell>
+            </TableRow> 
+          )
+        })
       }
       else{
         tableBody = (
@@ -104,8 +120,8 @@ class StudentClassList extends Component {
         </Table>
         <TablePagination 
           component="div"
-          count={this.state.total}  
-          rowsPerPageOptions={[1, 10, 25]}
+          count={this.state.classes.length}  
+          rowsPerPageOptions={[5, 10, 25]}
           rowsPerPage={this.state.rowsPerPage}
           page={this.state.page} 
           onChangeRowsPerPage={this.handleChangeRowsPerPage}

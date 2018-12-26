@@ -173,7 +173,7 @@ class LecturerClassList extends Component {
         <TablePagination 
             component="div"
             count={this.state.total}  
-            rowsPerPageOptions={[1, 10, 25]}
+            rowsPerPageOptions={[5, 10, 25]}
             rowsPerPage={this.state.rowsPerPage}
             page={this.state.page} 
             onChangeRowsPerPage={this.handleChangeRowsPerPage}
