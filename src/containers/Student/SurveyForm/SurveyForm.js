@@ -8,18 +8,37 @@ import axios from '../../../utils/axiosConfig';
 class SurveyForm extends Component {
   state = {
     surveyContent: null,
-    formIsValid: false
+    formIsValid: false,
+    formId: null,
+    newForm: false
   }
   componentDidMount() {
-    let surveyContent = {};
-    //create state for form
-    const category = Object.keys(this.props.surveyInfo.content);
-    for (let index in category) {
-      surveyContent = {...surveyContent, ...{[category[index]] : '0'}}
-    }
-    this.setState({
-      surveyContent: surveyContent
+    //check if form exist
+    axios.get('/api/Forms/List?StudentClassId=' + this.props.surveyInfo.studentClassId, {data: {}})
+    .then(result => {
+      if(result.data.length > 0) {
+        this.setState({
+          surveyContent :result.data[0].ContentValues,
+          formIsValid: true,
+          formId: result.data[0].Id
+        })
+      } else {
+        let surveyContent = {};
+        //create state for form
+        const category = Object.keys(this.props.surveyInfo.content);
+        for (let index in category) {
+          surveyContent = {...surveyContent, ...{[category[index]] : '0'}}
+        }
+        this.setState({
+          surveyContent: surveyContent,
+          newForm: true
+        })
+      }
     })
+    .catch(error => {
+
+    })
+    
   }
 
   handleChange = (event, key) => {
@@ -40,16 +59,30 @@ class SurveyForm extends Component {
 
   handleSubmitForm = (event) => {
     event.preventDefault();
-    axios.post('/api/Forms', {
-      StudentClassId: this.props.surveyInfo.studentClassId,
-      Content: JSON.stringify(this.state.surveyContent)
-    })
-    .then(result => {
-      console.log('OK')
-    })
-    .catch(error => {
-      console.log('GG ez')
-    })
+    if (this.state.newForm) {
+      axios.post('/api/Forms', {
+        StudentClassId: this.props.surveyInfo.studentClassId,
+        Content: JSON.stringify(this.state.surveyContent)
+      })
+      .then(result => {
+        console.log('OK')
+      })
+      .catch(error => {
+        console.log('GG ez')
+      })
+    } else {
+      axios.put('/api/Forms/' + this.state.formId, {
+        StudentClassId: this.props.surveyInfo.studentClassId,
+        Content: JSON.stringify(this.state.surveyContent)
+      })
+      .then(result => {
+        console.log('Updated')
+      })
+      .catch(error => {
+        console.log('fck')
+      })
+    }
+   
   }
 
   checkFormValidation = (form) => {
