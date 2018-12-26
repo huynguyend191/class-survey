@@ -4,16 +4,18 @@ import Close from '@material-ui/icons/Cancel';
 import classes from './SurveyForm.module.css';
 import  { invertObjectServerToClient } from '../../../utils/invertObject';
 import axios from '../../../utils/axiosConfig';
+import UploadedModal from '../../../components/UploadedModal/UploadedModal';
 
 class SurveyForm extends Component {
   state = {
-    surveyContent: null,
+    surveyContent: null, //form
     formIsValid: false,
     formId: null,
-    newForm: false,
+    newForm: false, //check if update or post
     loading: false,
     error: null,
-    invalidMsg: false
+    invalidMsg: false, //form check
+    succesfulModal: false
   }
   componentDidMount() {
     //check if form exist
@@ -64,13 +66,14 @@ class SurveyForm extends Component {
 
   handleSubmitForm = (event) => {
     event.preventDefault();
+    this.setState({loading: true});
     if (this.state.newForm) {
       axios.post('/api/Forms', {
         StudentClassId: this.props.surveyInfo.studentClassId,
         Content: JSON.stringify(this.state.surveyContent)
       })
       .then(result => {
-        this.setState({loading: false})
+        this.setState({loading: false, succesfulModal: true});
       })
       .catch(error => {
         this.setState({loading: false, error: 'Submit form failed, please try again'});
@@ -81,7 +84,7 @@ class SurveyForm extends Component {
         Content: JSON.stringify(this.state.surveyContent)
       })
       .then(result => {
-        this.setState({loading: false})
+        this.setState({loading: false, succesfulModal: true});
       })
       .catch(error => {
         this.setState({loading: false, error: 'Submit form failed, please try again'});
@@ -172,6 +175,7 @@ class SurveyForm extends Component {
         fullWidth={true}
         maxWidth={'md'}
       >
+        <UploadedModal isOpen={this.state.succesfulModal} handleCloseModal={this.handleClose} />
         <div className={classes.SurveyForm}>
           <div className={classes.Header}>
             <p style={{fontSize: '27px', margin: 'auto 0', fontWeight: '500'}}>Survey Detail</p>
