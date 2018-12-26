@@ -8,6 +8,7 @@ import classes from './SurveyVersionDetail.module.css';
 import axios from '../../../utils/axiosConfig';
 import UploadedModal from '../../../components/UploadedModal/UploadedModal';
 import  { invertObjectServerToClient, invertObjectClientToServer } from '../../../utils/invertObject';
+import _ from 'lodash';
 class SurveyVersionDetail extends Component {
   state = {
     version: null,
@@ -21,10 +22,10 @@ class SurveyVersionDetail extends Component {
     succesfulModal: false,
 
     //input to add, edit
-    inputValue: null,
-    isEditing: false,
-    inputError: null,
-    isValidInput: false,
+    inputValueSubCategory: null,
+    isEditingSubCategory: false,
+    inputErrorSubCategory: null,
+    isValidInputSubCategory: false,
 
     //different value
     subCatergory: null,
@@ -92,32 +93,38 @@ class SurveyVersionDetail extends Component {
     this.setState({invalidVersionNameErr: error, validVersionName: isValid})
   }
   addSubcategory = (category) => {
-    this.setState({isEditing: true, inputValue: null, inputError: null, isValidInput: false, category: category});
+    this.setState({isEditingSubCategory: true, inputValueSubCategory: null, inputErrorSubCategory: null, isValidInputSubCategory: false, category: category});
   }
-  handleInputChange = (event) => {
-    this.setState({inputValue: event.target.value});
+  handleSubCategoryInputChange = (event) => {
+    this.setState({inputValueSubCategory: event.target.value});
     if(event.target.value.trim() === '') {
-      this.setState({inputError: 'Category cannot be emty', isValidInput: false});
+      this.setState({inputErrorSubCategory: 'Sub category cannot be emty', isValidInputSubCategory: false});
     }else {
-      this.setState({inputError: null, isValidInput: true});
+      this.setState({inputErrorSubCategory: null, isValidInputSubCategory: true});
     }
   }
   saveSubCategory = () => {
-    const content = {...this.state.version.ContentCategory, ...{[this.state.inputValue]: this.state.category}};
+    const content = {...this.state.version.ContentCategory, ...{[this.state.inputValueSubCategory]: this.state.category}};
     const versionDetail = {
       ...this.state.version,
       ContentCategory: content
     }
-    this.setState({isEditing: false, version: versionDetail})
+    this.setState({isEditingSubCategory: false, version: versionDetail})
   }
-  closeInput = () => {
-    this.setState({isEditing: false})
+  closeInputSubCategory = () => {
+    this.setState({isEditingSubCategory: false})
   }
   render() {
     let versionContent = null; //data
     let renderContent = null; //render HTML
+    let isContentEmty;
     if (this.state.version) {
       versionContent = invertObjectServerToClient(this.state.version.ContentCategory);
+      if(_.isEmpty(versionContent)) {
+        isContentEmty = true;
+      } else {
+        isContentEmty = false;
+      }
       const renderItems = Object.keys(versionContent).map(key => {
         const listItems = versionContent[key].map(item => {
           //return sub category
@@ -166,7 +173,7 @@ class SurveyVersionDetail extends Component {
               color="primary" 
               size="small" 
               style={{height: '24px', paddingTop: '0', paddingBottom: '0', marginLeft: '5px'}}
-              disabled={!this.state.validVersionName}
+              disabled={!this.state.validVersionName || isContentEmty}
               onClick={this.handleSubmit}
             >SAVE
               
@@ -191,20 +198,20 @@ class SurveyVersionDetail extends Component {
       > 
         <UploadedModal isOpen={this.state.succesfulModal} handleCloseModal={this.handleClose} />
         <Dialog
-          open={this.state.isEditing}
-          onClose={this.closeInput}
+          open={this.state.isEditingSubCategory}
+          onClose={this.closeInputSubCategory}
         >
           <div className={classes.InputArea}>
             <div>Add Sub-category</div>
-            <textarea className={classes.CategoryInput} value={this.state.inputValue} onChange={this.handleInputChange} />
-            <div style={{fontSize: '12px', height: '14px', color: 'red', margin: '2px auto'}}>{this.state.inputError}</div>
+            <textarea className={classes.CategoryInput} value={this.state.inputValueSubCategory} onChange={this.handleSubCategoryInputChange} />
+            <div style={{fontSize: '12px', height: '14px', color: 'red', margin: '2px auto'}}>{this.state.inputErrorSubCategory}</div>
             <Button 
               variant="contained" 
               color="primary" 
               size="small" 
               style={{float: 'right'}}
               onClick={this.saveSubCategory}
-              disabled={!this.state.isValidInput}
+              disabled={!this.state.isValidInputSubCategory}
             >Ok</Button>
           </div>
         </Dialog>
