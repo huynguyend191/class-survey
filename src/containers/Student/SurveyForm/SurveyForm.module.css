@@ -27,5 +27,10 @@
 .Content {
   padding: 10px 30px 10px 30px;
   overflow: auto;
+}
 
+.RadioGroup {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
