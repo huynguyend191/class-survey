@@ -40,6 +40,7 @@ class SurveyVersionDetail extends Component {
         open={true}
         fullWidth={true}
         maxWidth={'md'}
+        onClose = {this.handleClose}
       >
         <div className={classes.SurveyVerDetail}>
           <div className={classes.Header}>

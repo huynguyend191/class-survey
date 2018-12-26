@@ -23,6 +23,7 @@
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
+  min-height: 40px;
 }
 
 .CloseButton {
@@ -74,4 +75,9 @@
   padding: 3px;
   border: 1px solid #bdbdbd;
   text-align: center;
+}
+
+.ResultTable {
+  overflow: auto;
+  min-height: 280px;
 }

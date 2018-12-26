@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Dialog, IconButton, RadioGroup, Radio, FormControlLabel } from '@material-ui/core';
+import { Dialog, IconButton, RadioGroup, Radio, Button } from '@material-ui/core';
 import Close from '@material-ui/icons/Cancel';
 import classes from './SurveyForm.module.css';
 import  { invertObjectServerToClient } from '../../../utils/invertObject';
+import axios from '../../../utils/axiosConfig';
 
 class SurveyForm extends Component {
   state = {
-    surveyContent: null
+    surveyContent: null,
+    formIsValid: false
   }
   componentDidMount() {
     let surveyContent = {};
@@ -24,14 +26,38 @@ class SurveyForm extends Component {
     const surveyContent = this.state.surveyContent;
     // create new object with value selected
     const result = {...surveyContent, ...{[key]: event.target.value }}
+
     this.setState({
       surveyContent: result
     })
+    this.checkFormValidation(result);
+
   };
 
   handleClose = () => {
     this.props.history.push(this.props.returnPath);
   }
+
+  handleSubmitForm = (event) => {
+    event.preventDefault();
+    axios.post('/api/Forms', {
+      StudentClassId: this.props.surveyInfo.studentClassId,
+      Content: JSON.stringify(this.state.surveyContent)
+    })
+    .then(result => {
+      console.log('OK')
+    })
+    .catch(error => {
+      console.log('GG ez')
+    })
+  }
+
+  checkFormValidation = (form) => {
+    // if 0 doesn't exist, valid
+    const isValid = Object.values(form).indexOf('0') < 0
+    this.setState({formIsValid: isValid});
+  }
+
   render() {
     let surveyForm = null;
     if (this.state.surveyContent) {
@@ -53,34 +79,42 @@ class SurveyForm extends Component {
                 <Radio color="primary" value="3" />
                 <Radio color="primary" value="4" />
                 <Radio color="primary" value="5" />
-
-                {/* <FormControlLabel value="1" control={<Radio color="primary" />} label="1" />
-                <FormControlLabel value="2" control={<Radio color="primary" />} label="2" />
-                <FormControlLabel value="3" control={<Radio color="primary" />} label="3" />
-                <FormControlLabel value="4" control={<Radio color="primary" />} label="4" />
-                <FormControlLabel value="5" control={<Radio color="primary" />} label="5" /> */}
               </RadioGroup>
             </div>
             
           )
         })
         return (
-          <div key={key} style={{borderBottom: '1px solid rgb(163, 163, 163)'}}>
-            <div style={{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}>
-              <p style={{fontWeight: '500'}}>{index+1}. {key}</p>
-              <div style={{display: 'flex', flexDirection:'row'}}>
-                <p className={classes.RadioLabel}>1</p>
-                <p className={classes.RadioLabel}>2</p>
-                <p className={classes.RadioLabel}>3</p>
-                <p className={classes.RadioLabel}>4</p>
-                <p className={classes.RadioLabel}>5</p>
+            <div key={key} style={{borderBottom: '1px solid rgb(163, 163, 163)'}}>
+              <div style={{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}>
+                <p style={{fontWeight: '500'}}>{index+1}. {key}</p>
+                <div style={{display: 'flex', flexDirection:'row'}}>
+                  <p className={classes.RadioLabel}>1</p>
+                  <p className={classes.RadioLabel}>2</p>
+                  <p className={classes.RadioLabel}>3</p>
+                  <p className={classes.RadioLabel}>4</p>
+                  <p className={classes.RadioLabel}>5</p>
+                </div>
               </div>
+              {listItems}
+              
             </div>
-            {listItems}
-          </div>
+           
         )
       })
-      surveyForm = <form>{surveyFormContent}</form>
+      surveyForm = (
+        <form onSubmit={this.handleSubmitForm}>
+          {surveyFormContent} 
+          <div className={classes.ButtonHolder}>
+          <Button 
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            disabled={!this.state.formIsValid}
+          >Submit</Button>
+          </div>
+        </form>)
     }
     
     return (
