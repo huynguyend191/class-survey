@@ -104,3 +104,12 @@ ol ol {
   left: -.5em;
   border-left-color: #72cffa;             
 }   
+
+.VersionInput {
+  height: 24px;
+  padding: 2px;
+  width: 50px;
+  border-radius: 3px;
+  border: 1px solid rgb(185, 183, 183);
+  text-align: center;
+}

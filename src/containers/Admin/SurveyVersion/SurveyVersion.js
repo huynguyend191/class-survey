@@ -137,6 +137,7 @@ class SurveyVersion extends Component {
               history={this.props.history} 
               returnPath={this.props.match.path}
               version={this.state.selectedVersion}
+              handleRefresh={this.props.onFetchSurveyVer}
             />
           }
         />
