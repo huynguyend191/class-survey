@@ -7,7 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import classes from './SurveyVersionDetail.module.css';
 import axios from '../../../utils/axiosConfig';
 import UploadedModal from '../../../components/UploadedModal/UploadedModal';
-import  { invertObjectServerToClient, invertObjectClientToServer } from '../../../utils/invertObject';
+import  { invertObjectServerToClient } from '../../../utils/invertObject';
 import _ from 'lodash';
 class SurveyVersionDetail extends Component {
   state = {
@@ -52,18 +52,18 @@ class SurveyVersionDetail extends Component {
       console.log(error)
     })
   }
-  removeCategory = (category) => {
-    const content = invertObjectServerToClient(this.state.version.ContentCategory);
-    delete content[category];
-    const versionDetail = {
-      ...this.state.version,
-      ContentCategory: invertObjectClientToServer(content)
-    }
-    this.setState({
-      version: versionDetail
-    })
+  // removeCategory = (category) => {
+  //   const content = invertObjectServerToClient(this.state.version.ContentCategory);
+  //   delete content[category];
+  //   const versionDetail = {
+  //     ...this.state.version,
+  //     ContentCategory: invertObjectClientToServer(content)
+  //   }
+  //   this.setState({
+  //     version: versionDetail
+  //   })
     
-  }
+  // }
   removeSubCategory = (subCatergory) => {
     const content = this.state.version.ContentCategory;
     delete content[subCatergory];
@@ -131,11 +131,14 @@ class SurveyVersionDetail extends Component {
           return (
             <li key={item}>
               <p>{item}
-                <IconButton 
+                {
+                  versionContent[key].length > 1 ? <IconButton 
                   style={{ backgroundColor: 'transparent', padding: '3px', margin:'auto', float: 'right' }} 
                   onClick={() => this.removeSubCategory(item)}>
                   <DeleteIcon fontSize="small" color="error" />
-                </IconButton>
+                </IconButton> : null
+                }
+                
               </p>
             </li>
           )
@@ -144,13 +147,13 @@ class SurveyVersionDetail extends Component {
           //return category
           <li key={key}>
             <p>{key}
-            <Tooltip title='Remove'>
+            {/* <Tooltip title='Remove'>
               <IconButton 
                 style={{ backgroundColor: 'transparent', padding: '3px', margin:'auto', float: 'right' }} 
                 onClick={() => this.removeCategory(key)}>
                 <DeleteIcon fontSize="small" color="error" />
               </IconButton>
-            </Tooltip>
+            </Tooltip> */}
             <Tooltip title='Add sub-category'>
               <IconButton 
                 style={{ backgroundColor: 'transparent', padding: '3px', margin:'auto', float: 'right' }} 
