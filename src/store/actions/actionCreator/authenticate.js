@@ -57,7 +57,7 @@ export const initSignOut = () => {
     //remove all cookies
     const allCookies = cookies.getAll();
     for (let cookieName in allCookies) {
-      cookies.remove(cookieName);
+      cookies.remove(cookieName,  { path: '/' });
     }
     //update state
     dispatch(signOut());
