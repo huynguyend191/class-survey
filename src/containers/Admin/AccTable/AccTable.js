@@ -85,6 +85,7 @@ class AccTable extends Component {
               Username: accounts[index].Username,
               Name: accounts[index].Name,
               Vnumail: accounts[index].Vnumail,
+              ClassCode: accounts[index].LecturerCode
             })
           }
         }

@@ -1,4 +1,4 @@
-export const tableHeadLecturer = ['Username', 'Fullname', 'Email'];
+export const tableHeadLecturer = ['Username', 'Fullname','Email', 'LecturerCode'];
 
 export const tableHeadStudent = ['Usename', 'Fullname', 'Email', 'Class'];
 
