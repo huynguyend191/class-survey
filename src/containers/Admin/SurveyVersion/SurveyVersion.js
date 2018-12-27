@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import classes from './SurveyVersion.module.css';
 import { fetchSurveyVer } from '../../../store/actions';
-import { createSurveyVer, deleteSurveyVer } from '../../../store/actions/';
+import { createSurveyVer, deleteSurveyVer, removeSurveyVerError } from '../../../store/actions/';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import GenerateSurveyVer from '@material-ui/icons/PlaylistAdd';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -14,6 +14,7 @@ import uuidv4 from 'uuid';
 import moment from 'moment';
 import { surveyForm } from '../../../utils/defaultSurveyForm';
 import SurveyVersionDetail from '../SurveyVersionDetail/SurveyVersionDetail';
+import ErrorModal from '../../../components/ErrorModal/ErrorModal';
 
 class SurveyVersion extends Component {
   state = {
@@ -148,6 +149,11 @@ class SurveyVersion extends Component {
           deleteId={this.state.deleteId}
           msg="survey version"
         />
+        <ErrorModal 
+          isOpen={this.props.error ? true : false}
+          error={this.props.error}
+          handleCloseModal={this.props.handleCloseError}
+        />
         <Table className={classes.SurveyVerTable}>
           <TableHead>
             <TableRow className={classes.TableHeadRow}>
@@ -197,7 +203,7 @@ const mapStateToProps = state => {
   return {
     surveyVersions: state.surveyReducer.surveyVersions,
     loading: state.surveyReducer.loadingVersion,
-    error: state.surveyReducer.errorVersion
+    error: state.surveyReducer.versionError
   }
 } 
 
@@ -205,7 +211,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onFetchSurveyVer: () => dispatch(fetchSurveyVer()),
     onCreateNew: (form) => dispatch(createSurveyVer(form)),
-    onDeleteSurveyVer: (id) => dispatch(deleteSurveyVer(id))
+    onDeleteSurveyVer: (id) => dispatch(deleteSurveyVer(id)),
+    handleCloseError: () => dispatch(removeSurveyVerError())
   }
 }
 

@@ -28,5 +28,6 @@ export {
   editSurvey,
   fetchSurveyVer,
   deleteSurveyVer,
-  createSurveyVer
+  createSurveyVer,
+  removeSurveyVerError
 } from './actionCreator/surveys';

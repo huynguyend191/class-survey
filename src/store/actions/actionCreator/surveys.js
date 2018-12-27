@@ -102,7 +102,7 @@ export const fetchSurveyVerSuccessful = (surveyVersions) => {
 
 export const fetchSurveyVerFailed = (error) => {
   return {
-    type: actionTypes.FETCH_SURVEY_FAILED,
+    type: actionTypes.FETCH_SURVEY_VER_FAILED,
     error
   }
 }
